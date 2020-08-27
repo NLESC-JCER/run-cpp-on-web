@@ -2,7 +2,7 @@
 
 I am a research software engineer working at the Netherlands eScience center working together with a researcher who wrote a algorithm in the C++ language.
 To make the algorithm more usable by others I want make it accessable from a web browser.
-Let's go through the steps to create a web application in this blog and upcoming blogs as a reminder for myself and I hope helpful for others in a similar situation.
+Let's go through the steps to create a web application in this blog and upcoming blogs as a reminder for myself and for others in a similar situation.
 
 The algorithm of the researcher is a bit to complex to talk about here so I will use the [Newton-Rapson root finding algorithm](https://en.wikipedia.org/wiki/Newton%27s_method) as a replacement. The C++ implementation of root finding algorithm will use a class with an epsilon value to initialize it and a solve method which accepts an initial guess which returns the root value. The C+++ source code can be found [here](https://github.com/NLESC-JCER/run-cpp-on-web/tree/master/js-webapp).
 
@@ -34,12 +34,12 @@ The command to compile is
 
 ```shell
 emcc -I. -o newtonraphsonwasm.js \
-  -s MODULARIZE=1 -s EXPORT_NAME=createModule \
+  -Oz -s MODULARIZE=1 -s EXPORT_NAME=createModule \
   --bind newtonraphson.cpp wasm-newtonraphson.cpp
 ```
 
 The compiler generated a JavaScript file which we can embed in a HTML page.
-We need to wait for the createModule be ready then we can start calling functions we defined in the binding. The last step is to render the answer on the page with a [document manipulation method](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById).
+We need to wait for the createModule to download and initialize the WebAssembly module then we can start calling functions we defined in the binding. The last step is to render the answer on the page with a [document manipulation method](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById).
 
 ```html
 <!doctype html>
@@ -74,6 +74,10 @@ Visit [http://localhost:8000/example.html](http://localhost:8000/example.html) t
 
 <iframe width="100%" height="60" src="https://nlesc-jcer.github.io/run-cpp-on-web/js-webapp/example.html" /></iframe>
 
-When everything went OK we should see a page with `-1.00` as the answer.
+When everything went OK we should see a page with `-1.00` which is the correct answer for the root of the defined equation.
 
 The result of root finding was calculated using the C++ algorithm compiled to a WebAssembly module, executed by some JavaScript and rendered on a HTML page.
+
+The nice thing about this solution is that we don't need expensive infrastructure to perform computation as the computation is done in the users web browser. We just need somewhere to host the files.
+
+In upcoming blogs will see if we can perform the computation without blocking the user interface and make a nice interactive form. In even more blogs we will look into performing the computation on the server with JavaScript and Python in a human readable and compute readble format.
