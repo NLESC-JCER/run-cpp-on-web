@@ -51,11 +51,11 @@ _Hold your horses._
 
 ## What we'll need
 
-OK, now that you're fully on board with this, let's get to it. 
+OK, now that you're fully on board with this, let's get to it. Here's a list of what we need:
 
-1. Some C/C++ code to illustrate the process. We'll use some C++ code that implements the _Newton-Raphson_ root finding
-method (You remember Newton? Quiet fellow, fabulous hair? Yes, him). Newton-Raphson is a so-called _root finding_ algorithm,
-i.e. a method to find the value of _x_ where it crosses _y_ for a given mathematical function.
+1. Some C/C++ code to illustrate the process. For this, we'll use some C++ code that implements the _Newton-Raphson_
+root finding method (You remember Newton? Quiet fellow, fabulous hair? Yes, him). Newton-Raphson is a so-called _root
+finding_ algorithm, i.e. a method to find the value of _x_ where it crosses _y_ for a given mathematical function.
 1. A program that can take our existing C/C++ code and compile it into a WebAssembly module. Modern browsers are able to
 run WebAssembly without loss of performance. For this, we'll use [Emscripten](https://emscripten.org/)'s ``emcc``
 compiler, the most popular C++ to WebAssembly compiler of the bunch.
@@ -114,6 +114,8 @@ namespace rootfinding {
 ```
 File: _newtonraphson.hpp_
 
+(Explain what is going on)
+
 ...and its implementation:
 
 ```cpp
@@ -125,9 +127,10 @@ using namespace algebra;
 
 namespace rootfinding {
 
+    // Define the constructor method of NewtonRaphson instances
     NewtonRaphson::NewtonRaphson(double tolerancein) : tolerance(tolerancein) {}
 
-    // Function to find the root
+    // Define the 'solve' method of NewtonRaphson instances
     double NewtonRaphson::solve(double xin) {
       double x = xin;
       double delta_x = equation(x) / derivative(x);
@@ -157,6 +160,8 @@ EMSCRIPTEN_BINDINGS(newtonraphsonwasm) {
     ;
 }
 ```
+
+(Explain the above snippet in functional terms)
 
 The Newton-Raphson source and its binding can be compiled into a WebAssembly module with Emscripten's ``emcc`` compiler, as follows:
 
