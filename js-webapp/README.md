@@ -1,6 +1,6 @@
 # Run your C++ code on the web
 
-Let's say you have some C or C++ code lying around that you would like to make available to a wider audience, by putting
+Let's say you have some C or C++ code laying around that you would like to make available to a wider audience, by putting
 it on the web. Until recently, this used to be pretty difficult, and may even have required reimplementation of the
 software in JavaScript, the programming language that browsers use.
 
@@ -11,12 +11,12 @@ purposes.
 
 In this blog, we'll show you how to take a simple algorithm written in C++ and make it available as a simple web
 application. Subsequent blogs in this series will expand on the current one by laying out more advanced topics,
-specifically how to deal with long running tasks, and how to make a nice user interface.
+specifically [how to deal with long running tasks](someotherblog), and [how to make a nice user interface](yetanotherblog).
 
 So today's aim is to have a simple web app like the code snippet below. At first glance this is just some boilerplate to
 be able to use the ``newtonraphson.js`` library, but **the neat part is that the complete Newton-Raphson code is written
-in C++, not JavaScript**. However, with some trickery we'll be able to use that C++ code from the browser, without the
-need to port it first!
+in C++, not JavaScript**. With some trickery, we'll be able to use that C++ code from the browser, without the need to
+port it first!
 
 ```html
 <!doctype html>
