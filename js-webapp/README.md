@@ -4,7 +4,10 @@
 
 \<describe the payoff>
 
-So the aim is to have a simple web app like the code snippet below. At first glance this is just some boilerplate to be able to use the ``newtonraphson.js`` library, but **the neat part is that the complete Newton-Raphson code is written in C++, not JavaScript**. However, with some trickery we'll be able to use that C++ code from the browser, without the need to port it first!
+So the aim is to have a simple web app like the code snippet below. At first glance this is just some boilerplate to be
+able to use the ``newtonraphson.js`` library, but **the neat part is that the complete Newton-Raphson code is written in
+C++, not JavaScript**. However, with some trickery we'll be able to use that C++ code from the browser, without the need
+to port it first!
 
 ```html
 <!doctype html>
@@ -32,7 +35,8 @@ So the aim is to have a simple web app like the code snippet below. At first gla
 ![hold-your-horses.jpeg](hold-your-horses.jpeg)
 _Hold your horses._
 
-Now before you say _"That'll be so much slower than running it native!"_ or _"C/C++ from the browser? Impossible!"_, just hold your horses for a sec. With the right tools, something something.
+Now before you say _"That'll be so much slower than running it native!"_ or _"C/C++ from the browser? Impossible!"_,
+just hold your horses for a sec. With the right tools, something something.
 
 \<Let's get to it>
 
@@ -40,9 +44,15 @@ OK, now that you're fully on board with this, let's get to it.
 
 ## What we'll need
 
-1. Some C/C++ code. We'll use some C++ code that implements the _Newton-Raphson_ root finding method (You know Newton? Quiet fellow, fabulous hair? Yes, him). In case you didn't know, Newton-Raphson will find the root of a mathematical function, i.e. the value of x where it crosses y.
-1. A program that can take our existing C/C++ code and compile it into a WebAssembly module. Modern browsers are able to run WebAssembly without loss of performance. For this, we'll use [Emscripten](https://emscripten.org/)'s ``emcc`` compiler, the most popular C++ to WebAssembly compiler of the bunch.
-1. To call C++ code (which has been compiled to a WebAssembly module) from JavaScript, a binding is required. The binding will map C++ constructs to their JavaScript equivalent and back. For this, we'll use [embind](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html#embind).
+1. Some C/C++ code. We'll use some C++ code that implements the _Newton-Raphson_ root finding method (You know Newton?
+Quiet fellow, fabulous hair? Yes, him). In case you didn't know, Newton-Raphson will find the root of a mathematical
+function, i.e. the value of x where it crosses y.
+1. A program that can take our existing C/C++ code and compile it into a WebAssembly module. Modern browsers are able to
+run WebAssembly without loss of performance. For this, we'll use [Emscripten](https://emscripten.org/)'s ``emcc``
+compiler, the most popular C++ to WebAssembly compiler of the bunch.
+1. To call C++ code (which has been compiled to a WebAssembly module) from JavaScript, a binding is required. The
+binding will map C++ constructs to their JavaScript equivalent and back. For this, we'll use
+[embind](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html#embind).
 1. A web server to serve our files. We'll use Python 3's ``http.server``, but other options like X and Y work equally well.
 
 
@@ -157,9 +167,12 @@ This will generate a JavaScript file, ``newtonraphson.js``, that we can embed in
 _example.html_
 
 When this page is loaded, ... (explain what's happening)
-The last step is to render the answer on the page using the document manipulation method [``getElementById``](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById).
+The last step is to render the answer on the page using the document manipulation method
+[``getElementById``](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById).
 
-We can not just open this HTML page in a web browser, as the embedded JavaScript file can only be loaded when it is hosted by a web server. Python3 ships with a built-in web server ``http.server``, we will use it to host all files on port 8000.
+We can not just open this HTML page in a web browser, as the embedded JavaScript file can only be loaded when it is
+hosted by a web server. Python3 ships with a built-in web server ``http.server``, we will use it to host all files on
+port 8000.
 
 ```shell
 python3 -m http.server 8000
@@ -168,15 +181,20 @@ python3 -m http.server 8000
 Visit [http://localhost:8000/example.html](http://localhost:8000/example.html) to see the result of the calculation. 
 
 (Show a picture of what it looks like.)
-Caption _When everything went OK we should see a page with `-1.00` which is the correct answer for the root of the defined equation given the initial guess of -20._
+Caption _When everything went OK we should see a page with `-1.00` which is the correct answer for the root of the
+defined equation given the initial guess of -20._
 
 (Recap and announce what else is coming)
 
-The result of root finding was calculated using the C++ algorithm compiled to a WebAssembly module, executed by some JavaScript and rendered on a HTML page.
+The result of root finding was calculated using the C++ algorithm compiled to a WebAssembly module, executed by some
+JavaScript and rendered on a HTML page.
 
-The nice thing about this solution is that we don't need expensive infrastructure to perform computation as the computation is done in the users web browser. We just need somewhere to host the files.
+The nice thing about this solution is that we don't need expensive infrastructure to perform computation as the
+computation is done in the users web browser. We just need somewhere to host the files.
 
-In upcoming blogs will see if we can perform the computation without blocking the user interface and make a nice interactive form. In even more blogs we will look into performing the computation on the server with JavaScript and Python in a human readable and compute readable format.
+In upcoming blogs will see if we can perform the computation without blocking the user interface and make a nice
+interactive form. In even more blogs we will look into performing the computation on the server with JavaScript and
+Python in a human readable and compute readable format.
 
 (Good practice to activate users by asking for claps--I you don't, they won't).
 
