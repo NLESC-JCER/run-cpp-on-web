@@ -23,15 +23,19 @@ port it first!
 <!doctype html>
 <html lang="en">
    <head>
-      <title>Example</title>
+      <title>Newton-Raphson</title>
+      <meta charset="utf-8">
       <script type="text/javascript" src="newtonraphson.js"></script>
       <script>
-         const module = await createModule();
-         const tolerance = 0.001;
-         const newtonraphson = new module.NewtonRaphson(tolerance);
-         const initial_guess = -20;
-         const root = newtonraphson.solve(initial_guess);
-         document.getElementById('answer').innerHTML = root.toFixed(2);
+         createModule().then((module) => {
+            const tolerance = 0.001;
+            const newtonraphson = new module.NewtonRaphson(tolerance);
+            const initial_guess = -20;
+            const root = newtonraphson.solve(initial_guess);
+            document.getElementById("answer")
+               .innerHTML = "Function root is approximately at x = " +
+                            root.toFixed(2);
+         });
       </script>
    </head>
    <body>
@@ -191,15 +195,19 @@ following HTML:
 <!doctype html>
 <html lang="en">
    <head>
-      <title>Example</title>
+      <title>Newton-Raphson</title>
+      <meta charset="utf-8">
       <script type="text/javascript" src="newtonraphson.js"></script>
       <script>
-         const module = await createModule();
-         const tolerance = 0.001;
-         const newtonraphson = new module.NewtonRaphson(tolerance);
-         const initial_guess = -20;
-         const root = newtonraphson.solve(initial_guess);
-         document.getElementById('answer').innerHTML = root.toFixed(2);
+         createModule().then((module) => {
+            const tolerance = 0.001;
+            const newtonraphson = new module.NewtonRaphson(tolerance);
+            const initial_guess = -20;
+            const root = newtonraphson.solve(initial_guess);
+            document.getElementById("answer")
+               .innerHTML = "Function root is approximately at x = " +
+                            root.toFixed(2);
+         });
       </script>
    </head>
    <body>
