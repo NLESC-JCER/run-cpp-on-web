@@ -183,8 +183,9 @@ emcc -I. -o newtonraphson.js \
   --bind newtonraphson.cpp bindings.cpp
 ```
 
-This will generate a JavaScript file ``newtonraphson.js``. Using this JavaScript library, we can find the root of the
-mathematical function, and subsequently display its value with the following HTML:
+This will generate a WebAssembly module ``newtonraphson.wasm``, along with a JavaScript file ``newtonraphson.js``. Using
+this JavaScript library, we can find the root of the mathematical function, and subsequently display its value with the
+following HTML:
 
 ```html
 <!doctype html>
