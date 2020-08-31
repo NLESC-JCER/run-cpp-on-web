@@ -11,7 +11,8 @@ purposes.
 
 In this blog, we'll show you how to take a simple algorithm written in C++ and make it available as a simple web
 application. Subsequent blogs in this series will expand on the current one by laying out more advanced topics,
-specifically [how to deal with long running tasks](someotherblog), and [how to make a nice user interface](yetanotherblog).
+specifically how to [make the app interactive](anotherblog), how to [visualize the results](someotherblog), and
+how to [deal with long running tasks](yetanotherblog).
 
 So today's aim is to have a simple web app like the code snippet below. At first glance this is just some boilerplate to
 be able to use the ``newtonraphson.js`` library, but **the neat part is that the complete Newton-Raphson code is written
@@ -21,21 +22,25 @@ port it first!
 ```html
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>Example</title>
-    <script type="text/javascript" src="newtonraphson.js"></script>
-    <script>
-      const module = await createModule();
-      const tolerance = 0.001;
-      const newtonraphson = new module.NewtonRaphson(tolerance);
-      const initial_guess = -20;
-      const root = newtonraphson.solve(initial_guess);
-      document.getElementById('answer').innerHTML = root.toFixed(2);
-    </script>
-  </head>
-  <body>
-    <span id="answer"> </span>
-  </body>
+   <head>
+      <title>Newton-Raphson</title>
+      <meta charset="utf-8">
+      <script type="text/javascript" src="newtonraphson.js"></script>
+      <script>
+         createModule().then((module) => {
+            const tolerance = 0.001;
+            const newtonraphson = new module.NewtonRaphson(tolerance);
+            const initial_guess = -20;
+            const root = newtonraphson.solve(initial_guess);
+            document.getElementById("answer")
+               .innerHTML = "Function root is approximately at x = " +
+                            root.toFixed(2);
+         });
+      </script>
+   </head>
+   <body>
+      <span id="answer"> </span>
+   </body>
 </html>
 ```
 
@@ -67,10 +72,6 @@ their JavaScript equivalent and back. For this, we'll use
 
 ## Tying it all together
 
-<!--
-Basically, take the C++ and the bindings, then use emcc to compile it into wasm, then call the result from JS. Show the required code snippets
--->
-
 ### The C++ code
 
 Here is the equation whose root we want to find, along with its derivative, since that's what Newton-Raphson requires:
@@ -78,21 +79,24 @@ Here is the equation whose root we want to find, along with its derivative, sinc
 ```cpp
 namespace algebra {
 
-    // An example equation
-    double equation(double x) {
+   // An example equation
+   double equation(double x) {
       return x * x * x - x * x + 2;
-    }
+   }
 
-    // Derivative of the above equation
-    double derivative(double x) {
+   // Derivative of the above equation
+   double derivative(double x) {
       return 3 * x * x - 2 * x;
-    }
-
+   }
 }
 ```
 File: _algebra.cpp_
 
-The header file for the Newton-Raphson iterative root finding algorithm:
+File ``newtonraphson.hpp`` is the header file for the Newton-Raphson iterative root finding algorithm. It defines a
+class ``NewtonRaphson`` in namespace ``rootfinding``. Besides the constructor method ``NewtonRaphson(double
+tolerance_in)``, ``NewtonRaphson`` has one other public method, ``solve``, which takes a ``double``, and returns another
+``double``. Furthermore, ``NewtonRaphson`` also has a private member, ``tolerance`` of type ``double``, which is used to
+store the class instance's private data.
 
 ```cpp
 #ifndef H_NEWTONRAPHSON_H
@@ -101,49 +105,53 @@ The header file for the Newton-Raphson iterative root finding algorithm:
 #include <string>
 
 namespace rootfinding {
-  class NewtonRaphson {
-    public:
-      NewtonRaphson(double tolerancein);
-      double solve(double xin);
-    private:
-      double tolerance;
+   class NewtonRaphson {
+      public:
+         NewtonRaphson(double tolerance_in);
+         double solve(double initial_guess);
+      private:
+         double tolerance;
   };
 }
-
 #endif
 ```
 File: _newtonraphson.hpp_
 
-(Explain what is going on)
-
-...and its implementation:
+File ``newtonraphson.cpp`` contains the corresponding implementation:
 
 ```cpp
 #include "newtonraphson.hpp"
-#include "algebra.hpp"
+#include "algebra.cpp"
 #include <math.h>
 
 using namespace algebra;
 
 namespace rootfinding {
 
-    // Define the constructor method of NewtonRaphson instances
-    NewtonRaphson::NewtonRaphson(double tolerancein) : tolerance(tolerancein) {}
+   // Define the constructor method of NewtonRaphson instances
+   NewtonRaphson::NewtonRaphson(double tolerance_in) : tolerance(tolerance_in) {}
 
-    // Define the 'solve' method of NewtonRaphson instances
-    double NewtonRaphson::solve(double xin) {
-      double x = xin;
+   // Define the 'solve' method of NewtonRaphson instances
+   double NewtonRaphson::solve(double initial_guess) {
+      double x = initial_guess;
       double delta_x = equation(x) / derivative(x);
 
       while (fabs(delta_x) >= tolerance) {
-        delta_x = equation(x) / derivative(x);
-        x = x - delta_x;
+         delta_x = equation(x) / derivative(x);
+         x = x - delta_x;
       }
       return x;
-    };
+   };
 }
 ```
 File: _newtonraphson.cpp_
+
+From this definition, ``NewtonRaphson`` instances need to be initialized with a value for ``tolerance_in``, which is then
+stored as the private member ``tolerance``. Once the object instance has been constructed, users can call its ``solve``
+method to iteratively find ``equation``'s root, with ``equation`` and its ``derivative`` being imported from
+``algebra.cpp`` via the ``include`` line near the top. 
+
+### Binding
 
 The binding of the C++ code:
 
@@ -153,52 +161,62 @@ The binding of the C++ code:
 
 using namespace emscripten;
 
-EMSCRIPTEN_BINDINGS(newtonraphsonwasm) {
-  class_<rootfinding::NewtonRaphson>("NewtonRaphson")
-    .constructor<double>()
-    .function("solve", &rootfinding::NewtonRaphson::solve)
-    ;
+EMSCRIPTEN_BINDINGS(newtonraphson) {
+   class_<rootfinding::NewtonRaphson>("NewtonRaphson")
+      .constructor<double>()
+      .function("solve", &rootfinding::NewtonRaphson::solve)
+      ;
 }
 ```
+File: _bindings.cpp_
 
 (Explain the above snippet in functional terms)
+
+### Compiling to WebAssembly
 
 The Newton-Raphson source and its binding can be compiled into a WebAssembly module with Emscripten's ``emcc`` compiler, as follows:
 
 ```shell
 emcc -I. -o newtonraphson.js \
   -Oz -s MODULARIZE=1 -s EXPORT_NAME=createModule \
-  --bind newtonraphson.cpp wasm-newtonraphson.cpp
+  --bind newtonraphson.cpp bindings.cpp
 ```
 
-This will generate a JavaScript file ``newtonraphson.js``. Using this JavaScript library, we can find the root of the
-mathematical function, and subsequently display its value with the following HTML:
+This will generate a WebAssembly module ``newtonraphson.wasm``, along with a JavaScript file ``newtonraphson.js``. Using
+this JavaScript library, we can find the root of the mathematical function, and subsequently display its value with the
+following HTML:
 
 ```html
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>Example</title>
-    <script type="text/javascript" src="newtonraphson.js"></script>
-    <script>
-      const module = await createModule();
-      const tolerance = 0.001;
-      const newtonraphson = new module.NewtonRaphson(tolerance);
-      const initial_guess = -20;
-      const root = newtonraphson.solve(initial_guess);
-      document.getElementById('answer').innerHTML = root.toFixed(2);
-    </script>
-  </head>
-  <body>
-    <span id="answer"> </span>
-  </body>
+   <head>
+      <title>Newton-Raphson</title>
+      <meta charset="utf-8">
+      <script type="text/javascript" src="newtonraphson.js"></script>
+      <script>
+         createModule().then((module) => {
+            const tolerance = 0.001;
+            const newtonraphson = new module.NewtonRaphson(tolerance);
+            const initial_guess = -20;
+            const root = newtonraphson.solve(initial_guess);
+            document.getElementById("answer")
+               .innerHTML = "Function root is approximately at x = " +
+                            root.toFixed(2);
+         });
+      </script>
+   </head>
+   <body>
+      <span id="answer"> </span>
+   </body>
 </html>
 ```
-_example.html_
+_index.html_
 
 When this page is loaded, ... (explain what's happening)
 The last step is to render the answer on the page using the document manipulation method
 [``getElementById``](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById).
+
+### Hosting the app with a web server
 
 We can not just open this HTML page in a web browser, as the embedded JavaScript file can only be loaded when it is
 hosted by a web server. Python3 ships with a built-in web server ``http.server``, we will use it to host all files on
@@ -208,11 +226,11 @@ port 8000.
 python3 -m http.server 8000
 ```
 
-Visit [http://localhost:8000/example.html](http://localhost:8000/example.html) to see the result of the calculation. 
+Visit [http://localhost:8000/](http://localhost:8000/) to see the result of the calculation. 
 
-(Show a picture of what it looks like.)
-Caption _When everything went OK we should see a page with `-1.00` which is the correct answer for the root of the
-defined equation given the initial guess of -20._
+![result.png](result.png)
+
+_The resulting page if everything works._
 
 (Recap and announce what else is coming)
 
@@ -226,6 +244,4 @@ In upcoming blogs will see if we can perform the computation without blocking th
 interactive form. In even more blogs we will look into performing the computation on the server with JavaScript and
 Python in a human readable and compute readable format.
 
-(Good practice to activate users by asking for claps--I you don't, they won't).
-
-If you enjoyed this article, make sure to give us clap!
+If you enjoyed this article, make sure to give us a clap!
