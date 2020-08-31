@@ -32,11 +32,11 @@ to port it first!
 
 \<be sceptic>
 
-![hold-your-horses.jpeg](hold-your-horses.jpeg)
-_Hold your horses._
-
 Now before you say _"That'll be so much slower than running it native!"_ or _"C/C++ from the browser? Impossible!"_,
 just hold your horses for a sec. With the right tools, something something.
+
+![hold-your-horses.jpeg](hold-your-horses.jpeg)
+_Hold your horses._
 
 \<Let's get to it>
 
@@ -45,13 +45,13 @@ OK, now that you're fully on board with this, let's get to it.
 ## What we'll need
 
 1. Some C/C++ code. We'll use some C++ code that implements the _Newton-Raphson_ root finding method (You know Newton?
-Quiet fellow, fabulous hair? Yes, him). In case you didn't know, Newton-Raphson will find the root of a mathematical
-function, i.e. the value of x where it crosses y.
+Quiet fellow, fabulous hair? Yes, him). In case you didn't know, Newton-Raphson is a method to find the root of a mathematical
+function, i.e. the value of _x_ where it crosses _y_.
 1. A program that can take our existing C/C++ code and compile it into a WebAssembly module. Modern browsers are able to
 run WebAssembly without loss of performance. For this, we'll use [Emscripten](https://emscripten.org/)'s ``emcc``
 compiler, the most popular C++ to WebAssembly compiler of the bunch.
-1. To call C++ code (which has been compiled to a WebAssembly module) from JavaScript, a binding is required. The
-binding will map C++ constructs to their JavaScript equivalent and back. For this, we'll use
+1. To use the WebAssembly functionality from JavaScript, a binding is required. The binding will map C++ constructs to
+their JavaScript equivalent and back. For this, we'll use 
 [embind](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html#embind).
 1. A web server to serve our files. We'll use Python 3's ``http.server``, but other options like X and Y work equally well.
 
@@ -64,7 +64,26 @@ Basically, take the C++ and the bindings, then use emcc to compile it into wasm,
 
 ### The C++ code
 
-The Newton-Raphson header file:
+Here is the equation whose root we want to find, along with its derivative, since that's what Newton-Raphson requires:
+
+```cpp
+namespace algebra {
+
+    // An example equation
+    double equation(double x) {
+      return x * x * x - x * x + 2;
+    }
+
+    // Derivative of the above equation
+    double derivative(double x) {
+      return 3 * x * x - 2 * x;
+    }
+
+}
+```
+File: _algebra.cpp_
+
+The header file for the Newton-Raphson iterative root finding algorithm:
 
 ```cpp
 #ifndef H_NEWTONRAPHSON_H
@@ -86,7 +105,7 @@ namespace rootfinding {
 ```
 File: _newtonraphson.hpp_
 
-The Newton-Raphson source file:
+...and its implementation:
 
 ```cpp
 #include "newtonraphson.hpp"
@@ -95,24 +114,21 @@ The Newton-Raphson source file:
 
 using namespace algebra;
 
-namespace rootfinding
-{
+namespace rootfinding {
 
-NewtonRaphson::NewtonRaphson(double tolerancein) : tolerance(tolerancein) {}
+    NewtonRaphson::NewtonRaphson(double tolerancein) : tolerance(tolerancein) {}
 
-// Function to find the root
-double NewtonRaphson::solve(double xin)
-{
-  double x = xin;
-  double delta_x = equation(x) / derivative(x);
+    // Function to find the root
+    double NewtonRaphson::solve(double xin) {
+      double x = xin;
+      double delta_x = equation(x) / derivative(x);
 
-  while (fabs(delta_x) >= tolerance)
-  {
-    delta_x = equation(x) / derivative(x);
-    x = x - delta_x;
-  }
-  return x;
-};
+      while (fabs(delta_x) >= tolerance) {
+        delta_x = equation(x) / derivative(x);
+        x = x - delta_x;
+      }
+      return x;
+    };
 }
 ```
 File: _newtonraphson.cpp_
