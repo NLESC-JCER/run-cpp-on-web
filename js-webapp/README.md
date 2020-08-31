@@ -78,16 +78,15 @@ Here is the equation whose root we want to find, along with its derivative, sinc
 ```cpp
 namespace algebra {
 
-    // An example equation
-    double equation(double x) {
+   // An example equation
+   double equation(double x) {
       return x * x * x - x * x + 2;
-    }
+   }
 
-    // Derivative of the above equation
-    double derivative(double x) {
+   // Derivative of the above equation
+   double derivative(double x) {
       return 3 * x * x - 2 * x;
-    }
-
+   }
 }
 ```
 File: _algebra.cpp_
@@ -101,26 +100,28 @@ The header file for the Newton-Raphson iterative root finding algorithm:
 #include <string>
 
 namespace rootfinding {
-  class NewtonRaphson {
-    public:
-      NewtonRaphson(double tolerancein);
-      double solve(double xin);
-    private:
-      double tolerance;
+   class NewtonRaphson {
+      public:
+         NewtonRaphson(double tolerancein);
+         double solve(double xin);
+      private:
+         double tolerance;
   };
 }
-
 #endif
 ```
 File: _newtonraphson.hpp_
 
-(Explain what is going on)
+File ``newtonraphson.hpp`` defines a class ``NewtonRaphson`` in namespace ``rootfinding``. Besides the constructor
+method ``NewtonRaphson(double tolerancein)``, ``NewtonRaphson`` has one other public method, ``solve``, which takes a
+``double``, and returns another ``double``. Furthermore, ``NewtonRaphson`` also has a private member, ``tolerance`` of
+type ``double``, which is used to store the class instance's private data.
 
-...and its implementation:
+File ``newtonraphson.cpp`` contains the implementation corresponding to the header file's definition:
 
 ```cpp
 #include "newtonraphson.hpp"
-#include "algebra.hpp"
+#include "algebra.cpp"
 #include <math.h>
 
 using namespace algebra;
@@ -144,6 +145,11 @@ namespace rootfinding {
 }
 ```
 File: _newtonraphson.cpp_
+
+From this definition, ``NewtonRaphson`` instances need to be initialized with a value for ``tolerancein``, which is then
+stored as the private member ``tolerance``. Once the object instance has been constructed, users can call its ``solve``
+method to iteratively find ``equation``'s root, with ``equation`` and its ``derivative`` being imported from
+``algebra.cpp`` via the ``include`` line near the top. 
 
 The binding of the C++ code:
 
