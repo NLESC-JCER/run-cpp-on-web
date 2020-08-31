@@ -233,7 +233,8 @@ python3 -m http.server 8000
 
 Visit [http://localhost:8000/example.html](http://localhost:8000/example.html) to see the result of the calculation. 
 
-(Show a picture of what it looks like.)
+![result.png](result.png)
+
 Caption _When everything went OK we should see a page with `-1.00` which is the correct answer for the root of the
 defined equation given the initial guess of -20._
 
