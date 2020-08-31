@@ -1,13 +1,22 @@
-# C++ in a web browser
+# Run your C++ code on the web
 
-\<paint picture of how cool we'd be>
+Let's say you have some C or C++ code lying around that you would like to make available to a wider audience, by putting
+it on the web. Until recently, this used to be pretty difficult, and may even have required reimplementation of the
+software in JavaScript, the programming language that browsers use.
 
-\<describe the payoff>
+_Wouldn't it be great if you could run your existing C/C++ code on the web with only minor effort?_
 
-So the aim is to have a simple web app like the code snippet below. At first glance this is just some boilerplate to be
-able to use the ``newtonraphson.js`` library, but **the neat part is that the complete Newton-Raphson code is written in
-C++, not JavaScript**. However, with some trickery we'll be able to use that C++ code from the browser, without the need
-to port it first!
+That way, loads more people would be able to see your results, interact with your algorithm, and apply it for their own
+purposes.
+
+In this blog, we'll show you how to take a simple algorithm written in C++ and make it available as a simple web
+application. Subsequent blogs in this series will expand on the current one by laying out more advanced topics,
+specifically how to deal with long running tasks, and how to make a nice user interface.
+
+So today's aim is to have a simple web app like the code snippet below. At first glance this is just some boilerplate to
+be able to use the ``newtonraphson.js`` library, but **the neat part is that the complete Newton-Raphson code is written
+in C++, not JavaScript**. However, with some trickery we'll be able to use that C++ code from the browser, without the
+need to port it first!
 
 ```html
 <!doctype html>
@@ -30,23 +39,23 @@ to port it first!
 </html>
 ```
 
-\<be sceptic>
-
 Now before you say _"That'll be so much slower than running it native!"_ or _"C/C++ from the browser? Impossible!"_,
-just hold your horses for a sec. With the right tools, something something.
+just hold your horses for a sec. With the right tools, it is possible to run C/C++ code in the browser, without any
+significant performance penalty. (Mention WebAssembly). Using this approach, (these peeps) were able to run the video
+game (X) in the browser and didn't find any performance problems. And if it works for video games, it will likely work
+for your research software, too. 
 
 ![hold-your-horses.jpeg](hold-your-horses.jpeg)
+
 _Hold your horses._
-
-\<Let's get to it>
-
-OK, now that you're fully on board with this, let's get to it. 
 
 ## What we'll need
 
-1. Some C/C++ code. We'll use some C++ code that implements the _Newton-Raphson_ root finding method (You know Newton?
-Quiet fellow, fabulous hair? Yes, him). In case you didn't know, Newton-Raphson is a method to find the root of a mathematical
-function, i.e. the value of _x_ where it crosses _y_.
+OK, now that you're fully on board with this, let's get to it. 
+
+1. Some C/C++ code to illustrate the process. We'll use some C++ code that implements the _Newton-Raphson_ root finding
+method (You remember Newton? Quiet fellow, fabulous hair? Yes, him). Newton-Raphson is a so-called _root finding_ algorithm,
+i.e. a method to find the value of _x_ where it crosses _y_ for a given mathematical function.
 1. A program that can take our existing C/C++ code and compile it into a WebAssembly module. Modern browsers are able to
 run WebAssembly without loss of performance. For this, we'll use [Emscripten](https://emscripten.org/)'s ``emcc``
 compiler, the most popular C++ to WebAssembly compiler of the bunch.
@@ -157,8 +166,8 @@ emcc -I. -o newtonraphson.js \
   --bind newtonraphson.cpp wasm-newtonraphson.cpp
 ```
 
-This will generate a JavaScript file, ``newtonraphson.js``, that we can embed in an HTML page, as follows:
-
+This will generate a JavaScript file ``newtonraphson.js``. Using this JavaScript library, we can find the root of the
+mathematical function, and subsequently display its value with the following HTML:
 
 ```html
 <!doctype html>
