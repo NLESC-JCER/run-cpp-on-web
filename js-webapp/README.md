@@ -72,10 +72,6 @@ their JavaScript equivalent and back. For this, we'll use
 
 ## Tying it all together
 
-<!--
-Basically, take the C++ and the bindings, then use emcc to compile it into wasm, then call the result from JS. Show the required code snippets
--->
-
 ### The C++ code
 
 Here is the equation whose root we want to find, along with its derivative, since that's what Newton-Raphson requires:
@@ -96,7 +92,11 @@ namespace algebra {
 ```
 File: _algebra.cpp_
 
-The header file for the Newton-Raphson iterative root finding algorithm:
+File ``newtonraphson.hpp`` is the header file for the Newton-Raphson iterative root finding algorithm. It defines a
+class ``NewtonRaphson`` in namespace ``rootfinding``. Besides the constructor method ``NewtonRaphson(double
+tolerance_in)``, ``NewtonRaphson`` has one other public method, ``solve``, which takes a ``double``, and returns another
+``double``. Furthermore, ``NewtonRaphson`` also has a private member, ``tolerance`` of type ``double``, which is used to
+store the class instance's private data.
 
 ```cpp
 #ifndef H_NEWTONRAPHSON_H
@@ -107,8 +107,8 @@ The header file for the Newton-Raphson iterative root finding algorithm:
 namespace rootfinding {
    class NewtonRaphson {
       public:
-         NewtonRaphson(double tolerancein);
-         double solve(double xin);
+         NewtonRaphson(double tolerance_in);
+         double solve(double initial_guess);
       private:
          double tolerance;
   };
@@ -117,12 +117,7 @@ namespace rootfinding {
 ```
 File: _newtonraphson.hpp_
 
-File ``newtonraphson.hpp`` defines a class ``NewtonRaphson`` in namespace ``rootfinding``. Besides the constructor
-method ``NewtonRaphson(double tolerancein)``, ``NewtonRaphson`` has one other public method, ``solve``, which takes a
-``double``, and returns another ``double``. Furthermore, ``NewtonRaphson`` also has a private member, ``tolerance`` of
-type ``double``, which is used to store the class instance's private data.
-
-File ``newtonraphson.cpp`` contains the implementation corresponding to the header file's definition:
+File ``newtonraphson.cpp`` contains the corresponding implementation:
 
 ```cpp
 #include "newtonraphson.hpp"
@@ -134,11 +129,11 @@ using namespace algebra;
 namespace rootfinding {
 
    // Define the constructor method of NewtonRaphson instances
-   NewtonRaphson::NewtonRaphson(double tolerancein) : tolerance(tolerancein) {}
+   NewtonRaphson::NewtonRaphson(double tolerance_in) : tolerance(tolerance_in) {}
 
    // Define the 'solve' method of NewtonRaphson instances
-   double NewtonRaphson::solve(double xin) {
-      double x = xin;
+   double NewtonRaphson::solve(double initial_guess) {
+      double x = initial_guess;
       double delta_x = equation(x) / derivative(x);
 
       while (fabs(delta_x) >= tolerance) {
@@ -151,7 +146,7 @@ namespace rootfinding {
 ```
 File: _newtonraphson.cpp_
 
-From this definition, ``NewtonRaphson`` instances need to be initialized with a value for ``tolerancein``, which is then
+From this definition, ``NewtonRaphson`` instances need to be initialized with a value for ``tolerance_in``, which is then
 stored as the private member ``tolerance``. Once the object instance has been constructed, users can call its ``solve``
 method to iteratively find ``equation``'s root, with ``equation`` and its ``derivative`` being imported from
 ``algebra.cpp`` via the ``include`` line near the top. 
@@ -215,7 +210,7 @@ following HTML:
    </body>
 </html>
 ```
-_example.html_
+_index.html_
 
 When this page is loaded, ... (explain what's happening)
 The last step is to render the answer on the page using the document manipulation method
@@ -235,8 +230,7 @@ Visit [http://localhost:8000/](http://localhost:8000/) to see the result of the 
 
 ![result.png](result.png)
 
-Caption _When everything went OK we should see a page with `-1.00` which is the correct answer for the root of the
-defined equation given the initial guess of -20._
+_The resulting page if everything works._
 
 (Recap and announce what else is coming)
 
@@ -250,4 +244,4 @@ In upcoming blogs will see if we can perform the computation without blocking th
 interactive form. In even more blogs we will look into performing the computation on the server with JavaScript and
 Python in a human readable and compute readable format.
 
-If you enjoyed this article, make sure to give us clap!
+If you enjoyed this article, make sure to give us a clap!
