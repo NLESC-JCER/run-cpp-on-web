@@ -231,7 +231,7 @@ port 8000.
 python3 -m http.server 8000
 ```
 
-Visit [http://localhost:8000/example.html](http://localhost:8000/example.html) to see the result of the calculation. 
+Visit [http://localhost:8000/](http://localhost:8000/) to see the result of the calculation. 
 
 ![result.png](result.png)
 
