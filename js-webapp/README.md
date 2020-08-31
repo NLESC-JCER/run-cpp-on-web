@@ -22,21 +22,21 @@ port it first!
 ```html
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>Example</title>
-    <script type="text/javascript" src="newtonraphson.js"></script>
-    <script>
-      const module = await createModule();
-      const tolerance = 0.001;
-      const newtonraphson = new module.NewtonRaphson(tolerance);
-      const initial_guess = -20;
-      const root = newtonraphson.solve(initial_guess);
-      document.getElementById('answer').innerHTML = root.toFixed(2);
-    </script>
-  </head>
-  <body>
-    <span id="answer"> </span>
-  </body>
+   <head>
+      <title>Example</title>
+      <script type="text/javascript" src="newtonraphson.js"></script>
+      <script>
+         const module = await createModule();
+         const tolerance = 0.001;
+         const newtonraphson = new module.NewtonRaphson(tolerance);
+         const initial_guess = -20;
+         const root = newtonraphson.solve(initial_guess);
+         document.getElementById('answer').innerHTML = root.toFixed(2);
+      </script>
+   </head>
+   <body>
+      <span id="answer"> </span>
+   </body>
 </html>
 ```
 
@@ -129,20 +129,20 @@ using namespace algebra;
 
 namespace rootfinding {
 
-    // Define the constructor method of NewtonRaphson instances
-    NewtonRaphson::NewtonRaphson(double tolerancein) : tolerance(tolerancein) {}
+   // Define the constructor method of NewtonRaphson instances
+   NewtonRaphson::NewtonRaphson(double tolerancein) : tolerance(tolerancein) {}
 
-    // Define the 'solve' method of NewtonRaphson instances
-    double NewtonRaphson::solve(double xin) {
+   // Define the 'solve' method of NewtonRaphson instances
+   double NewtonRaphson::solve(double xin) {
       double x = xin;
       double delta_x = equation(x) / derivative(x);
 
       while (fabs(delta_x) >= tolerance) {
-        delta_x = equation(x) / derivative(x);
-        x = x - delta_x;
+         delta_x = equation(x) / derivative(x);
+         x = x - delta_x;
       }
       return x;
-    };
+   };
 }
 ```
 File: _newtonraphson.cpp_
@@ -163,10 +163,10 @@ The binding of the C++ code:
 using namespace emscripten;
 
 EMSCRIPTEN_BINDINGS(newtonraphson) {
-  class_<rootfinding::NewtonRaphson>("NewtonRaphson")
-    .constructor<double>()
-    .function("solve", &rootfinding::NewtonRaphson::solve)
-    ;
+   class_<rootfinding::NewtonRaphson>("NewtonRaphson")
+      .constructor<double>()
+      .function("solve", &rootfinding::NewtonRaphson::solve)
+      ;
 }
 ```
 File: _bindings.cpp_
@@ -189,21 +189,21 @@ mathematical function, and subsequently display its value with the following HTM
 ```html
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>Example</title>
-    <script type="text/javascript" src="newtonraphson.js"></script>
-    <script>
-      const module = await createModule();
-      const tolerance = 0.001;
-      const newtonraphson = new module.NewtonRaphson(tolerance);
-      const initial_guess = -20;
-      const root = newtonraphson.solve(initial_guess);
-      document.getElementById('answer').innerHTML = root.toFixed(2);
-    </script>
-  </head>
-  <body>
-    <span id="answer"> </span>
-  </body>
+   <head>
+      <title>Example</title>
+      <script type="text/javascript" src="newtonraphson.js"></script>
+      <script>
+         const module = await createModule();
+         const tolerance = 0.001;
+         const newtonraphson = new module.NewtonRaphson(tolerance);
+         const initial_guess = -20;
+         const root = newtonraphson.solve(initial_guess);
+         document.getElementById('answer').innerHTML = root.toFixed(2);
+      </script>
+   </head>
+   <body>
+      <span id="answer"> </span>
+   </body>
 </html>
 ```
 _example.html_
