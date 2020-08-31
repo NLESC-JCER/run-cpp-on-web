@@ -6,11 +6,11 @@
       <script type="text/javascript" src="newtonraphson.js"></script>
       <script>
          createModule().then((module) => {
-            const epsilon = 0.001;
-            const finder = new module.NewtonRaphson(epsilon);
-            const guess = -20;
-            const root = finder.solve(guess);
-            document.getElementById('answer')
+            const tolerance = 0.001;
+            const newtonraphson = new module.NewtonRaphson(tolerance);
+            const initial_guess = -20;
+            const root = newtonraphson.solve(initial_guess);
+            document.getElementById("answer")
                .innerHTML = "Function root is approximately at x = " +
                             root.toFixed(2);
          });
