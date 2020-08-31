@@ -11,7 +11,8 @@ purposes.
 
 In this blog, we'll show you how to take a simple algorithm written in C++ and make it available as a simple web
 application. Subsequent blogs in this series will expand on the current one by laying out more advanced topics,
-specifically [how to deal with long running tasks](someotherblog), and [how to make a nice user interface](yetanotherblog).
+specifically how to [make the app interactive](anotherblog), how to [visualize the results](someotherblog), and
+how to [deal with long running tasks](yetanotherblog).
 
 So today's aim is to have a simple web app like the code snippet below. At first glance this is just some boilerplate to
 be able to use the ``newtonraphson.js`` library, but **the neat part is that the complete Newton-Raphson code is written
@@ -151,6 +152,8 @@ stored as the private member ``tolerance``. Once the object instance has been co
 method to iteratively find ``equation``'s root, with ``equation`` and its ``derivative`` being imported from
 ``algebra.cpp`` via the ``include`` line near the top. 
 
+### Binding
+
 The binding of the C++ code:
 
 ```cpp
@@ -159,22 +162,25 @@ The binding of the C++ code:
 
 using namespace emscripten;
 
-EMSCRIPTEN_BINDINGS(newtonraphsonwasm) {
+EMSCRIPTEN_BINDINGS(newtonraphson) {
   class_<rootfinding::NewtonRaphson>("NewtonRaphson")
     .constructor<double>()
     .function("solve", &rootfinding::NewtonRaphson::solve)
     ;
 }
 ```
+File: _bindings.cpp_
 
 (Explain the above snippet in functional terms)
+
+### Compiling to WebAssembly
 
 The Newton-Raphson source and its binding can be compiled into a WebAssembly module with Emscripten's ``emcc`` compiler, as follows:
 
 ```shell
 emcc -I. -o newtonraphson.js \
   -Oz -s MODULARIZE=1 -s EXPORT_NAME=createModule \
-  --bind newtonraphson.cpp wasm-newtonraphson.cpp
+  --bind newtonraphson.cpp bindings.cpp
 ```
 
 This will generate a JavaScript file ``newtonraphson.js``. Using this JavaScript library, we can find the root of the
@@ -206,6 +212,8 @@ When this page is loaded, ... (explain what's happening)
 The last step is to render the answer on the page using the document manipulation method
 [``getElementById``](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById).
 
+### Hosting the app with a web server
+
 We can not just open this HTML page in a web browser, as the embedded JavaScript file can only be loaded when it is
 hosted by a web server. Python3 ships with a built-in web server ``http.server``, we will use it to host all files on
 port 8000.
@@ -231,7 +239,5 @@ computation is done in the users web browser. We just need somewhere to host the
 In upcoming blogs will see if we can perform the computation without blocking the user interface and make a nice
 interactive form. In even more blogs we will look into performing the computation on the server with JavaScript and
 Python in a human readable and compute readable format.
-
-(Good practice to activate users by asking for claps--I you don't, they won't).
 
 If you enjoyed this article, make sure to give us clap!
