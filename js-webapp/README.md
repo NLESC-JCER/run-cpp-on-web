@@ -175,7 +175,7 @@ following HTML:
    <body>
       <div id="answer"></div>
       <script>
-         createModule().then((NewtonRaphson) => {
+         createModule().then((rootfinding) => {
             const tolerance = 0.001;
             const initial_guess = -20;
             const newtonraphson = new NewtonRaphson.NewtonRaphson(tolerance);
