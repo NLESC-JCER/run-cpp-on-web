@@ -15,9 +15,16 @@ specifically how to [make the app interactive](anotherblog), how to [visualize t
 how to [deal with long running tasks](yetanotherblog).
 
 So today's aim is to have a simple web app that determines the root of a mathematical function _x^3 - x^2 + 2_, i.e. the
-value of _x_ where _y = 0_. For this, we'll use the _Newton-Raphson_ root finding method. Remember Newton? Quiet
-fellow, fabulous hair? Yes, _that_ Newton. Anyway, the algorithm is written C++, but **with some trickery, we'll be able
-to use that C++ code from the browser, without the need to port it first**! 
+value of _x_ where _y = 0_. 
+
+![equation.svg.png](equation.svg.png)
+
+For this, we'll use an iterative method known as the _Newton-Raphson_ root finding method. Remember Newton? Quiet
+fellow, fabulous hair? Yes, _that_ Newton. The way this works is you give Newton-Raphson the equation whose root you
+want to find, along with the derivative of that equation. Then you take an initial guess of what the value of the root
+could be, and let the method iterate towards the solution. The solution is approximate within a tolerance, which you can
+also set. Anyway, the algorithm is written C++, but **with some trickery, we'll be able to use that C++ code from the
+browser, without the need to port it first**! 
 
 ![newton.jpg](newton.jpg)
 
@@ -175,10 +182,10 @@ following HTML:
    <body>
       <div id="answer"></div>
       <script>
-         createModule().then((NewtonRaphson) => {
+         createModule().then((rootfinding) => {
             const tolerance = 0.001;
             const initial_guess = -20;
-            const newtonraphson = new NewtonRaphson.NewtonRaphson(tolerance);
+            const newtonraphson = new rootfinding.NewtonRaphson(tolerance);
             const root = newtonraphson.solve(initial_guess);
             document.getElementById("answer")
                .innerHTML = "Function root is approximately at x = " +
