@@ -36,8 +36,8 @@ _Newton (and his hair)._
 
 Now before you say _"That'll be so much slower than running it native!"_ or _"C/C++ from the browser? Impossible!"_,
 just hold your horses for a sec. With the right tools, it is possible to run C/C++ code in the browser, without any
-significant performance penalty. (Mention WebAssembly). Using this approach, (these peeps) were able to run the video
-game (X) in the browser and didn't find any performance problems. And if it works for video games, it will likely work
+significant performance penalty. **TODO** (Mention WebAssembly). Using this approach, **TODO** (these peeps) were able to run the video
+game **TODO** (X) in the browser and didn't find any performance problems. And if it works for video games, it will likely work
 for your research software, too. 
 
 ![hold-your-horses.jpeg](hold-your-horses.jpeg)
@@ -158,7 +158,7 @@ EMSCRIPTEN_BINDINGS(newtonraphson) {
 ```
 File: _bindings.cpp_.
 
-(Explain the above snippet in functional terms)
+TODO (Explain the above snippet in functional terms)
 
 ### Compiling to WebAssembly
 
@@ -201,7 +201,7 @@ following HTML:
 ```
 File: _index.html_.
 
-When this page is loaded, ... (explain what's happening)
+When this page is loaded, ... TODO (explain what's happening)
 The last step is to render the answer on the page using the document manipulation method
 [``getElementById``](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById).
 
@@ -221,7 +221,7 @@ Visit [http://localhost:8000/](http://localhost:8000/) to see the result of the 
 
 _The resulting page if everything works._
 
-(Recap and announce what else is coming)
+TODO (Recap and announce what else is coming)
 
 The result of root finding was calculated using the C++ algorithm compiled to a WebAssembly module, executed by some
 JavaScript and rendered on a HTML page.
@@ -229,8 +229,10 @@ JavaScript and rendered on a HTML page.
 The nice thing about this solution is that we don't need expensive infrastructure to perform computation as the
 computation is done in the users web browser. We just need somewhere to host the files.
 
+<!--
 In upcoming blogs will see if we can perform the computation without blocking the user interface and make a nice
 interactive form. In even more blogs we will look into performing the computation on the server with JavaScript and
 Python in a human readable and compute readable format.
+-->
 
 If you enjoyed this article, make sure to give us a clap!
