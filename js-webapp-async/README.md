@@ -5,7 +5,7 @@
 # Introduction
 In a [previous blogpost](../js-webapp/README.md) we discussed how to run c++ code on the web using Javascript.
 
-We created a webapp that executed some C++ code and showed the result, which was a single number. While the page was running the C++ code, the page was blocked and unresponsive. That was not a problem then, because the computation done in the code was tiny. This becomes a problem when we are performing long running tasks instead. How to prevent blocking when running long running tasks in c++?
+We created a webapp that executed some C++ code and showed the result. While the page was running the C++ code, the page was blocked and unresponsive. That was not a problem then, because the computation done in the code was tiny. This becomes a problem when we are performing long running tasks instead. How to prevent blocking when running long running tasks in c++?
 
 In this blogpost, we will use web workers to solve this problem by running the code asynchronously.
 
