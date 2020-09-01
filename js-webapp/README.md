@@ -178,7 +178,7 @@ following HTML:
          createModule().then((rootfinding) => {
             const tolerance = 0.001;
             const initial_guess = -20;
-            const newtonraphson = new NewtonRaphson.NewtonRaphson(tolerance);
+            const newtonraphson = new rootfinding.NewtonRaphson(tolerance);
             const root = newtonraphson.solve(initial_guess);
             document.getElementById("answer")
                .innerHTML = "Function root is approximately at x = " +
