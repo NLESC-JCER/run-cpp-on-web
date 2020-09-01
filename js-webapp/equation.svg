@@ -8,8 +8,8 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
-   width="400"
-   height="302.96378"
+   width="600"
+   height="454.44565"
    id="svg152"
    sodipodi:docname="equation.svg"
    inkscape:version="0.92.3 (2405546, 2018-03-11)">
@@ -38,9 +38,9 @@
      inkscape:window-height="1346"
      id="namedview154"
      showgrid="false"
-     inkscape:zoom="3.7232174"
-     inkscape:cx="200"
-     inkscape:cy="151.48189"
+     inkscape:zoom="2.482145"
+     inkscape:cx="300"
+     inkscape:cy="227.22282"
      inkscape:window-x="20"
      inkscape:window-y="40"
      inkscape:window-maximized="0"
@@ -84,7 +84,7 @@
   </defs>
   <g
      id="g1914"
-     transform="scale(0.4840834)">
+     transform="scale(0.7261251)">
     <rect
        y="0"
        x="0"
