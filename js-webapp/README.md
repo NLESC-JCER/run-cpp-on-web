@@ -14,7 +14,7 @@ application. Subsequent blogs in this series will expand on the current one by l
 specifically how to [make the app interactive](anotherblog), how to [visualize the results](someotherblog), and
 how to [deal with long running tasks](yetanotherblog).
 
-So today's aim is to have a simple web app that determines the root of a mathematical function _x^3 - x^2 + 2_, i.e. the
+So today's aim is to have a simple web app that determines the _root_ of a mathematical function _x^3 - x^2 + 2_, i.e. the
 value of _x_ where _y = 0_. For this, we'll use the _Newton-Raphson_ root finding method. Remember Newton? Quiet
 fellow, fabulous hair? Yes, _that_ Newton. Anyway, the algorithm is written C++, but **with some trickery, we'll be able
 to use that C++ code from the browser, without the need to port it first**! 
