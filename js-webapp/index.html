@@ -1,19 +1,20 @@
 <html>
-   <head>
-      <script type="text/javascript" src="newtonraphson.js"></script>
-   </head>
-   <body>
-      <div id="answer"></div>
-      <script>
-         createModule().then((rootfinding) => {
-            const tolerance = 0.001;
-            const initial_guess = -20;
-            const newtonraphson = new rootfinding.NewtonRaphson(tolerance);
-            const root = newtonraphson.solve(initial_guess);
-            document.getElementById("answer")
-               .innerHTML = "Function root is approximately at x = " +
-                            root.toFixed(2);
-         });
-      </script>
-   </body>
+  <head>
+    <script type="text/javascript" src="newtonraphson.js"></script>
+  </head>
+  <body>
+    <div id="answer"></div>
+    <script>
+      createModule().then((rootfinding) => {
+        const tolerance = 0.001;
+        const initial_guess = -20;
+        const newtonraphson = new rootfinding.NewtonRaphson(tolerance);
+        const root = newtonraphson.solve(initial_guess);
+        console.log(newtonraphson);
+        document.getElementById("answer")
+                .innerHTML = "Function root is approximately at x = " +
+                             root.toFixed(2);
+      });
+    </script>
+  </body>
 </html>

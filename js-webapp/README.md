@@ -67,15 +67,15 @@ Here is the equation whose root we want to find, along with its derivative, sinc
 ```cpp
 namespace algebra {
 
-   // An example equation
-   double equation(double x) {
-      return x * x * x - x * x + 2;
-   }
+  // An example equation
+  double equation(double x) {
+    return x * x * x - x * x + 2;
+  }
 
-   // Derivative of the above equation
-   double derivative(double x) {
-      return 3 * x * x - 2 * x;
-   }
+  // Derivative of the above equation
+  double derivative(double x) {
+    return 3 * x * x - 2 * x;
+  }
 }
 ```
 File: _algebra.cpp_
@@ -93,12 +93,12 @@ which takes a ``double``, and returns another ``double``. Furthermore, ``NewtonR
 #include <string>
 
 namespace rootfinding {
-   class NewtonRaphson {
-      public:
-         NewtonRaphson(double tolerance_in);
-         double solve(double initial_guess);
-      private:
-         double tolerance;
+  class NewtonRaphson {
+    public:
+      NewtonRaphson(double tolerance_in);
+      double solve(double initial_guess);
+    private:
+      double tolerance;
   };
 }
 #endif
@@ -116,20 +116,20 @@ using namespace algebra;
 
 namespace rootfinding {
 
-   // Define the constructor method of NewtonRaphson instances
-   NewtonRaphson::NewtonRaphson(double tolerance_in) : tolerance(tolerance_in) {}
+  // Define the constructor method of NewtonRaphson instances
+  NewtonRaphson::NewtonRaphson(double tolerance_in) : tolerance(tolerance_in) {}
 
-   // Define the 'solve' method of NewtonRaphson instances
-   double NewtonRaphson::solve(double initial_guess) {
-      double x = initial_guess;
-      double delta_x = equation(x) / derivative(x);
+  // Define the 'solve' method of NewtonRaphson instances
+  double NewtonRaphson::solve(double initial_guess) {
+    double x = initial_guess;
+    double delta_x = equation(x) / derivative(x);
 
-      while (fabs(delta_x) >= tolerance) {
-         delta_x = equation(x) / derivative(x);
-         x = x - delta_x;
-      }
-      return x;
-   };
+    while (fabs(delta_x) >= tolerance) {
+      delta_x = equation(x) / derivative(x);
+      x = x - delta_x;
+    }
+    return x;
+  };
 }
 ```
 File: _newtonraphson.cpp_.
@@ -150,10 +150,10 @@ The binding of the C++ code:
 using namespace emscripten;
 
 EMSCRIPTEN_BINDINGS(newtonraphson) {
-   class_<rootfinding::NewtonRaphson>("NewtonRaphson")
-      .constructor<double>()
-      .function("solve", &rootfinding::NewtonRaphson::solve)
-      ;
+  class_<rootfinding::NewtonRaphson>("NewtonRaphson")
+    .constructor<double>()
+    .function("solve", &rootfinding::NewtonRaphson::solve)
+    ;
 }
 ```
 File: _bindings.cpp_.
@@ -180,23 +180,23 @@ following HTML:
 
 ```html
 <html>
-   <head>
-      <script type="text/javascript" src="newtonraphson.js"></script>
-   </head>
-   <body>
-      <div id="answer"></div>
-      <script>
-         createModule().then((rootfinding) => {
-            const tolerance = 0.001;
-            const initial_guess = -20;
-            const newtonraphson = new rootfinding.NewtonRaphson(tolerance);
-            const root = newtonraphson.solve(initial_guess);
-            document.getElementById("answer")
-               .innerHTML = "Function root is approximately at x = " +
-                            root.toFixed(2);
-         });
-      </script>
-   </body>
+  <head>
+    <script type="text/javascript" src="newtonraphson.js"></script>
+  </head>
+  <body>
+    <div id="answer"></div>
+    <script>
+      createModule().then((rootfinding) => {
+        const tolerance = 0.001;
+        const initial_guess = -20;
+        const newtonraphson = new rootfinding.NewtonRaphson(tolerance);
+        const root = newtonraphson.solve(initial_guess);
+        document.getElementById("answer")
+                .innerHTML = "Function root is approximately at x = " +
+                             root.toFixed(2);
+        });
+    </script>
+  </body>
 </html>
 ```
 File: _index.html_.
