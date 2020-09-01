@@ -3,7 +3,7 @@
 - live demos: 
 
 # Introduction
-In a previous blogpost we discussed how to run c++ code on the web using Javascript. (link)
+In a [previous blogpost](../js-webapp/README.md) we discussed how to run c++ code on the web using Javascript.
 
 We created a webapp that executed some C++ code and showed the result, which was a single number. While the page was running the C++ code, the page was blocked and unresponsive. That was not a problem then, because the computation done in the code was tiny. This becomes a problem when we are performing long running tasks instead. How to prevent blocking when running long running tasks in c++?
 
@@ -135,4 +135,4 @@ worker (separate thread), executed by JavaScript with messages to/from the web w
 # Outro
 In this blogpost we have learned how to run, computationally intensive c++ code on the web using web workers.
 
-In the next blogpost we will show how to expand the code to a fancy React webapp, using json-schema form and vega plot.
+In the [next blogpost](../js-react/README.md) we will show how to expand the code to an interactive React webapp.
