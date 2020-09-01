@@ -9,40 +9,30 @@ _Wouldn't it be great if you could run your existing C/C++ code on the web with 
 That way, loads more people would be able to see your results, interact with your algorithm, and apply it for their own
 purposes.
 
-In this blog, we'll show you how to take a simple algorithm written in C++ and make it available as a simple web
+In this blog, we'll show you how to take a simple algorithm written in C++ and make it available as a web
 application. Subsequent blogs in this series will expand on the current one by laying out more advanced topics,
 specifically how to [make the app interactive](anotherblog), how to [visualize the results](someotherblog), and
 how to [deal with long running tasks](yetanotherblog).
 
-So today's aim is to have a simple web app like the code snippet below. At first glance this is just some boilerplate to
-be able to use the ``newtonraphson.js`` library, but **the neat part is that the complete Newton-Raphson code is written
-in C++, not JavaScript**. With some trickery, we'll be able to use that C++ code from the browser, without the need to
-port it first!
+So today's aim is to have a simple web app that determines the root of a mathematical function _x^3 - x^2 + 2_, i.e. the
+value of _x_ where _y = 0_. 
 
-```html
-<!doctype html>
-<html lang="en">
-   <head>
-      <title>Newton-Raphson</title>
-      <meta charset="utf-8">
-      <script type="text/javascript" src="newtonraphson.js"></script>
-      <script>
-         createModule().then((module) => {
-            const tolerance = 0.001;
-            const newtonraphson = new module.NewtonRaphson(tolerance);
-            const initial_guess = -20;
-            const root = newtonraphson.solve(initial_guess);
-            document.getElementById("answer")
-               .innerHTML = "Function root is approximately at x = " +
-                            root.toFixed(2);
-         });
-      </script>
-   </head>
-   <body>
-      <span id="answer"> </span>
-   </body>
-</html>
-```
+![equation.svg.png](equation.svg.png)
+
+Function _x^3 - x^2 + 2_.
+
+For this, we'll use an iterative method known as the [_Newton-Raphson_ root finding
+method](https://www.youtube.com/watch?v=cOmAk82cr9M). Remember Newton? Quiet fellow, fabulous hair? Yes, _that_ Newton.
+The way this works is you give Newton-Raphson the equation whose root you want to find, along with the derivative of
+that equation. Then you take an ``initial_guess`` of what you think the value of the root could be, then let the method
+iterate towards the solution. The solution is approximate within a ``tolerance``, which you can also set. Anyway, the
+algorithm is written C++, but **with some trickery, we'll be able to use that C++ code from the browser, without the
+need to port it first**! 
+
+
+![newton.jpg](newton.jpg)
+
+_Newton (and his hair)._
 
 Now before you say _"That'll be so much slower than running it native!"_ or _"C/C++ from the browser? Impossible!"_,
 just hold your horses for a sec. With the right tools, it is possible to run C/C++ code in the browser, without any
@@ -58,9 +48,7 @@ _Hold your horses._
 
 OK, now that you're fully on board with this, let's get to it. Here's a list of what we need:
 
-1. Some C/C++ code to illustrate the process. For this, we'll use some C++ code that implements the _Newton-Raphson_
-root finding method (You remember Newton? Quiet fellow, fabulous hair? Yes, him). Newton-Raphson is a so-called _root
-finding_ algorithm, i.e. a method to find the value of _x_ where it crosses _y_ for a given mathematical function.
+1. Some C/C++ code to illustrate the process. We'll use our Newton-Raphson C++ code.
 1. A program that can take our existing C/C++ code and compile it into a WebAssembly module. Modern browsers are able to
 run WebAssembly without loss of performance. For this, we'll use [Emscripten](https://emscripten.org/)'s ``emcc``
 compiler, the most popular C++ to WebAssembly compiler of the bunch.
@@ -92,11 +80,11 @@ namespace algebra {
 ```
 File: _algebra.cpp_
 
-File ``newtonraphson.hpp`` is the header file for the Newton-Raphson iterative root finding algorithm. It defines a
-class ``NewtonRaphson`` in namespace ``rootfinding``. Besides the constructor method ``NewtonRaphson(double
-tolerance_in)``, ``NewtonRaphson`` has one other public method, ``solve``, which takes a ``double``, and returns another
-``double``. Furthermore, ``NewtonRaphson`` also has a private member, ``tolerance`` of type ``double``, which is used to
-store the class instance's private data.
+The snippet below shows the contents of the file ``newtonraphson.hpp``. It is the header file for the Newton-Raphson
+iterative root finding algorithm. It defines a class ``NewtonRaphson`` in namespace ``rootfinding``. Besides the
+constructor method ``NewtonRaphson(double tolerance_in)``, ``NewtonRaphson`` has one other public method, ``solve``,
+which takes a ``double``, and returns another ``double``. Furthermore, ``NewtonRaphson`` also has a private member,
+``tolerance`` of type ``double``, which is used to store the class instance's private data.
 
 ```cpp
 #ifndef H_NEWTONRAPHSON_H
@@ -115,7 +103,7 @@ namespace rootfinding {
 }
 #endif
 ```
-File: _newtonraphson.hpp_
+File: _newtonraphson.hpp_.
 
 File ``newtonraphson.cpp`` contains the corresponding implementation:
 
@@ -144,7 +132,7 @@ namespace rootfinding {
    };
 }
 ```
-File: _newtonraphson.cpp_
+File: _newtonraphson.cpp_.
 
 From this definition, ``NewtonRaphson`` instances need to be initialized with a value for ``tolerance_in``, which is then
 stored as the private member ``tolerance``. Once the object instance has been constructed, users can call its ``solve``
@@ -168,7 +156,7 @@ EMSCRIPTEN_BINDINGS(newtonraphson) {
       ;
 }
 ```
-File: _bindings.cpp_
+File: _bindings.cpp_.
 
 (Explain the above snippet in functional terms)
 
@@ -177,8 +165,12 @@ File: _bindings.cpp_
 The Newton-Raphson source and its binding can be compiled into a WebAssembly module with Emscripten's ``emcc`` compiler, as follows:
 
 ```shell
-emcc -I. -o newtonraphson.js \
-  -Oz -s MODULARIZE=1 -s EXPORT_NAME=createModule \
+emcc \
+  -I. \
+  -o newtonraphson.js \
+  -Oz \
+  -s MODULARIZE=1 \
+  -s EXPORT_NAME=createModule \
   --bind newtonraphson.cpp bindings.cpp
 ```
 
@@ -187,30 +179,27 @@ this JavaScript library, we can find the root of the mathematical function, and 
 following HTML:
 
 ```html
-<!doctype html>
-<html lang="en">
+<html>
    <head>
-      <title>Newton-Raphson</title>
-      <meta charset="utf-8">
       <script type="text/javascript" src="newtonraphson.js"></script>
+   </head>
+   <body>
+      <div id="answer"></div>
       <script>
-         createModule().then((module) => {
+         createModule().then((rootfinding) => {
             const tolerance = 0.001;
-            const newtonraphson = new module.NewtonRaphson(tolerance);
             const initial_guess = -20;
+            const newtonraphson = new rootfinding.NewtonRaphson(tolerance);
             const root = newtonraphson.solve(initial_guess);
             document.getElementById("answer")
                .innerHTML = "Function root is approximately at x = " +
                             root.toFixed(2);
          });
       </script>
-   </head>
-   <body>
-      <span id="answer"> </span>
    </body>
 </html>
 ```
-_index.html_
+File: _index.html_.
 
 When this page is loaded, ... (explain what's happening)
 The last step is to render the answer on the page using the document manipulation method
