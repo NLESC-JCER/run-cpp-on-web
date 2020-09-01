@@ -19,6 +19,8 @@ value of _x_ where _y = 0_.
 
 ![equation.svg.png](equation.svg.png)
 
+Function _x^3 - x^2 + 2_.
+
 For this, we'll use an iterative method known as the [_Newton-Raphson_ root finding
 method](https://www.youtube.com/watch?v=cOmAk82cr9M). Remember Newton? Quiet fellow, fabulous hair? Yes, _that_ Newton.
 The way this works is you give Newton-Raphson the equation whose root you want to find, along with the derivative of
