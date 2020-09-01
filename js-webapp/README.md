@@ -19,12 +19,14 @@ value of _x_ where _y = 0_.
 
 ![equation.svg.png](equation.svg.png)
 
-For this, we'll use an iterative method known as the _Newton-Raphson_ root finding method. Remember Newton? Quiet
-fellow, fabulous hair? Yes, _that_ Newton. The way this works is you give Newton-Raphson the equation whose root you
-want to find, along with the derivative of that equation. Then you take an initial guess of what the value of the root
-could be, and let the method iterate towards the solution. The solution is approximate within a tolerance, which you can
-also set. Anyway, the algorithm is written C++, but **with some trickery, we'll be able to use that C++ code from the
-browser, without the need to port it first**! 
+For this, we'll use an iterative method known as the [_Newton-Raphson_ root finding
+method](https://www.youtube.com/watch?v=cOmAk82cr9M). Remember Newton? Quiet fellow, fabulous hair? Yes, _that_ Newton.
+The way this works is you give Newton-Raphson the equation whose root you want to find, along with the derivative of
+that equation. Then you take an ``initial_guess`` of what you think the value of the root could be, then let the method
+iterate towards the solution. The solution is approximate within a ``tolerance``, which you can also set. Anyway, the
+algorithm is written C++, but **with some trickery, we'll be able to use that C++ code from the browser, without the
+need to port it first**! 
+
 
 ![newton.jpg](newton.jpg)
 
