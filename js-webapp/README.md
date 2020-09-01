@@ -158,7 +158,7 @@ EMSCRIPTEN_BINDINGS(newtonraphson) {
 ```
 File: _bindings.cpp_.
 
-TODO (Explain the above snippet in functional terms)
+**TODO** (Explain the above snippet in functional terms)
 
 ### Compiling to WebAssembly
 
@@ -201,7 +201,7 @@ following HTML:
 ```
 File: _index.html_.
 
-When this page is loaded, ... TODO (explain what's happening)
+When this page is loaded, ... **TODO** (explain what's happening)
 The last step is to render the answer on the page using the document manipulation method
 [``getElementById``](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById).
 
@@ -221,7 +221,7 @@ Visit [http://localhost:8000/](http://localhost:8000/) to see the result of the 
 
 _The resulting page if everything works._
 
-TODO (Recap and announce what else is coming)
+**TODO** (Recap and announce what else is coming)
 
 The result of root finding was calculated using the C++ algorithm compiled to a WebAssembly module, executed by some
 JavaScript and rendered on a HTML page.
