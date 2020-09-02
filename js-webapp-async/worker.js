@@ -1,5 +1,5 @@
 // this JavaScript snippet is stored as webassembly/worker.js
-importScripts('newtonraphsonwasm.js');
+importScripts('newtonraphson.js');
 
 // this JavaScript snippet is later referred to as <<worker-provider-onmessage>>
 onmessage = function(message) {
