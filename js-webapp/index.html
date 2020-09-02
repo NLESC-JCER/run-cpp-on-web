@@ -10,13 +10,15 @@
         const initial_guess = -20;
         const newtonraphson = new rootfinding.NewtonRaphson(tolerance);
         const root = newtonraphson.solve(initial_guess);
-        console.log(
+        console.log(JSON.stringify(
           new Array(
             newtonraphson.iterations.size()
           ).fill(0).map(
-            (_, id) => newtonraphson.iterations.get(id)
+            (_, id) => {
+              return {id, ...newtonraphson.iterations.get(id)}
+            }
           )
-        );
+        , null, 2));
         document.getElementById("answer")
                 .innerHTML = "Function root is approximately at x = " +
                              root.toFixed(2);
