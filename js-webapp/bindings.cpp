@@ -17,5 +17,5 @@ EMSCRIPTEN_BINDINGS(newtonraphson) {
     .field("delta_x", &rootfinding::Iteration::delta_x)
     ;
 
-  register_vector<rootfinding::Iteration>("vector<iIteration>");
+  register_vector<rootfinding::Iteration>("vector<Iteration>");
 }
