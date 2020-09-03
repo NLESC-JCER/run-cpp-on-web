@@ -3,12 +3,23 @@
 
 The blog topics are
 
-1. [small static web page without user interaction](js-webapp)
-1. gathering user inputs through a form in a simple react app
-1. displaying results from the algorithm in a more complex web app
-1. [how to deal with tasks that take longer to complete](js-webapp-async)
+1. web assembly, [small static web page without user interaction](js-webapp)
+1. unblock ui with web worker, [how to deal with tasks that take longer to complete](js-webapp-async)
+1. interactive form with React, [gathering user inputs through a form in a simple react app](js-react)
+1. plot with Vega, displaying results from the algorithm in a more complex web app
 
 The order will be 
 - 1-2-3-4, or
-- 1-4-2-3
+- 1-3-4-2
+
+Blog ideas:
+
+1. when stuff goes wrong, handling exceptions from C++
+1. computation takes too long for browser, use a web service running on a server with Fastify
+1. computation blocks my service, use thread pool (JS)
+1. I don't like JavaScript, give me Python, use pybind11 to interact with C++ from Python
+1. Expose C++ on the web using Python, use a web service running on a server with connexion
+1. is it done yet?, give progress during calculation, use Celery (Python)
+
+
 
