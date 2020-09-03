@@ -1,0 +1,24 @@
+<html>
+   <head>
+      <!-- Load WebAssemlby module -->
+      <script type="text/javascript" src="newtonraphson.js"></script>
+   </head>
+   <body>
+      <div>
+         Function root is approximately at x =
+         <span id="answer"/>
+      </div>
+      <script>
+         // Wait for module to initialize,
+         createModule().then(({NewtonRaphson}) => {
+            // Hardcoded input values
+            const tolerance = 0.001;
+            const initial_guess = -20;
+            const newtonraphson = new NewtonRaphson(tolerance);
+            const root = newtonraphson.solve(initial_guess);
+            // Write root to tag with answer as id
+            document.getElementById("answer").innerHTML = root.toFixed(2);
+         });
+      </script>
+   </body>
+</html>
