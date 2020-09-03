@@ -27,7 +27,7 @@ If you haven't read the first two parts please have a look at:
 
 ## React web application
 
-The web application will wrote in [Part 1 Title]('link-to-part-1') needs to update the entire page to display the results. Even for small changes in the webpage this has to happen. Thanks to the advance web-browsers and Javascript, Single Page Applications (SPA) can update only required elements in the webpage. We will use one of the most popular web-frameworks, React, to develop the SPA.
+The web application we wrote in [Part 1 Title]('link-to-part-1') needs to update the entire page to display the results. Even for small changes in the webpage this has to happen. Thanks to the advance web-browsers and Javascript, Single Page Applications (SPA) can update only required elements in the webpage. We will use one of the most popular web-frameworks, React, to develop the SPA.
 
 The form in the web application will collect the user inputs and use them to initialize the [algorithm]('link-to-algo') we use. When the form is submitted, a web worker loads the wasm file, starts the calculation, renders the result. With this architecture the application only needs cheap static file hosting to host the HTML, js and wasm files. The algorithm willbe running in the web browser on the end users machine instead of a server.
 
@@ -39,7 +39,8 @@ To render the React application we need a HTML element as a container. We will g
 
 We will keep the html code very minimal. The code will contain three essential elements:
 
-- **\<head\>** element to set the title and to load the required external dependencies (javascript libraries)
+- **\<head\>** element to set the title and to load the required external dependencies (javascript libraries).
+
   ```html
   <head>
     <title>Example React application</title>
@@ -50,11 +51,13 @@ We will keep the html code very minimal. The code will contain three essential e
   ```
 
 - **\<div\>** element to discplay the result
+
   ```html
   <div id="container"></div>
   ```
 
 - **\<script\>** element to load the Javascript application
+
   ```html
     <script type="text/babel" src="app.js"></script>
   ```
@@ -146,7 +149,7 @@ function App() {
     // TODO: add form
   );
 }
-
+```
 
 ```js
   // FIXME: this is react state
