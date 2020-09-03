@@ -196,7 +196,7 @@ File: _index.html_.
 
 ### Hosting the app with a web server
 
-We can not just open this HTML page in a web browser, as the embedded JavaScript file can only be loaded when it is
+In order to display the HTML page in a web browser we will need a web server because the embedded JavaScript file can only be loaded in this way. We will use Python [http.server](https://docs.python.org/3/library/http.server.html) module for this.
 hosted by a web server. Python3 ships with a built-in web server ``http.server``, we will use it to host all files on
 port 8000.
 
