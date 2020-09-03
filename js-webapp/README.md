@@ -170,29 +170,31 @@ following HTML:
 ```html
 <html>
    <head>
+      <!-- Load WebAssemlby module -->
       <script type="text/javascript" src="newtonraphson.js"></script>
    </head>
    <body>
-      <div id="answer"></div>
+      <div>
+         Function root is approximately at x =
+         <span id="answer"/>
+      </div>
       <script>
-         createModule().then((rootfinding) => {
+         // Wait for module to initialize,
+         createModule().then(({NewtonRaphson}) => {
+            // Hardcoded input values
             const tolerance = 0.001;
             const initial_guess = -20;
-            const newtonraphson = new rootfinding.NewtonRaphson(tolerance);
+            // Perform computation
+            const newtonraphson = new NewtonRaphson(tolerance);
             const root = newtonraphson.solve(initial_guess);
-            document.getElementById("answer")
-               .innerHTML = "Function root is approximately at x = " +
-                            root.toFixed(2);
+            // Write root to tag with answer as identifier
+            document.getElementById("answer").innerHTML = root.toFixed(2);
          });
       </script>
    </body>
 </html>
 ```
 File: _index.html_.
-
-When this page is loaded, ... **TODO** (explain what's happening)
-The last step is to render the answer on the page using the document manipulation method
-[``getElementById``](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById).
 
 ### Hosting the app with a web server
 
