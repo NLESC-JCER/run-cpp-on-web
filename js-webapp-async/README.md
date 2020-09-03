@@ -17,7 +17,8 @@ Notice that we also added a slider input to the page. This slider isn't connecte
 
 ### Web workers
 
-A web worker is an object that handles execution of a piece of code aynchronously. On completion the web worker will notify so the result can be processed and, in this case, rendered on the page. 
+A [web worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) is an object that handles execution of a piece of code aynchronously. On completion the web worker will notify so the result can be processed and, in this case, rendered on the page. 
+
 
 The way the page communicates with the worker object is through sending messages. The page will send a message to the worker to start doing work, and the message will include all data that the worder needs. The worker will perform its execution, using only the data that was in the message. The worker will not be able to access any data in the webapp directly. The worker can only send back results by sending a message back to the webapp. 
 
