@@ -1,7 +1,3 @@
-- audience: RSEs
-- approach: text before code, include code if it supports the story
-- live demos: 
-
 # Introduction
 In a [previous blogpost](../js-webapp/README.md) we discussed how to run c++ code on the web using Javascript.
 
