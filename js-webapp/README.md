@@ -15,7 +15,7 @@ specifically how to [make the app interactive](anotherblog), how to [visualize t
 how to [deal with long running tasks](yetanotherblog).
 
 So today's aim is to have a simple web app that determines the root of a mathematical function _x^3 - x^2 + 2_, i.e. the
-value of _x_ where _y = 0_. 
+value of _x_ where _y = 0_.
 
 ![equation.svg.png](equation.svg.png)
 
@@ -27,7 +27,7 @@ The way this works is you give Newton-Raphson the equation whose root you want t
 that equation. Then you take an ``initial_guess`` of what you think the value of the root could be, then let the method
 iterate towards the solution. The solution is approximate within a ``tolerance``, which you can also set. Anyway, the
 algorithm is written C++, but **with some trickery, we'll be able to use that C++ code from the browser, without the
-need to port it first**! 
+need to port it first**!
 
 
 ![newton.jpg](newton.jpg)
@@ -38,7 +38,7 @@ Now before you say _"That'll be so much slower than running it native!"_ or _"C/
 just hold your horses for a sec. With the right tools, it is possible to run C/C++ code in the browser, without any
 significant performance penalty. **TODO** (Mention WebAssembly). Using this approach, **TODO** (these peeps) were able to run the video
 game **TODO** (X) in the browser and didn't find any performance problems. And if it works for video games, it will likely work
-for your research software, too. 
+for your research software, too.
 
 ![hold-your-horses.jpeg](hold-your-horses.jpeg)
 
@@ -53,10 +53,9 @@ OK, now that you're fully on board with this, let's get to it. Here's a list of 
 run WebAssembly without loss of performance. For this, we'll use [Emscripten](https://emscripten.org/)'s ``emcc``
 compiler, the most popular C++ to WebAssembly compiler of the bunch.
 1. To use the WebAssembly functionality from JavaScript, a binding is required. The binding will map C++ constructs to
-their JavaScript equivalent and back. For this, we'll use 
+their JavaScript equivalent and back. For this, we'll use
 [embind](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html#embind).
 1. A web server to serve our files. We'll use Python 3's ``http.server``, but other options like X and Y work equally well.
-
 
 ## Tying it all together
 
@@ -65,17 +64,14 @@ their JavaScript equivalent and back. For this, we'll use
 Here is the equation whose root we want to find, along with its derivative, since that's what Newton-Raphson requires:
 
 ```cpp
-namespace algebra {
+// An example equation
+double equation(double x) {
+  return x * x * x - x * x + 2;
+}
 
-   // An example equation
-   double equation(double x) {
-      return x * x * x - x * x + 2;
-   }
-
-   // Derivative of the above equation
-   double derivative(double x) {
-      return 3 * x * x - 2 * x;
-   }
+// Derivative of the above equation
+double derivative(double x) {
+  return 3 * x * x - 2 * x;
 }
 ```
 File: _algebra.cpp_
@@ -92,15 +88,13 @@ which takes a ``double``, and returns another ``double``. Furthermore, ``NewtonR
 
 #include <string>
 
-namespace rootfinding {
-   class NewtonRaphson {
-      public:
-         NewtonRaphson(double tolerance_in);
-         double solve(double initial_guess);
-      private:
-         double tolerance;
-  };
-}
+class NewtonRaphson {
+  public:
+    NewtonRaphson(double tolerance_in);
+    double solve(double initial_guess);
+  private:
+    double tolerance;
+};
 #endif
 ```
 File: _newtonraphson.hpp_.
@@ -112,32 +106,27 @@ File ``newtonraphson.cpp`` contains the corresponding implementation:
 #include "algebra.cpp"
 #include <math.h>
 
-using namespace algebra;
+// Define the constructor method of NewtonRaphson instances
+NewtonRaphson::NewtonRaphson(double tolerance_in) : tolerance(tolerance_in) {}
 
-namespace rootfinding {
+// Define the 'solve' method of NewtonRaphson instances
+double NewtonRaphson::solve(double initial_guess) {
+  double x = initial_guess;
+  double delta_x = equation(x) / derivative(x);
 
-   // Define the constructor method of NewtonRaphson instances
-   NewtonRaphson::NewtonRaphson(double tolerance_in) : tolerance(tolerance_in) {}
-
-   // Define the 'solve' method of NewtonRaphson instances
-   double NewtonRaphson::solve(double initial_guess) {
-      double x = initial_guess;
-      double delta_x = equation(x) / derivative(x);
-
-      while (fabs(delta_x) >= tolerance) {
-         delta_x = equation(x) / derivative(x);
-         x = x - delta_x;
-      }
-      return x;
-   };
-}
+  while (fabs(delta_x) >= tolerance) {
+    delta_x = equation(x) / derivative(x);
+    x = x - delta_x;
+  }
+  return x;
+};
 ```
 File: _newtonraphson.cpp_.
 
 From this definition, ``NewtonRaphson`` instances need to be initialized with a value for ``tolerance_in``, which is then
 stored as the private member ``tolerance``. Once the object instance has been constructed, users can call its ``solve``
 method to iteratively find ``equation``'s root, with ``equation`` and its ``derivative`` being imported from
-``algebra.cpp`` via the ``include`` line near the top. 
+``algebra.cpp`` via the ``include`` line near the top.
 
 ### Binding
 
@@ -150,9 +139,9 @@ The binding of the C++ code:
 using namespace emscripten;
 
 EMSCRIPTEN_BINDINGS(newtonraphson) {
-   class_<rootfinding::NewtonRaphson>("NewtonRaphson")
+   class_<NewtonRaphson>("NewtonRaphson")
       .constructor<double>()
-      .function("solve", &rootfinding::NewtonRaphson::solve)
+      .function("solve", &NewtonRaphson::solve)
       ;
 }
 ```
@@ -215,7 +204,7 @@ port 8000.
 python3 -m http.server 8000
 ```
 
-Visit [http://localhost:8000/](http://localhost:8000/) to see the result of the calculation. 
+Visit [http://localhost:8000/](http://localhost:8000/) to see the result of the calculation.
 
 ![result.png](result.png)
 
