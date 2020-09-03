@@ -22,6 +22,6 @@ Blog ideas:
 1. I don't like JavaScript, give me Python, use pybind11 to interact with C++ from Python
 1. Expose C++ on the web using Python, use a web service running on a server with connexion
 1. is it done yet?, give progress during calculation, use Celery (Python)
-
-
+1. My C++ program needs sockets, can I use those? Explain limitations of Emscripten, use [web socket](https://emscripten.org/docs/porting/networking.html) and in-memory filesystem as examples
+1. How to build WebAssembly with a dependencies like boost, explain [bundled standard libs](https://emscripten.org/docs/compiling/Building-Projects.html#using-libraries) and https://github.com/emscripten-ports
 
