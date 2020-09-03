@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <script type="text/javascript" src="newtonraphson.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.13.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.13.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.8.0"></script>
+  </head>
+  <body>
+    <div id="plot"></div>
+    <script>
+      createModule().then(async (rootfinding) => {
+        const tolerance = 0.001;
+        const initial_guess = -4;
+        const newtonraphson = new rootfinding.NewtonRaphson(tolerance);
+        newtonraphson.solve(initial_guess);
+        const iterations = new Array(
+            newtonraphson.iterations.size()
+        ).fill().map(
+          (_, id) => {
+            return {id, ...newtonraphson.iterations.get(id)}
+          }
+        );
+        console.log(JSON.stringify(iterations, null, 2));
+        const spec_request = await fetch('vega-spec.json');
+        // TODO decide for spec to be fetched and overwrites or fetched or inlined
+        const spec = await spec_request.json();
+        // ovewrite equation range
+        spec.layer[0].data.sequence.start = initial_guess;
+        spec.layer[0].data.sequence.stop = -1 * initial_guess;
+        // overwrite data
+        spec.layer[2].data.values = iterations;
+        vegaEmbed(document.getElementById("plot"), spec);
+      });
+    </script>
+  </body>
+</html>
