@@ -45,7 +45,10 @@ The webpage that uses the worker will look like:
       worker.onmessage = function(message) {
         if (message.data.type === 'RESULT') {
           const root = message.data.payload.root;
-          document.getElementById('answer').innerHTML = root.toFixed(2);
+          document.getElementById("answer")
+               .innerHTML = "Function root is approximately at x = " +
+                            root.toFixed(2);
+
         }
       }
     </script>
