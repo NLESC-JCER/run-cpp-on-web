@@ -86,8 +86,6 @@ which takes a ``double``, and returns another ``double``. Furthermore, ``NewtonR
 #ifndef H_NEWTONRAPHSON_H
 #define H_NEWTONRAPHSON_H
 
-#include <string>
-
 class NewtonRaphson {
   public:
     NewtonRaphson(double tolerance_in);
