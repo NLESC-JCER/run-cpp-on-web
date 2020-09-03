@@ -36,8 +36,8 @@ _Newton (and his hair)._
 
 Now before you say _"That'll be so much slower than running it native!"_ or _"C/C++ from the browser? Impossible!"_,
 just hold your horses for a sec. With the right tools, it is possible to run C/C++ code in the browser, without any
-significant performance penalty. **TODO** (Mention WebAssembly). Using this approach, **TODO** (these peeps) were able to run the video
-game **TODO** (X) in the browser and didn't find any performance problems. And if it works for video games, it will likely work
+significant performance penalty. WebAssembly to the rescue, a low level language browsers can run and C++ can be compiled to. Using this approach, Gabriel Cuvillier was able to run the video
+game [Doom 3 in the browser](http://wasm.continuation-labs.com/d3demo/) and didn't find any performance problems. And if it works for video games, it will likely work
 for your research software, too.
 
 ![hold-your-horses.jpeg](hold-your-horses.jpeg)
@@ -145,7 +145,7 @@ EMSCRIPTEN_BINDINGS(newtonraphson) {
 ```
 File: _bindings.cpp_.
 
-**TODO** (Explain the above snippet in functional terms)
+Here we expose the NewtonRaphson class by registering itself and its public members using [embind binding statements](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html#classes).
 
 ### Compiling to WebAssembly
 
