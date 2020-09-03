@@ -6,7 +6,7 @@ software in JavaScript, the programming language that browsers use.
 
 _Wouldn't it be great if you could run your existing C/C++ code on the web with only minor effort?_
 
-That way, loads more people would be able to see your results, interact with your algorithm, and apply it for their own
+Loads more people would be able to see your results, interact with your algorithm, and apply it for their own
 purposes.
 
 In this blog, we'll show you how to take a simple algorithm written in C++ and make it available as a web
