@@ -1,4 +1,4 @@
-# Run your C++ code on the web: interactive form with React
+# Run your C++ code on the web: Part X - Interactive form with React
 
 In the previous blog posts we compiled the C++ algorithm into a webassembly code, added a web worker to unblock the ui when running long running tasks. In this blog post we will create a web application using [React](https://reactjs.org/). The web application will have a web-form which allows us to change the parameters of the algorithm.
 
@@ -66,7 +66,6 @@ Similarly we will split the JavasSript code into sections and build up the the R
 Let's start with the header part. We will define a JavaScript function which returns the header element which will be rendered by the web-browser when the user visits the page.
 
 ```js
-// this JavaScript snippet is later referred to as <<heading-component>>
 function Heading() {
   const title = 'Root finding web application';
   return <h1>{title}</h1>
@@ -120,12 +119,12 @@ When the page is rendered, the generated HTML code will be like:
 
 ## Adding the  web form
 
-The web application in our example should have a form with tolerance and initial_guess input fields, as well as a submit button. The form in JSX can be written in the following way:
+The web application in our example should have a form with ``tolerance`` and ``initial_guess`` input fields, as well as a submit button. The form in JSX can be written in the following way:
 
 ```js
 <form onSubmit={handleSubmit}>
   <label>
-    Epsilon:
+    Tolerance:
     <input name="tolerance" type="number" value={tolerance} onChange={onToleranceChange}/>
   </label>
   <label>
@@ -137,37 +136,34 @@ The web application in our example should have a form with tolerance and initial
 ```
 
 The form tag has a `onSubmit` property, which is set to a function (`handleSubmit`) that will handle the form
-submission. The input tag has a `value` property to set the variable (`epsilon` and `guess`) and it also has `onChange`
-property to set the function (`onEpsilonChange` and `onGuessChange`) which will be triggered when the user changes the
+submission. The input tag has a `value` property to set the variable (`tolerance` and `initial_guess`) and it also has `onChange`
+property to set the function (`onToleranceChange` and `onGuessChange`) which will be triggered when the user changes the
 value.
 
-Let's implement the `value` and `onChange` for the `epsilon` input.
+Let's implement the `value` and `onChange` for the `tolerance` input.
 To store the value we will use the [React useState hook](https://reactjs.org/docs/hooks-state.html).
 
-```{.js #react-state}
-// this JavaScript snippet is later referred to as <<react-state>>
-const [epsilon, setEpsilon] = React.useState(0.001);
+```js
+const [tolerance, setTolerance] = React.useState(0.001);
 ```
 
-The argument of the `useState` function is the initial value. The `epsilon` variable contains the current value for
-epsilon and `setEpsilon` is a function to set epsilon to a new value.
+The argument of the `useState` function is the initial value. The `tolerance` variable contains the current value for
+tolerance and `setTolerance` is a function to set tolerance to a new value.
 
 The input tag in the form will call the `onChange` function with a event object. We need to extract the user input from
-the event and pass it to `setEpsilon`. The value should be a number, so we use `Number()` to cast the string from the
+the event and pass it to `setTolerance`. The value should be a number, so we use `Number()` to cast the string from the
 event to a number.
 
-```{.js #react-state}
-// this JavaScript snippet is appended to <<react-state>>
-function onEpsilonChange(event) {
-  setEpsilon(Number(event.target.value));
+```js
+function onToleranceChange(event) {
+  setTolerance(Number(event.target.value));
 }
 ```
 
-We will follow the same steps for the guess input as well.
+We will follow the same steps for the initial_guess input as well.
 
-```{.js #react-state}
-// this JavaScript snippet is appended to <<react-state>>
-const [guess, setGuess] = React.useState(-20);
+```js
+const [initial_guess, setGuess] = React.useState(-20);
 
 function onGuessChange(event) {
   setGuess(Number(event.target.value));
@@ -178,47 +174,42 @@ We are ready to implement the `handleSubmit` function which will process the for
 to the onChange of the input tag, an event object. Normally when you submit a form the form fields will be send to the
 server, but we want to perform the calculation in the browser so we have to disable the default action with.
 
-```{.jsx #handle-submit}
-// this JavaScript snippet is later referred to as <<handle-submit>>
+```jsx
 event.preventDefault();
 ```
 
 Like we did in the previous chapter we have to construct a web worker.
 
-```{.jsx #handle-submit}
-// this JavaScript snippet is appended to <<handle-submit>>
+```jsx
 const worker = new Worker('worker.js');
 ```
 
 The `worker.js` is the same as in the previous chapter so we re-use it by
 
-```{.awk #link-worker}
+```jsx
 cd react && ln -s ../webassembly/worker.js . && cd -
 ```
 
 We have to post a message to the worker with the values from the form.
 
-```{.jsx #handle-submit}
-// this JavaScript snippet is appended to <<handle-submit>>
+```jsx
 worker.postMessage({
   type: 'CALCULATE',
-  payload: { epsilon: epsilon, guess: guess }
+  payload: { tolerance: tolerance, initial_guess: initial_guess }
 });
 ```
 
 We need a place to store the result of the calculation (`root` value), we will use `useState` function again. The
 initial value of the result is set to `undefined` as the result is only known after the calculation has been completed.
 
-```{.js #react-state}
-// this JavaScript snippet is appended to <<react-state>>
+```jsx
 const [root, setRoot] = React.useState(undefined);
 ```
 
 When the worker is done it will send a message back to the app. The app needs to store the result value (`root`) using
 `setRoot`. The worker will then be terminated because it did its job.
 
-```{.jsx #handle-submit}
-// this JavaScript snippet is appended to <<handle-submit>>
+```jsx
 worker.onmessage = function(message) {
     if (message.data.type === 'RESULT') {
       const result = message.data.payload.root;
@@ -231,8 +222,7 @@ worker.onmessage = function(message) {
 To render the result we can use a React Component which has `root` as a property. When the calculation has not been done
 yet, it will render `Not submitted`. When the `root` property value is set then we will show it.
 
-```{.jsx #result-component}
-// this JavaScript snippet is later referred to as <<result-component>>
+```jsx
 function Result(props) {
   const root = props.root;
   let message = 'Not submitted';
@@ -246,32 +236,76 @@ function Result(props) {
 We can combine the heading, form and result components and all the states and handleSubmit function into the `App` React
 component.
 
-```{.jsx file=react/app.js}
-<<heading-component>>
-<<result-component>>
+```js
+function Heading() {
+  const title = 'Root finding web application';
+  return <h1>{title}</h1>
+}
 
-// this JavaScript snippet appenended to react/app.js
+function Result(props) {
+  const root = props.root;
+  let message = 'Not submitted';
+  if (root !== undefined) {
+    message = 'Root = ' + root;
+  }
+  return <div id="answer">{message}</div>;
+}
+
 function App() {
-  <<react-state>>
+  const [epsilon, setEpsilon] = React.useState(0.001);
+  function onEpsilonChange(event) {
+    setEpsilon(Number(event.target.value));
+  }
+  const [guess, setGuess] = React.useState(-20);
+
+  function onGuessChange(event) {
+    setGuess(Number(event.target.value));
+  }
+  const [root, setRoot] = React.useState(undefined);
 
   function handleSubmit(event) {
-    <<handle-submit>>
+    event.preventDefault();
+    const worker = new Worker('worker.js');
+    worker.postMessage({
+      type: 'CALCULATE',
+      payload: { epsilon: epsilon, guess: guess }
+    });
+    worker.onmessage = function(message) {
+        if (message.data.type === 'RESULT') {
+          const result = message.data.payload.root;
+          setRoot(result);
+          worker.terminate();
+      }
+    };
   }
 
   return (
     <div>
       <Heading/>
-      <<react-form>>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Epsilon:
+          <input name="epsilon" type="number" value={epsilon} onChange={onEpsilonChange}/>
+        </label>
+        <label>
+          Initial guess:
+          <input name="guess" type="number" value={guess} onChange={onGuessChange}/>
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
       <Result root={root}/>
     </div>
   );
 }
+ReactDOM.render(
+  <App/>,
+  document.getElementById('container')
+);
 ```
 
 Finally we can render the `App` component to the HTML container with `container` as identifier.
 
-```{.jsx file=react/app.js}
-// this JavaScript snippet appenended to react/app.js
+```js
 ReactDOM.render(
   <App/>,
   document.getElementById('container')
@@ -280,13 +314,13 @@ ReactDOM.render(
 
 Make sure that the App can find the WebAssembly files by
 
-```{.awk #link-webassembly-wasm}
+```awk
 cd react && ln -s ../webassembly/newtonraphsonwasm.wasm . && cd -
 ```
 
 and
 
-```{.awk #link-webassembly-js}
+```awk
 cd react && ln -s ../webassembly/newtonraphsonwasm.js . && cd -
 ```
 
