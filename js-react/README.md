@@ -160,7 +160,7 @@ function onToleranceChange(event) {
 }
 ```
 
-We will follow the same steps for the initial_guess input as well.
+We will follow the same steps for the `initial_guess` input as well.
 
 ```js
 const [initial_guess, setGuess] = React.useState(-20);
@@ -171,20 +171,20 @@ function onGuessChange(event) {
 ```
 
 We are ready to implement the `handleSubmit` function which will process the form data. The function will get, similar
-to the onChange of the input tag, an event object. Normally when you submit a form the form fields will be send to the
+to the `onChange` of the input tag, an event object. Normally when you submit a form the form fields will be send to the
 server, but we want to perform the calculation in the browser so we have to disable the default action with.
 
 ```jsx
 event.preventDefault();
 ```
 
-Like we did in the previous chapter we have to construct a web worker.
+Like we did in the previous post we have to construct a web worker.
 
 ```jsx
 const worker = new Worker('worker.js');
 ```
 
-The `worker.js` is the same as in the previous chapter so we re-use it by
+The `worker.js` is the same as in the previous post so we re-use it by
 
 ```jsx
 cd react && ln -s ../webassembly/worker.js . && cd -
@@ -334,7 +334,6 @@ Visit [http://localhost:8000/react/example-app.html](http://localhost:8000/react
 answer. Embedded below is the example app hosted on [GitHub pages](https://nlesc-jcer.github.io/cpp2wasm/react/example-app.html)
 
 <iframe width="100%" height="160" src="https://nlesc-jcer.github.io/cpp2wasm/react/example-app.html" /></iframe>
-
 
 ## Extra notes
 
