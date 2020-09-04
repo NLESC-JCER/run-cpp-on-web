@@ -4,9 +4,9 @@ In the previous blog posts we compiled the C++ algorithm into a webassembly code
 
 If you haven't read the first two parts please have a look at:
 
--[Part 1: web assembly]('https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/js-webapp')
+-[Part 1: web assembly](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/js-webapp)
 
--[Part 2: unblock ui with web worker]('[link-to-part-2](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/js-webapp-async)')
+-[Part 2: unblock ui with web worker](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/js-webapp-async)
 
 ## React web application
 
@@ -16,7 +16,7 @@ The form in the web application will collect the user inputs and use them to ini
 
 ### The Html code
 
-To render the React application we need a HTML element as a container. We will give it the identifier **container** which will use later when we implement the **React** application in the [javascript section]('js-section').
+To render the React application we need a HTML element as a container. We will give it the identifier **container** which will use later when we implement the **React** application in the [javascript section](js-section).
 
 We will keep the html code very minimal. The code will contain three essential elements:
 
@@ -52,6 +52,7 @@ The complete html code will look like this:
     <title>Example React application</title>
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
   </head>
   <div id="container"></div>
   <script type="text/babel" src="app.js"></script>
@@ -72,7 +73,7 @@ function Heading() {
 }
 ```
 
-The return statement of this function looks weird, right? It is indeed not HTML. React uses a syntax extension called [JSX]('https://reactjs.org/docs/introducing-jsx.html') to describe the UI. With the magical conversion of [Babel]('https://babeljs.io/docs/en/next/babel-standalone.html') we can convert JSX into JavaScript code. After this conversion the generated JavaScript code will look like:
+The return statement of this function looks weird, right? It is indeed not HTML. React uses a syntax extension called [JSX](https://reactjs.org/docs/introducing-jsx.html) to describe the UI. With the magical conversion of [Babel](https://babeljs.io/docs/en/next/babel-standalone.html) we can convert JSX into JavaScript code. After this conversion the generated JavaScript code will look like:
 
 ```js
 function Heading() {
