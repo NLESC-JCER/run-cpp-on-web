@@ -252,11 +252,11 @@ function Result(props) {
 }
 
 function App() {
-  const [epsilon, setEpsilon] = React.useState(0.001);
+  const [tolerance, setTolerance] = React.useState(0.001);
   function onEpsilonChange(event) {
     setEpsilon(Number(event.target.value));
   }
-  const [guess, setGuess] = React.useState(-20);
+  const [initial_guess, setGuess] = React.useState(-20);
 
   function onGuessChange(event) {
     setGuess(Number(event.target.value));
@@ -268,7 +268,7 @@ function App() {
     const worker = new Worker('worker.js');
     worker.postMessage({
       type: 'CALCULATE',
-      payload: { epsilon: epsilon, guess: guess }
+      payload: { tolerance: tolerance, guess: inital_guess }
     });
     worker.onmessage = function(message) {
         if (message.data.type === 'RESULT') {
@@ -284,12 +284,12 @@ function App() {
       <Heading/>
       <form onSubmit={handleSubmit}>
         <label>
-          Epsilon:
-          <input name="epsilon" type="number" value={epsilon} onChange={onEpsilonChange}/>
+          Tolerance:
+          <input name="tolerance" type="number" value={tolerance} onChange={onToleranceChange}/>
         </label>
         <label>
           Initial guess:
-          <input name="guess" type="number" value={guess} onChange={onGuessChange}/>
+          <input name="inital_guess" type="number" value={inital_guess} onChange={onGuessChange}/>
         </label>
         <input type="submit" value="Submit" />
       </form>
@@ -334,6 +334,7 @@ Visit [http://localhost:8000/react/example-app.html](http://localhost:8000/react
 answer. Embedded below is the example app hosted on [GitHub pages](https://nlesc-jcer.github.io/cpp2wasm/react/example-app.html)
 
 <iframe width="100%" height="160" src="https://nlesc-jcer.github.io/cpp2wasm/react/example-app.html" /></iframe>
+
 
 ## Extra notes
 
