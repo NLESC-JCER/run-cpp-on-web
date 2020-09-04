@@ -82,26 +82,10 @@ function Heading() {
 }
 ```
 
-I now can hear you saying: but wait... How do I use Babel? We haven't inclueded it anywhere. Yes, this is what we are going to do next. We will add the following line to our HTML code so that we can use Babel to produce the JavaScript code.
+I now can hear what you are saying: but wait... How do I use Babel? We haven't inclueded it anywhere. Yes, we did. Babel was already added to the HTML code.
 
 ```html
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-```
-
-So the updated Html code will be:
-
-```html
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>Example React application</title>
-    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-  </head>
-  <div id="container"></div>
-  <script type="text/babel" src="app.js"></script>
-</html>
 ```
 
 In order the header element to be rendered we need to tell **ReactDOM** which element it should render and where it should be displayed. Do you still remember the **container** div we defined in the HTML part?
