@@ -150,6 +150,7 @@ Here we expose the NewtonRaphson class by registering itself and its public memb
 
 ### Compiling to WebAssembly
 
+First we need to [download and install](https://emscripten.org/docs/getting_started/downloads.html) Emscripten to get the compiler.
 The Newton-Raphson source and its binding can be compiled into a WebAssembly module with Emscripten's ``emcc`` compiler, as follows:
 
 ```shell
