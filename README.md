@@ -1,5 +1,7 @@
 - audience: RSEs
 - approach: text before code, include code if it supports the story
+- each blog has a focus and will try to minimize distractions, for example React blog should not use web worker and plot blog should use straight vegalite not react.
+- each blog has its own code, will make sure all they expand the first blog
 
 The blog topics are
 
