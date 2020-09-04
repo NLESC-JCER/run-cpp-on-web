@@ -9,6 +9,7 @@ The blog topics are
 1. unblock ui with web worker, [how to deal with tasks that take longer to complete](js-webapp-async)
 1. interactive form with React, [gathering user inputs through a form in a simple react app](js-react)
 1. plot with Vega, displaying results from the algorithm in a more complex web app
+1. blog which combines web-worker, form with React and plot with vega into single example
 
 The order will be 
 - 1-2-3-4, or
