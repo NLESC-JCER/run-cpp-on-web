@@ -135,17 +135,17 @@ When the page is rendered, the generated HTML code will be like:
 
 ## Adding the  web form
 
-The web application in our example should have a form with epsilon and guess input fields, as well as a submit button. The form in JSX can be written in the following way:
+The web application in our example should have a form with tolerance and initial_guess input fields, as well as a submit button. The form in JSX can be written in the following way:
 
 ```js
 <form onSubmit={handleSubmit}>
   <label>
     Epsilon:
-    <input name="epsilon" type="number" value={epsilon} onChange={onEpsilonChange}/>
+    <input name="tolerance" type="number" value={tolerance} onChange={onToleranceChange}/>
   </label>
   <label>
     Initial guess:
-    <input name="guess" type="number" value={guess} onChange={onGuessChange}/>
+    <input name="initial_guess" type="number" value={initial_guess} onChange={onGuessChange}/>
   </label>
   <input type="submit" value="Submit" />
 </form>
