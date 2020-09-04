@@ -136,6 +136,170 @@ The web application in our example should have a form with tolerance and initial
 </form>
 ```
 
+The form tag has a `onSubmit` property, which is set to a function (`handleSubmit`) that will handle the form
+submission. The input tag has a `value` property to set the variable (`epsilon` and `guess`) and it also has `onChange`
+property to set the function (`onEpsilonChange` and `onGuessChange`) which will be triggered when the user changes the
+value.
+
+Let's implement the `value` and `onChange` for the `epsilon` input.
+To store the value we will use the [React useState hook](https://reactjs.org/docs/hooks-state.html).
+
+```{.js #react-state}
+// this JavaScript snippet is later referred to as <<react-state>>
+const [epsilon, setEpsilon] = React.useState(0.001);
+```
+
+The argument of the `useState` function is the initial value. The `epsilon` variable contains the current value for
+epsilon and `setEpsilon` is a function to set epsilon to a new value.
+
+The input tag in the form will call the `onChange` function with a event object. We need to extract the user input from
+the event and pass it to `setEpsilon`. The value should be a number, so we use `Number()` to cast the string from the
+event to a number.
+
+```{.js #react-state}
+// this JavaScript snippet is appended to <<react-state>>
+function onEpsilonChange(event) {
+  setEpsilon(Number(event.target.value));
+}
+```
+
+We will follow the same steps for the guess input as well.
+
+```{.js #react-state}
+// this JavaScript snippet is appended to <<react-state>>
+const [guess, setGuess] = React.useState(-20);
+
+function onGuessChange(event) {
+  setGuess(Number(event.target.value));
+}
+```
+
+We are ready to implement the `handleSubmit` function which will process the form data. The function will get, similar
+to the onChange of the input tag, an event object. Normally when you submit a form the form fields will be send to the
+server, but we want to perform the calculation in the browser so we have to disable the default action with.
+
+```{.jsx #handle-submit}
+// this JavaScript snippet is later referred to as <<handle-submit>>
+event.preventDefault();
+```
+
+Like we did in the previous chapter we have to construct a web worker.
+
+```{.jsx #handle-submit}
+// this JavaScript snippet is appended to <<handle-submit>>
+const worker = new Worker('worker.js');
+```
+
+The `worker.js` is the same as in the previous chapter so we re-use it by
+
+```{.awk #link-worker}
+cd react && ln -s ../webassembly/worker.js . && cd -
+```
+
+We have to post a message to the worker with the values from the form.
+
+```{.jsx #handle-submit}
+// this JavaScript snippet is appended to <<handle-submit>>
+worker.postMessage({
+  type: 'CALCULATE',
+  payload: { epsilon: epsilon, guess: guess }
+});
+```
+
+We need a place to store the result of the calculation (`root` value), we will use `useState` function again. The
+initial value of the result is set to `undefined` as the result is only known after the calculation has been completed.
+
+```{.js #react-state}
+// this JavaScript snippet is appended to <<react-state>>
+const [root, setRoot] = React.useState(undefined);
+```
+
+When the worker is done it will send a message back to the app. The app needs to store the result value (`root`) using
+`setRoot`. The worker will then be terminated because it did its job.
+
+```{.jsx #handle-submit}
+// this JavaScript snippet is appended to <<handle-submit>>
+worker.onmessage = function(message) {
+    if (message.data.type === 'RESULT') {
+      const result = message.data.payload.root;
+      setRoot(result);
+      worker.terminate();
+  }
+};
+```
+
+To render the result we can use a React Component which has `root` as a property. When the calculation has not been done
+yet, it will render `Not submitted`. When the `root` property value is set then we will show it.
+
+```{.jsx #result-component}
+// this JavaScript snippet is later referred to as <<result-component>>
+function Result(props) {
+  const root = props.root;
+  let message = 'Not submitted';
+  if (root !== undefined) {
+    message = 'Root = ' + root;
+  }
+  return <div id="answer">{message}</div>;
+}
+```
+
+We can combine the heading, form and result components and all the states and handleSubmit function into the `App` React
+component.
+
+```{.jsx file=react/app.js}
+<<heading-component>>
+<<result-component>>
+
+// this JavaScript snippet appenended to react/app.js
+function App() {
+  <<react-state>>
+
+  function handleSubmit(event) {
+    <<handle-submit>>
+  }
+
+  return (
+    <div>
+      <Heading/>
+      <<react-form>>
+      <Result root={root}/>
+    </div>
+  );
+}
+```
+
+Finally we can render the `App` component to the HTML container with `container` as identifier.
+
+```{.jsx file=react/app.js}
+// this JavaScript snippet appenended to react/app.js
+ReactDOM.render(
+  <App/>,
+  document.getElementById('container')
+);
+```
+
+Make sure that the App can find the WebAssembly files by
+
+```{.awk #link-webassembly-wasm}
+cd react && ln -s ../webassembly/newtonraphsonwasm.wasm . && cd -
+```
+
+and
+
+```{.awk #link-webassembly-js}
+cd react && ln -s ../webassembly/newtonraphsonwasm.js . && cd -
+```
+
+Like before, we also need to host the files in a web server with
+
+```shell
+python3 -m http.server 8000
+```
+
+Visit [http://localhost:8000/react/example-app.html](http://localhost:8000/react/example-app.html) to see the root
+answer. Embedded below is the example app hosted on [GitHub pages](https://nlesc-jcer.github.io/cpp2wasm/react/example-app.html)
+
+<iframe width="100%" height="160" src="https://nlesc-jcer.github.io/cpp2wasm/react/example-app.html" /></iframe>
 
 ## Extra notes
 
