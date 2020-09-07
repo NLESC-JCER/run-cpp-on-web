@@ -29,7 +29,6 @@ iterate towards the solution. The solution is approximate within a ``tolerance``
 algorithm is written C++, but **with some trickery, we'll be able to use that C++ code from the browser, without the
 need to port it first**!
 
-
 ![newton.jpg](newton.jpg)
 
 _Newton (and his hair)._
@@ -153,7 +152,7 @@ Compile it
 c++ -o newtonraphson -I. newtonraphson.cpp cli.cpp
 ```
 
-And run it, to see if it returns the correct answer, `-1` in our case.
+And run it, to see if it returns the correct answer, `-1.00` in our case.
 
 ```shell
 ./newtonraphson
@@ -249,18 +248,14 @@ Visit [http://localhost:8000/](http://localhost:8000/) to see the result of the 
 
 _The resulting page if everything works._
 
-**TODO** (Recap and announce what else is coming)
+Looking at the plot of the equation we expect the root to be `-1.00`, which is exactly what the HTML page in the browser is showing.
 
-The result of root finding was calculated using the C++ algorithm compiled to a WebAssembly module, executed by some
-JavaScript and rendered on a HTML page.
+So what did we do, we wrote a simple algorithm in C++, wrote Emscripten bindings, compiled a WebAssembly module and ran the algorithm in a web browser using some JavaScript to talk to the module.
 
 The nice thing about this solution is that we don't need expensive infrastructure to perform computation as the
 computation is done in the users web browser. We just need somewhere to host the files.
 
-<!--
-In upcoming blogs will see if we can perform the computation without blocking the user interface and make a nice
-interactive form. In even more blogs we will look into performing the computation on the server with JavaScript and
-Python in a human readable and compute readable format.
--->
+In upcoming blogs will see how we can perform the computation without blocking the user interface, make a nice
+interactive form and make a visualization using a scatter plot. In a wrap up blog we will combine all the code of this and upcoming JavaScript WebAssembly blogs in a final web application.
 
 If you enjoyed this article, make sure to give us a clap!
