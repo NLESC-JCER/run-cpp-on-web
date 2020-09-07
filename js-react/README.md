@@ -90,7 +90,6 @@ I now can hear what you are saying: but wait... How do I use Babel? We haven't i
 In order the header element to be rendered we need to tell **ReactDOM** which element it should render and where it should be displayed. Do you still remember the **container** div we defined in the HTML part?
 
 ```js
-// this JavaScript snippet appenended to react/app.js
 ReactDOM.render(
   <Heading/>,
   document.getElementById('container')
