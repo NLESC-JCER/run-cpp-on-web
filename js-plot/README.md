@@ -113,8 +113,10 @@ The last iteration has `-1.00` as x, which is what we expected.
 
 ## Bindings
 
-The Emscripten bindings need to return iterations which not a simple scalar value, but a complex type of a vector with structs.
-In embind we use [value_object](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html#value-types) to expose the Iteration struct and [register_vector](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html#built-in-type-conversions) as the iterations property type.
+Emscripten can handle simple types like double and int, but needs help exposing more complex types to JavaScript like the iterations property.
+We need to use [value_object](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html#value-types) to expose the Iteration struct and [register_vector](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html#built-in-type-conversions) as the iterations property type.
+
+So the bindings look like
 
 ```cpp
 #include <emscripten/bind.h>
