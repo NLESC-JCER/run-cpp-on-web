@@ -144,34 +144,25 @@ To store the value we will use the [React useState hook](https://reactjs.org/doc
 
 ```js
 const [tolerance, setTolerance] = React.useState(0.001);
+const [initial_guess, setGuess] = React.useState(-4);
 ```
 
-The argument of the `useState` function is the initial value. The `tolerance` variable contains the current value for
-tolerance and `setTolerance` is a function to set tolerance to a new value.
+The argument of the `useState` function is the initial value. The `tolerance` variable contains the current value for tolerance and `setTolerance` is a function to set tolerance to a new value. The same logic is also used for initial_guess variable.
 
-The input tag in the form will call the `onChange` function with a event object. We need to extract the user input from
-the event and pass it to `setTolerance`. The value should be a number, so we use `Number()` to cast the string from the
+The input tag in the form will call the `onChange` function with a event object. We need to extract the user input from the event and pass it to `setTolerance` or `setGuess`. The value should be a number, so we use `Number()` to cast the string from the
 event to a number.
 
 ```js
 function onToleranceChange(event) {
   setTolerance(Number(event.target.value));
 }
-```
-
-We will follow the same steps for the `initial_guess` input as well.
-
-```js
-const [initial_guess, setGuess] = React.useState(-20);
 
 function onGuessChange(event) {
   setGuess(Number(event.target.value));
 }
 ```
 
-We are ready to implement the `handleSubmit` function which will process the form data. The function will get, similar
-to the `onChange` of the input tag, an event object. Normally when you submit a form the form fields will be send to the
-server, but we want to perform the calculation in the browser so we have to disable the default action with.
+We are now ready to implement the `handleSubmit` function which will process the submitted form data. The function will get, similar to the `onChange` of the input tag, an event object. Normally when you submit a form the form fields will be send to the server, but we want to perform the calculation in the browser so we have to disable the default action with.
 
 ```jsx
 event.preventDefault();
