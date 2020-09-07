@@ -267,7 +267,7 @@ function App() {
     const worker = new Worker('worker.js');
     worker.postMessage({
       type: 'CALCULATE',
-      payload: { tolerance: tolerance, guess: inital_guess }
+      payload: { epsilon: tolerance, guess: initial_guess }
     });
     worker.onmessage = function(message) {
         if (message.data.type === 'RESULT') {
