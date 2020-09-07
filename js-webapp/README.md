@@ -48,6 +48,7 @@ _Hold your horses._
 
 OK, now that you're fully on board with this, let's get to it. Here's a list of what we need:
 
+1. We are going to write a small HTML page, so you will need basic knowledge about [HTML pages](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics) and the programming language embedded in each web browser called [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) to make HTML pages interactive.
 1. Some C/C++ code to illustrate the process. We'll use our Newton-Raphson C++ code.
 1. A program that can take our existing C/C++ code and compile it into a WebAssembly module. Modern browsers are able to
 run WebAssembly without loss of performance. For this, we'll use [Emscripten](https://emscripten.org/)'s ``emcc``
@@ -149,6 +150,7 @@ Here we expose the NewtonRaphson class by registering itself and its public memb
 
 ### Compiling to WebAssembly
 
+First we need to [download and install](https://emscripten.org/docs/getting_started/downloads.html) Emscripten to get the compiler.
 The Newton-Raphson source and its binding can be compiled into a WebAssembly module with Emscripten's ``emcc`` compiler, as follows:
 
 ```shell
