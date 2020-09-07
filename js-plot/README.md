@@ -209,7 +209,7 @@ TODO explain vega-spec.json layer construction
 ```
 File: _index.html.
 
-When we visit the web page, we will be greeted by the following plot. We can zoom with mouse wheel and pan by dragging.
+When we visit the web page, we will be greeted by the following plot. We can zoom with mouse wheel and pan by dragging. Also when we hover over a point we get a tooltip with all iteration data.
 
 [![Image](vega-spec.svg)](https://nlesc-jcer.github.io/run-cpp-on-web/js-plot/index.html)
 (Click on image to get interactive version)
