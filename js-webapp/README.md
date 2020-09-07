@@ -127,6 +127,43 @@ stored as the private member ``tolerance``. Once the object instance has been co
 method to iteratively find ``equation``'s root, with ``equation`` and its ``derivative`` being imported from
 ``algebra.cpp`` via the ``include`` line near the top.
 
+To make sure the code actually works in C++ we will wrap it in a main function, compile it and run it.
+
+```cpp
+#include <iostream>
+#include <iomanip>
+
+#include "newtonraphson.hpp"
+
+int main() {
+  double initial_guess = -20;
+  double tolerance = 0.001;
+  NewtonRaphson finder(tolerance);
+  double x1 = finder.solve(initial_guess);
+  std::cout << "Function root is approximately at x = ";
+  std::cout << std::fixed << std::setprecision(2) << x1 << std::endl;
+  return 0;
+}
+```
+File: _cli.cpp_
+
+Compile it
+
+```shell
+c++ -o newtonraphson -I. newtonraphson.cpp cli.cpp
+```
+
+And run it, to see if it returns the correct answer, `-1` in our case.
+
+```shell
+./newtonraphson
+The value of the root is : -1.00
+```
+
+Nice, it works as expected.
+
+Next let's define the JavaScript interface our class should have with Emscripten bindings.
+
 ### Binding
 
 The binding of the C++ code:
@@ -188,7 +225,7 @@ following HTML:
             const newtonraphson = new NewtonRaphson(tolerance);
             const root = newtonraphson.solve(initial_guess);
             // Write root to tag with answer as identifier
-            document.getElementById("answer").innerHTML = root.toFixed(2);
+            document.getElementById("answer").innerHTML = root.toFixed(4);
          });
       </script>
    </body>
