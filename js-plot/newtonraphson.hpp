@@ -4,6 +4,7 @@
 #include <vector>
 
 struct Iteration {
+  int index;
   double x;
   double y;
   double slope;

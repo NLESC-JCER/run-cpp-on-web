@@ -11,6 +11,7 @@ EMSCRIPTEN_BINDINGS(newtonraphson) {
     ;
 
   value_object<Iteration>("Iteration")
+    .field("index", &Iteration::index)
     .field("x", &Iteration::x)
     .field("y", &Iteration::y)
     .field("slope", &Iteration::slope)
