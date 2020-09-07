@@ -252,7 +252,7 @@ function Result(props) {
 
 function App() {
   const [tolerance, setTolerance] = React.useState(0.001);
-  function onEpsilonChange(event) {
+  function onToleranceChange(event) {
     setEpsilon(Number(event.target.value));
   }
   const [initial_guess, setGuess] = React.useState(-20);
