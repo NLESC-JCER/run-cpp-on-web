@@ -288,7 +288,7 @@ function App() {
         </label>
         <label>
           Initial guess:
-          <input name="inital_guess" type="number" value={inital_guess} onChange={onGuessChange}/>
+          <input name="initial_guess" type="number" value={inital_guess} onChange={onGuessChange}/>
         </label>
         <input type="submit" value="Submit" />
       </form>
