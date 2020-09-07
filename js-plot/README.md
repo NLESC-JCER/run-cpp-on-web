@@ -9,6 +9,8 @@ Let's make changes to the C++ code to retrieve the data from the iterations.
 
 TODO add code snippets
 
+TODO explain how wasm vector is converted to array
+
 TODO show iterations from intiaizas json doc
 
 TODO Introduce Vega
