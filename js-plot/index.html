@@ -13,14 +13,18 @@
         const initial_guess = -4;
         const newtonraphson = new rootfinding.NewtonRaphson(tolerance);
         newtonraphson.solve(initial_guess);
+        // newtonraphson.iterations is a vector object which not consumeable by Vega
+        // So convert Emscripten vector of objects to JavaScript array of objects
         const iterations = new Array(
             newtonraphson.iterations.size()
         ).fill().map(
-          (_, id) => {
-            return {id, ...newtonraphson.iterations.get(id)}
+          (_, iteration) => {
+            return newtonraphson.iterations.get(iteration)
           }
         );
+        // Open console in DevTools (F12) to see iterations data as a JSON string
         console.log(JSON.stringify(iterations, null, 2));
+        // Read vega-lite declaration
         const spec_request = await fetch('vega-spec.json');
         // TODO decide for spec to be fetched and overwrites or fetched or inlined
         const spec = await spec_request.json();

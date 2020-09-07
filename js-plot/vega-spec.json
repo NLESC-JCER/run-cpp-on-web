@@ -1,100 +1,155 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
-    "width": 800,
-    "height": 600,
-    "layer": [
-      {
-        "data": {"sequence": {"start": -4, "stop": 4, "step": 0.1, "as": "x"}},
-        "transform": [
-          {
-            "calculate": "datum.x * datum.x * datum.x - datum.x * datum.x + 2",
-            "as": "y"
-          }
-        ],
-        "mark": "line",
-        "encoding": {
-          "x": {"type": "quantitative", "field": "x"},
-          "y": {"field": "y", "type": "quantitative"},
-          "color": {"value": "#f00"}
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "width": 800,
+  "height": 600,
+  "layer": [
+    {
+      "data": {
+        "sequence": {
+          "start": -4,
+          "stop": 4,
+          "step": 0.1,
+          "as": "x"
         }
       },
-      {
-        "data": {"values": [{}]},
-        "encoding": {"x": {"datum": -1}},
-        "layer": [
-          {"mark": {"type": "rule", "strokeDash": [4, 8]}},
+      "transform": [
+        {
+          "calculate": "datum.x * datum.x * datum.x - datum.x * datum.x + 2",
+          "as": "y"
+        }
+      ],
+      "mark": "line",
+      "encoding": {
+        "x": {
+          "type": "quantitative",
+          "field": "x"
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative"
+        },
+        "color": {
+          "value": "#f00"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {}
+        ]
+      },
+      "encoding": {
+        "x": {
+          "datum": -1
+        }
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "rule",
+            "strokeDash": [
+              4,
+              8
+            ]
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "right",
+            "baseline": "bottom",
+            "dx": -4,
+            "dy": 200,
+            "x": "width",
+            "text": "root"
+          }
+        }
+      ]
+    },
+    {
+      "data": {
+        "values": [
           {
-            "mark": {
-              "type": "text",
-              "align": "right",
-              "baseline": "bottom",
-              "dx": -4,
-              "dy": 200,
-              "x": "width",
-              "text": "root"
-            }
+            "index": 0,
+            "x": -4,
+            "y": -78,
+            "slope": 56,
+            "delta_x": -1.3928571428571428
+          },
+          {
+            "index": 1,
+            "x": -2.607142857142857,
+            "y": -22.518449344023324,
+            "slope": 25.605867346938776,
+            "delta_x": -0.8794253691513966
+          },
+          {
+            "index": 2,
+            "x": -1.7277174879914607,
+            "y": -6.1422577550278294,
+            "slope": 12.410458130917492,
+            "delta_x": -0.4949259479572281
+          },
+          {
+            "index": 3,
+            "x": -1.2327915400342326,
+            "y": -1.3933407207343333,
+            "slope": 7.024908023608391,
+            "delta_x": -0.1983429129679387
+          },
+          {
+            "index": 4,
+            "x": -1.0344486270662938,
+            "y": -0.1770308474165958,
+            "slope": 5.279149140250608,
+            "delta_x": -0.03353397350850215
+          },
+          {
+            "index": 5,
+            "x": -1.0009146535577917,
+            "y": -0.004576614918673005,
+            "slope": 5.007319738235726,
+            "delta_x": -0.0009139849576063872
           }
         ]
       },
-      {
-        "data": {
-          "values": [
-            {
-              "id": 0,
-              "x": -4,
-              "y": -78,
-              "slope": 56,
-              "delta_x": -1.3928571428571428
-            },
-            {
-              "id": 1,
-              "x": -2.607142857142857,
-              "y": -22.518449344023324,
-              "slope": 25.605867346938776,
-              "delta_x": -0.8794253691513966
-            },
-            {
-              "id": 2,
-              "x": -1.7277174879914607,
-              "y": -6.1422577550278294,
-              "slope": 12.410458130917492,
-              "delta_x": -0.4949259479572281
-            },
-            {
-              "id": 3,
-              "x": -1.2327915400342326,
-              "y": -1.3933407207343333,
-              "slope": 7.024908023608391,
-              "delta_x": -0.1983429129679387
-            },
-            {
-              "id": 4,
-              "x": -1.0344486270662938,
-              "y": -0.1770308474165958,
-              "slope": 5.279149140250608,
-              "delta_x": -0.03353397350850215
-            },
-            {
-              "id": 5,
-              "x": -1.0009146535577917,
-              "y": -0.004576614918673005,
-              "slope": 5.007319738235726,
-              "delta_x": -0.0009139849576063872
+      "encoding": {
+        "x": {
+          "field": "x",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "index",
+          "type": "nominal"
+        }
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "circle",
+            "tooltip": {
+              "content": "data"
             }
-          ]
-        },
-        "encoding": {
-          "x": {"field": "x", "type": "quantitative"},
-          "y": {"field": "y", "type": "quantitative"},
-          "text": {"field": "id", "type": "nominal"}
-        },
-        "layer": [
-          {
-            "mark": "circle",
-            "selection": {"grid": {"type": "interval", "bind": "scales"}}
           },
-          {"mark": {"type": "text", "dy": -10}}
-        ]
-      }
-    ]
-  }
+          "selection": {
+            "grid": {
+              "type": "interval",
+              "bind": "scales"
+            }
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "dy": -10
+          }
+        }
+      ]
+    }
+  ]
+}
