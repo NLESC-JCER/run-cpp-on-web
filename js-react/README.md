@@ -223,8 +223,7 @@ function Result(props) {
 }
 ```
 
-We can combine the heading, form and result components and all the states and handleSubmit function into the `App` React
-component.
+We can combine the heading, form and result components and all the states and handleSubmit function into the `App` React component and save it as `app.js`.
 
 ```js
 function Heading() {
@@ -244,7 +243,7 @@ function Result(props) {
 function App() {
   const [tolerance, setTolerance] = React.useState(0.001);
   function onToleranceChange(event) {
-    setEpsilon(Number(event.target.value));
+    setTolerance(Number(event.target.value));
   }
   const [initial_guess, setGuess] = React.useState(-20);
 
@@ -320,8 +319,7 @@ Like before, we also need to host the files in a web server with
 python3 -m http.server 8000
 ```
 
-Visit [http://localhost:8000/react/example-app.html](http://localhost:8000/react/example-app.html) to see the root
-answer. Embedded below is the example app hosted on [GitHub pages](https://nlesc-jcer.github.io/cpp2wasm/react/example-app.html)
+Visit [http://localhost:8000/react/example-app.html](http://localhost:8000/react/example-app.html) to see the root answer. Embedded below is the example app hosted on [GitHub pages](https://nlesc-jcer.github.io/cpp2wasm/react/example-app.html)
 
 <iframe width="100%" height="160" src="https://nlesc-jcer.github.io/cpp2wasm/react/example-app.html" /></iframe>
 
