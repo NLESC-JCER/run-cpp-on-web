@@ -14,10 +14,11 @@ function Heading() {
 
   function App() {
     const [tolerance, setTolerance] = React.useState(0.001);
+    const [initial_guess, setGuess] = React.useState(-4);
+
     function onToleranceChange(event) {
-      setEpsilon(Number(event.target.value));
+      setTolerance(Number(event.target.value));
     }
-    const [initial_guess, setGuess] = React.useState(-20);
 
     function onGuessChange(event) {
       setGuess(Number(event.target.value));
@@ -50,7 +51,7 @@ function Heading() {
           </label>
           <label>
             Initial guess:
-            <input name="initial_guess" type="number" value={inital_guess} onChange={onGuessChange}/>
+            <input name="initial_guess" type="number" value={initial_guess} onChange={onGuessChange}/>
           </label>
           <input type="submit" value="Submit" />
         </form>
