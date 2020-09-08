@@ -258,6 +258,8 @@ computation is done in the user's web browser--we just need somewhere to host th
 
 # Where to go from here?
 
+## Where to go from here?
+
 In upcoming blogs we will see how we can perform the computation without blocking the user interface, make a nice
 interactive form, and make a visualization to show data from each iteration. We'll wrap up the series in a final blog
 that combines the topics of the whole series in a full-featured web application.
