@@ -6,8 +6,8 @@
 int main() {
   double initial_guess = -20;
   double tolerance = 0.001;
-  NewtonRaphson finder(tolerance);
-  double root = finder.solve(initial_guess);
+  NewtonRaphson newtonraphson(tolerance);
+  double root = newtonraphson.solve(initial_guess);
 
   std::cout << std::fixed;
   std::cout << std::setprecision(2);
