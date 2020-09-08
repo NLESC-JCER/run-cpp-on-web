@@ -131,7 +131,7 @@ The code for the main function and the compile command can be found [here](https
 
 ```shell
 ./newtonraphson
-The value of the root is : -1.00
+Function root is approximately at x = -1.00
 ```
 
 Nice, it works as expected.
