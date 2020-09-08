@@ -189,13 +189,8 @@ First we need to [download and install](https://emscripten.org/docs/getting_star
 The Newton-Raphson source and its binding can be compiled into a WebAssembly module with Emscripten's ``emcc`` compiler, as follows:
 
 ```shell
-emcc \
-  -I. \
-  -o newtonraphson.js \
-  -Oz \
-  -s MODULARIZE=1 \
-  -s EXPORT_NAME=createModule \
-  --bind newtonraphson.cpp bindings.cpp
+emcc -I. -o newtonraphson.js -Oz -s MODULARIZE=1 \
+   -s EXPORT_NAME=createModule --bind newtonraphson.cpp bindings.cpp
 ```
 
 This will generate a WebAssembly module ``newtonraphson.wasm``, along with a JavaScript file ``newtonraphson.js``. Using
