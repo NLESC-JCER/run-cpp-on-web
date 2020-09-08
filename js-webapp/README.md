@@ -23,7 +23,7 @@ Function _x^3 - x^2 + 2_.
 
 For this, we'll use an iterative method known as the [_Newton-Raphson_ root finding
 method](https://www.youtube.com/watch?v=cOmAk82cr9M). Remember Newton? Quiet fellow, fabulous hair? Yes, _that_ Newton.
-The way this works is you give Newton-Raphson the equation whose root you want to find, along with the derivative of
+The way Newton-Raphson works is, you give it the equation whose root you want to find, along with the derivative of
 that equation. Then you take an ``initial_guess`` of what you think the value of the root could be, then let the method
 iterate towards the solution. The solution is approximate within a ``tolerance``, which you can also set. Anyway, the
 algorithm is written C++, but **with some trickery, we'll be able to use that C++ code from the browser, without the
@@ -35,9 +35,10 @@ _Newton (and his hair)._
 
 Now before you say _"That'll be so much slower than running it native!"_ or _"C/C++ from the browser? Impossible!"_,
 just hold your horses for a sec. With the right tools, it is possible to run C/C++ code in the browser, without any
-significant performance penalty. WebAssembly to the rescue, a low level language browsers can run and C++ can be compiled to. Using this approach, Gabriel Cuvillier was able to run the video
-game [Doom 3 in the browser](http://wasm.continuation-labs.com/d3demo/) and didn't find any performance problems. And if it works for video games, it will likely work
-for your research software, too.
+significant performance penalty. **TODO** WebAssembly to the rescue, a low level language browsers can run and C++ can
+be compiled to. Using this approach, Gabriel Cuvillier was able to run the video game _Doom 3_ [in the
+browser](http://wasm.continuation-labs.com/d3demo/) without any performance problems. And if it works for video games,
+it will likely work for your research software, too.
 
 ![hold-your-horses.jpeg](hold-your-horses.jpeg)
 
@@ -47,7 +48,7 @@ _Hold your horses._
 
 OK, now that you're fully on board with this, let's get to it. Here's a list of what we need:
 
-1. We are going to write a small HTML page, so you will need basic knowledge about [HTML pages](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics) and the programming language embedded in each web browser called [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) to make HTML pages interactive.
+1. We are going to write a small HTML page, so you will need basic knowledge about [HTML](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics) and [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
 1. Some C/C++ code to illustrate the process. We'll use our Newton-Raphson C++ code.
 1. A program that can take our existing C/C++ code and compile it into a WebAssembly module. Modern browsers are able to
 run WebAssembly without loss of performance. For this, we'll use [Emscripten](https://emscripten.org/)'s ``emcc``
@@ -146,6 +147,7 @@ int main() {
   return 0;
 }
 ```
+File: _cli.cpp_.
 
 It can be compiled with:
 
@@ -181,7 +183,9 @@ EMSCRIPTEN_BINDINGS(newtonraphson) {
 ```
 File: _bindings.cpp_.
 
-Here we expose the NewtonRaphson class by registering itself and its public members using [embind binding statements](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html#classes).
+**TODO**
+Here we expose the NewtonRaphson class by registering itself and its public members using [embind binding
+statements](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html#classes).
 
 ### Compiling to WebAssembly
 
@@ -189,13 +193,8 @@ First we need to [download and install](https://emscripten.org/docs/getting_star
 The Newton-Raphson source and its binding can be compiled into a WebAssembly module with Emscripten's ``emcc`` compiler, as follows:
 
 ```shell
-emcc \
-  -I. \
-  -o newtonraphson.js \
-  -Oz \
-  -s MODULARIZE=1 \
-  -s EXPORT_NAME=createModule \
-  --bind newtonraphson.cpp bindings.cpp
+emcc -I. -o newtonraphson.js -Oz -s MODULARIZE=1 \
+   -s EXPORT_NAME=createModule --bind newtonraphson.cpp bindings.cpp
 ```
 
 This will generate a WebAssembly module ``newtonraphson.wasm``, along with a JavaScript file ``newtonraphson.js``. Using
@@ -233,33 +232,34 @@ File: _index.html_.
 
 ### Hosting the app with a web server
 
-In order to display the HTML page in a web browser we will need a web server because the embedded JavaScript file can only be loaded in this way. We will use Python [http.server](https://docs.python.org/3/library/http.server.html) module for this.
-hosted by a web server. Python3 ships with a built-in web server ``http.server``, we will use it to host all files on
-port 8000.
+We'll need a web server to display the HTML page in a web browser. For this, we'll use the
+[http.server](https://docs.python.org/3/library/http.server.html) module from Python 3 to host all files on port 8000, like so:
 
 ```shell
 python3 -m http.server 8000
 ```
 
-Visit [http://localhost:8000/](http://localhost:8000/) to see the result of the calculation.
+Looking at the plot of the equation, the root of the equation should be at `x = -1.00`. Visit
+[http://localhost:8000/](http://localhost:8000/) to see if your browser shows the same result.
 
 ![result.png](result.png)
 
 _The resulting page if everything works._
 
-Looking at the plot of the equation we expect the root of the equation to be `-1.00`, which is exactly what the HTML page in the browser is showing.
-
 So what did we do
 
 1. We wrote a simple algorithm in C++
-2. Defined the JavaScript interface by writing Emscripten bindings
-3. Compiled the algorithm and bindings to a WebAssembly module with Emscripten compiler
-4. Ran the algorithm in a web browser using some JavaScript to talk to the WebAssembly module.
+2. We defined the JavaScript interface by writing Emscripten bindings
+3. We compiled the algorithm and bindings to a WebAssembly module with Emscripten compiler
+4. We ran the algorithm in a web browser using some JavaScript to talk to the WebAssembly module.
 
 The nice thing about this solution is that we don't need expensive infrastructure to perform computation as the
-computation is done in the users web browser. We just need somewhere to host the files.
+computation is done in the user's web browser--we just need somewhere to host the files.
+
+# Where to go from here?
 
 In upcoming blogs we will see how we can perform the computation without blocking the user interface, make a nice
-interactive form and make a visualization to show data from each iteration. In a wrap up blog we will combine all the code of this and upcoming JavaScript WebAssembly blogs in a final web application.
+interactive form, and make a visualization to show data from each iteration. We'll wrap up the series in a final blog
+that combines the topics of the whole series in a full-featured web application.
 
 If you enjoyed this article, make sure to give us a clap!
