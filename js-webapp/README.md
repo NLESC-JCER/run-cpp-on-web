@@ -77,7 +77,7 @@ double derivative(double x) {
 File: _algebra.cpp_
 
 The snippet below shows the contents of the file ``newtonraphson.hpp``. It is the header file for the Newton-Raphson
-iterative root finding algorithm. It defines a class ``NewtonRaphson`` in namespace ``rootfinding``. Besides the
+iterative root finding algorithm. It defines a class named ``NewtonRaphson``. Besides the
 constructor method ``NewtonRaphson(double tolerance_in)``, ``NewtonRaphson`` has one other public method, ``solve``,
 which takes a ``double``, and returns another ``double``. Furthermore, ``NewtonRaphson`` also has a private member,
 ``tolerance`` of type ``double``, which is used to store the class instance's private data.
