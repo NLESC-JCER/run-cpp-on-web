@@ -60,20 +60,15 @@ The webpage that uses the worker will look like:
 The worker code will contain only handling the incoming message. In this case, the worker will unpack the message, do the calculation, and pack the results in a new message that it will send back.
 The code for the worker in worker.js will now look like:
 ```js
-// this JavaScript snippet is stored as webassembly/worker.js
-importScripts('newtonraphsonwasm.js');
+importScripts('newtonraphson.js');
 
-// this JavaScript snippet is later referred to as <<worker-provider-onmessage>>
 onmessage = function(message) {
-  // this JavaScript snippet is before referred to as <<handle-message>>
   if (message.data.type === 'CALCULATE') {
     createModule().then((module) => {
-      // this JavaScript snippet is before referred to as <<perform-calc-in-worker>>
       const epsilon = message.data.payload.epsilon;
       const finder = new module.NewtonRaphson(epsilon);
       const guess = message.data.payload.guess;
       const root = finder.solve(guess);
-      // this JavaScript snippet is before referred to as <<post-result>>
       postMessage({
         type: 'RESULT',
         payload: {
@@ -83,6 +78,7 @@ onmessage = function(message) {
     });
   }
 };
+
 ```
 
 We can see the code in action [here](https://nlesc-jcer.github.io/run-cpp-on-web/js-webapp-async/example-web-worker.html). The calculation still takes the same time to perform, but as you will notice, the slider will be responsive all the time.
