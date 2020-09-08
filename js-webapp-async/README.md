@@ -29,31 +29,29 @@ Below is the code for the webapp. Notice the creation of the Worker object, the 
 The webpage that uses the worker will look like:
 ```html
 <!doctype html>
-<!-- this HTML page is stored as webassembly/example-web-worker.html -->
 <html lang="en">
   <head>
     <title>Example web worker</title>
     <script>
-      // this JavaScript snippet is later referred to as <<worker-consumer>>
       const worker = new Worker('worker.js');
-      // this JavaScript snippet is appended to <<worker-consumer>>
       worker.postMessage({
         type: 'CALCULATE',
         payload: { epsilon: 0.001, guess: -20 }
       });
-      // this JavaScript snippet is appended to <<worker-consumer>>
       worker.onmessage = function(message) {
         if (message.data.type === 'RESULT') {
           const root = message.data.payload.root;
-          document.getElementById("answer")
-               .innerHTML = "Function root is approximately at x = " +
+          document.getElementById('answer')
+		     .innerHTML = "Function root is approximately at x = " +
                             root.toFixed(2);
-
         }
       }
     </script>
   </head>
   <body>
+<div class="slidecontainer">
+  <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+</div>
     <span id="answer"> </span>
   </body>
 </html>
