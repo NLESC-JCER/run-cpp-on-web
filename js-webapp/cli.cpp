@@ -1,17 +1,16 @@
 #include <iostream>
 #include <iomanip>
 
-#include "newtonraphson.cpp"
+#include "newtonraphson.hpp"
 
 int main() {
-  double initial_guess = -20;
+  double initial_guess = -4;
   double tolerance = 0.001;
   NewtonRaphson newtonraphson(tolerance);
   double root = newtonraphson.solve(initial_guess);
 
-  std::cout << std::fixed;
-  std::cout << std::setprecision(2);
-  std::cout << "Function root is approximately at x = " << root << std::endl;
+  std::cout << "Function root is approximately at x = ";
+  std::cout << std::fixed << std::setprecision(2) << root << std::endl;
 
   return 0;
 }

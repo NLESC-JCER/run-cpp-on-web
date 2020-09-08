@@ -29,7 +29,6 @@ iterate towards the solution. The solution is approximate within a ``tolerance``
 algorithm is written C++, but **with some trickery, we'll be able to use that C++ code from the browser, without the
 need to port it first**!
 
-
 ![newton.jpg](newton.jpg)
 
 _Newton (and his hair)._
@@ -133,17 +132,16 @@ The following code is a minimal command line that we can use to check if everyth
 #include <iostream>
 #include <iomanip>
 
-#include "newtonraphson.cpp"
+#include "newtonraphson.hpp"
 
 int main() {
-  double initial_guess = -20;
+  double initial_guess = -4;
   double tolerance = 0.001;
   NewtonRaphson newtonraphson(tolerance);
   double root = newtonraphson.solve(initial_guess);
 
-  std::cout << std::fixed;
-  std::cout << std::setprecision(2);
-  std::cout << "Function root is approximately at x = " << root << std::endl;
+  std::cout << "Function root is approximately at x = ";
+  std::cout << std::fixed << std::setprecision(2) << root << std::endl;
 
   return 0;
 }
@@ -219,8 +217,9 @@ following HTML:
          // Wait for module to initialize,
          createModule().then(({NewtonRaphson}) => {
             // Hardcoded input values
-            const initial_guess = -20;
+            const initial_guess = -4;
             const tolerance = 0.001;
+            // Perform computation
             const newtonraphson = new NewtonRaphson(tolerance);
             const root = newtonraphson.solve(initial_guess);
             // Write the value of 'root' to the tag whose 'id' is equal to "answer"
@@ -248,18 +247,19 @@ Visit [http://localhost:8000/](http://localhost:8000/) to see the result of the 
 
 _The resulting page if everything works._
 
-**TODO** (Recap and announce what else is coming)
+Looking at the plot of the equation we expect the root of the equation to be `-1.00`, which is exactly what the HTML page in the browser is showing.
 
-The result of root finding was calculated using the C++ algorithm compiled to a WebAssembly module, executed by some
-JavaScript and rendered on a HTML page.
+So what did we do
+
+1. We wrote a simple algorithm in C++
+2. Defined the JavaScript interface by writing Emscripten bindings
+3. Compiled the algorithm and bindings to a WebAssembly module with Emscripten compiler
+4. Ran the algorithm in a web browser using some JavaScript to talk to the WebAssembly module.
 
 The nice thing about this solution is that we don't need expensive infrastructure to perform computation as the
 computation is done in the users web browser. We just need somewhere to host the files.
 
-<!--
-In upcoming blogs will see if we can perform the computation without blocking the user interface and make a nice
-interactive form. In even more blogs we will look into performing the computation on the server with JavaScript and
-Python in a human readable and compute readable format.
--->
+In upcoming blogs we will see how we can perform the computation without blocking the user interface, make a nice
+interactive form and make a visualization to show data from each iteration. In a wrap up blog we will combine all the code of this and upcoming JavaScript WebAssembly blogs in a final web application.
 
 If you enjoyed this article, make sure to give us a clap!
