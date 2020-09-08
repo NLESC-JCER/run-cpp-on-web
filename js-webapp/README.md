@@ -34,11 +34,11 @@ need to port it first**!
 _Newton (and his hair)._
 
 Now before you say _"That'll be so much slower than running it native!"_ or _"C/C++ from the browser? Impossible!"_,
-just hold your horses for a sec. With the right tools, it is possible to run C/C++ code in the browser, without any
-significant performance penalty. **TODO** WebAssembly to the rescue, a low level language browsers can run and C++ can
-be compiled to. Using this approach, Gabriel Cuvillier was able to run the video game _Doom 3_ [in the
-browser](http://wasm.continuation-labs.com/d3demo/) without any performance problems. And if it works for video games,
-it will likely work for your research software, too.
+just hold your horses for a sec. With the right tools, it is possible to run C/C++ code in the browser, without a
+significant performance penalty. For example, Gabriel Cuvillier was able to run the video game _Doom 3_ [in the
+browser](http://wasm.continuation-labs.com/d3demo/). He was able to do this by compiling the game's source code into
+WebAssembly, a low-level language that browsers can run. And if it works for video games, it will likely work for your
+research software, too.
 
 ![hold-your-horses.jpeg](hold-your-horses.jpeg)
 
@@ -50,13 +50,12 @@ OK, now that you're fully on board with this, let's get to it. Here's a list of 
 
 1. We are going to write a small HTML page, so you will need basic knowledge about [HTML](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics) and [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
 1. Some C/C++ code to illustrate the process. We'll use our Newton-Raphson C++ code.
-1. A program that can take our existing C/C++ code and compile it into a WebAssembly module. Modern browsers are able to
-run WebAssembly without loss of performance. For this, we'll use [Emscripten](https://emscripten.org/)'s ``emcc``
-compiler, the most popular C++ to WebAssembly compiler of the bunch.
+1. A program that can take our existing C/C++ code and compile it into a WebAssembly module. For this, we'll use
+[Emscripten](https://emscripten.org/)'s ``emcc`` compiler, the most popular C++ to WebAssembly compiler of the bunch.
 1. To use the WebAssembly functionality from JavaScript, a binding is required. The binding will map C++ constructs to
 their JavaScript equivalent and back. For this, we'll use
 [embind](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html#embind).
-1. A web server to serve our files. We'll use Python 3's ``http.server``, but other options like X and Y work equally well.
+1. A web server to serve our files. We'll use Python 3's ``http.server``, but other web servers work equally well.
 
 ## Tying it all together
 
@@ -127,7 +126,7 @@ stored as the private member ``tolerance``. Once the object instance has been co
 method to iteratively find ``equation``'s root, with ``equation`` and its ``derivative`` being imported from
 ``algebra.cpp`` via the ``include`` line near the top.
 
-The following code is a minimal command line that we can use to check if everything is working correctly:
+The following code is a minimal command line program that we can use to check if everything is working correctly:
 
 ```cpp
 #include <iostream>
@@ -149,7 +148,7 @@ int main() {
 ```
 File: _cli.cpp_.
 
-It can be compiled with:
+Our command line program can be compiled with:
 
 ```shell
 g++ -o cli.exe cli.cpp newtonraphson.cpp
@@ -166,7 +165,8 @@ Now we're ready to move on to the WebAssembly part.
 
 ### Binding
 
-The binding of the C++ code:
+To use the Newton-Raphson code from JavaScript, we'll need to define the _bindings_ file. The binding provides entry
+points to C++ methods and classes, which can then be used by JavaScript (after compilation). For our Newton-Raphson code, the binding file looks like this:
 
 ```cpp
 #include <emscripten/bind.h>
@@ -183,9 +183,9 @@ EMSCRIPTEN_BINDINGS(newtonraphson) {
 ```
 File: _bindings.cpp_.
 
-**TODO**
-Here we expose the NewtonRaphson class by registering itself and its public members using [embind binding
-statements](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html#classes).
+The binding file uses [``embind`` binding
+statements](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html#classes) to expose the
+``NewtonRaphson`` class, its constructor method, as well as its public method ``solve``.
 
 ### Compiling to WebAssembly
 
@@ -239,14 +239,14 @@ We'll need a web server to display the HTML page in a web browser. For this, we'
 python3 -m http.server 8000
 ```
 
-Looking at the plot of the equation, the root of the equation should be at `x = -1.00`. Visit
-[http://localhost:8000/](http://localhost:8000/) to see if your browser shows the same result.
+From the figure at the top of the article, the root of the equation should be at `x = -1.00`. Visit
+[http://localhost:8000/](http://localhost:8000/) to see if your browser shows the correct result.
 
 ![result.png](result.png)
 
 _The resulting page if everything works._
 
-So what did we do
+## Recap
 
 1. We wrote a simple algorithm in C++
 2. We defined the JavaScript interface by writing Emscripten bindings
@@ -256,12 +256,10 @@ So what did we do
 The nice thing about this solution is that we don't need expensive infrastructure to perform computation as the
 computation is done in the user's web browser--we just need somewhere to host the files.
 
-# Where to go from here?
-
 ## Where to go from here?
 
-In upcoming blogs we will see how we can perform the computation without blocking the user interface, make a nice
-interactive form, and make a visualization to show data from each iteration. We'll wrap up the series in a final blog
-that combines the topics of the whole series in a full-featured web application.
+In upcoming blogs we will see how we can perform the computation without blocking the user interface, how to make a nice
+interactive form, and how to make a visualization to show data from each iteration. We'll wrap up the series in a final
+blog that combines the topics of the whole series in a full-featured web application.
 
 If you enjoyed this article, make sure to give us a clap!
