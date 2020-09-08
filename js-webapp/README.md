@@ -224,7 +224,7 @@ following HTML:
             const newtonraphson = new NewtonRaphson(tolerance);
             const root = newtonraphson.solve(initial_guess);
             // Write root to tag with answer as identifier
-            document.getElementById("answer").innerHTML = root.toFixed(4);
+            document.getElementById("answer").innerHTML = root.toFixed(2);
          });
       </script>
    </body>
