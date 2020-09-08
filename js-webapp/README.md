@@ -225,7 +225,12 @@ _The resulting page if everything works._
 
 Looking at the plot of the equation we expect the root of the equation to be `-1.00`, which is exactly what the HTML page in the browser is showing.
 
-So what did we do, we wrote a simple algorithm in C++, wrote Emscripten bindings, compiled a WebAssembly module and ran the algorithm in a web browser using some JavaScript to talk to the module.
+So what did we do
+
+1. We wrote a simple algorithm in C++
+2. Defined the JavaScript interface by writing Emscripten bindings
+3. Compiled the algorithm and bindings to a WebAssembly module with Emscripten compiler
+4. Ran the algorithm in a web browser using some JavaScript to talk to the WebAssembly module.
 
 The nice thing about this solution is that we don't need expensive infrastructure to perform computation as the
 computation is done in the users web browser. We just need somewhere to host the files.
