@@ -37,7 +37,7 @@ class NewtonRaphson {
 ```
 File: _newtonraphson.hpp_
 
-The `newtonraphson.cpp` is rewritten from a while loop to a while/do loop like with a push to the iterations vector each cycle.
+The `newtonraphson.cpp` is rewritten from a while loop to a do while loop like with a push to the iterations vector each cycle.
 
 ```cpp
 #include "newtonraphson.hpp"
@@ -62,7 +62,7 @@ double NewtonRaphson::solve(double initial_guess) {
 ```
 File: _newtonraphson.cpp_.
 
-Before we go into Emscripten world, lets test if the iteration property is actually populated correctly by wrapping the code in a main function, adding some print statements, compiling it and running it.
+Before we go into Emscripten world, lets first test our c++ code. We will check if the iteration property is actually populated correctly by wrapping the code in a main function, adding some print statements, compiling it and running it.
 
 ```cpp
 #include <iomanip>
@@ -94,13 +94,13 @@ File: _cli.cpp_.
 Compile it with
 
 ```shell
-c++ -o newtonraphson -I. newtonraphson.cpp cli.cpp
+c++ -o cli.exe newtonraphson.cpp cli.cpp
 ```
 
 Run with
 
 ```shell
-./newtonraphson
+./cli.exe
 i = 0 x = -4.00 y = -78.00 slope = 56.00 delta_x = -1.39
 i = 1 x = -2.61 y = -22.52 slope = 25.61 delta_x = -0.88
 i = 2 x = -1.73 y = -6.14 slope = 12.41 delta_x = -0.49
