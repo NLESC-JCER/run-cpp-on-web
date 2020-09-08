@@ -259,6 +259,8 @@ So what did we do
 The nice thing about this solution is that we don't need expensive infrastructure to perform computation as the
 computation is done in the users web browser. We just need somewhere to host the files.
 
+# Where to go from here?
+
 In upcoming blogs we will see how we can perform the computation without blocking the user interface, make a nice
 interactive form and make a visualization to show data from each iteration. In a wrap up blog we will combine all the code of this and upcoming JavaScript WebAssembly blogs in a final web application.
 
