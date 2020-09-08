@@ -48,7 +48,7 @@ _Hold your horses._
 
 OK, now that you're fully on board with this, let's get to it. Here's a list of what we need:
 
-1. We are going to write a small HTML page, so you will need basic knowledge about [HTML](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics) and [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
+1. We are going to write a small HTML page, so you will need basic knowledge of [HTML](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics) and [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
 1. Some C/C++ code to illustrate the process. We'll use our Newton-Raphson C++ code.
 1. A program that can take our existing C/C++ code and compile it into a WebAssembly module. For this, we'll use
 [Emscripten](https://emscripten.org/)'s ``emcc`` compiler, the most popular C++ to WebAssembly compiler of the bunch.
