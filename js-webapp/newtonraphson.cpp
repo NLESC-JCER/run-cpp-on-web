@@ -12,7 +12,7 @@ double NewtonRaphson::solve(double xin) {
 
   while (fabs(delta_x) >= tolerance) {
     delta_x = equation(x) / derivative(x);
-      x = x - delta_x;
+    x = x - delta_x;
   }
   return x;
 };
