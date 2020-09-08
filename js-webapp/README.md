@@ -135,7 +135,7 @@ To make sure the code actually works in C++ we will wrap it in a main function, 
 #include "newtonraphson.hpp"
 
 int main() {
-  double initial_guess = -20;
+  double initial_guess = -4;
   double tolerance = 0.001;
   NewtonRaphson finder(tolerance);
   double x1 = finder.solve(initial_guess);
@@ -161,7 +161,7 @@ The value of the root is : -1.00
 
 Nice, it works as expected.
 
-Next let's define the JavaScript interface our class should have with Emscripten bindings.
+Next, let's define the JavaScript interface with Emscripten bindings.
 
 ### Binding
 
@@ -248,14 +248,14 @@ Visit [http://localhost:8000/](http://localhost:8000/) to see the result of the 
 
 _The resulting page if everything works._
 
-Looking at the plot of the equation we expect the root to be `-1.00`, which is exactly what the HTML page in the browser is showing.
+Looking at the plot of the equation we expect the root of the equation to be `-1.00`, which is exactly what the HTML page in the browser is showing.
 
 So what did we do, we wrote a simple algorithm in C++, wrote Emscripten bindings, compiled a WebAssembly module and ran the algorithm in a web browser using some JavaScript to talk to the module.
 
 The nice thing about this solution is that we don't need expensive infrastructure to perform computation as the
 computation is done in the users web browser. We just need somewhere to host the files.
 
-In upcoming blogs will see how we can perform the computation without blocking the user interface, make a nice
-interactive form and make a visualization using a scatter plot. In a wrap up blog we will combine all the code of this and upcoming JavaScript WebAssembly blogs in a final web application.
+In upcoming blogs we will see how we can perform the computation without blocking the user interface, make a nice
+interactive form and make a visualization to show data from each iteration. In a wrap up blog we will combine all the code of this and upcoming JavaScript WebAssembly blogs in a final web application.
 
 If you enjoyed this article, make sure to give us a clap!

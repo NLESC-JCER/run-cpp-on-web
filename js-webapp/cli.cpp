@@ -4,7 +4,7 @@
 #include "newtonraphson.hpp"
 
 int main() {
-  double initial_guess = -20;
+  double initial_guess = -4;
   double tolerance = 0.001;
   NewtonRaphson finder(tolerance);
   double x1 = finder.solve(initial_guess);
