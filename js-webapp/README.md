@@ -127,6 +127,43 @@ stored as the private member ``tolerance``. Once the object instance has been co
 method to iteratively find ``equation``'s root, with ``equation`` and its ``derivative`` being imported from
 ``algebra.cpp`` via the ``include`` line near the top.
 
+The following code is a minimal command line that we can use to check if everything is working correctly:
+
+```cpp
+#include <iostream>
+#include <iomanip>
+
+#include "newtonraphson.cpp"
+
+int main() {
+  double initial_guess = -20;
+  double tolerance = 0.001;
+  NewtonRaphson finder(tolerance);
+  double root = finder.solve(initial_guess);
+
+  std::cout << std::fixed;
+  std::cout << std::setprecision(2);
+  std::cout << "The value of the root is : " << root << std::endl;
+
+  return 0;
+}
+```
+
+It can be compiled with:
+
+```shell
+g++ -o cli.exe cli.cpp newtonraphson.cpp
+```
+
+Subsequently running it should give the following output:
+
+```shell
+./cli.exe
+The value of the root is : -1.00
+```
+
+Now we're ready to move on to the WebAssembly part.
+
 ### Binding
 
 The binding of the C++ code:
