@@ -127,32 +127,7 @@ method to iteratively find ``equation``'s root, with ``equation`` and its ``deri
 ``algebra.cpp`` via the ``include`` line near the top.
 
 To make sure the code actually works in C++ we will wrap it in a main function, compile it and run it.
-
-```cpp
-#include <iostream>
-#include <iomanip>
-
-#include "newtonraphson.hpp"
-
-int main() {
-  double initial_guess = -4;
-  double tolerance = 0.001;
-  NewtonRaphson finder(tolerance);
-  double x1 = finder.solve(initial_guess);
-  std::cout << "Function root is approximately at x = ";
-  std::cout << std::fixed << std::setprecision(2) << x1 << std::endl;
-  return 0;
-}
-```
-File: _cli.cpp_
-
-Compile it
-
-```shell
-c++ -o newtonraphson -I. newtonraphson.cpp cli.cpp
-```
-
-And run it, to see if it returns the correct answer, `-1.00` in our case.
+The code for the main function and the compile command can be found [here](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/js-webapp/cli.cpp). Let's see if it returns the correct answer, `-1.00` in our case.
 
 ```shell
 ./newtonraphson

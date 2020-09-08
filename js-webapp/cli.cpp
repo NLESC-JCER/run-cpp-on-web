@@ -1,3 +1,9 @@
+/*
+ * Compile with
+ *
+ * g++ -o newtonraphson -I. newtonraphson.cpp cli.cpp
+ *
+ */
 #include <iostream>
 #include <iomanip>
 
