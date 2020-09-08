@@ -138,12 +138,12 @@ The following code is a minimal command line that we can use to check if everyth
 int main() {
   double initial_guess = -20;
   double tolerance = 0.001;
-  NewtonRaphson finder(tolerance);
-  double root = finder.solve(initial_guess);
+  NewtonRaphson newtonraphson(tolerance);
+  double root = newtonraphson.solve(initial_guess);
 
   std::cout << std::fixed;
   std::cout << std::setprecision(2);
-  std::cout << "The value of the root is : " << root << std::endl;
+  std::cout << "Function root is approximately at x = " << root << std::endl;
 
   return 0;
 }
@@ -207,7 +207,7 @@ following HTML:
 ```html
 <html>
    <head>
-      <!-- Load WebAssemlby module -->
+      <!-- Load WebAssembly module -->
       <script type="text/javascript" src="newtonraphson.js"></script>
    </head>
    <body>
@@ -219,12 +219,11 @@ following HTML:
          // Wait for module to initialize,
          createModule().then(({NewtonRaphson}) => {
             // Hardcoded input values
-            const tolerance = 0.001;
             const initial_guess = -20;
-            // Perform computation
+            const tolerance = 0.001;
             const newtonraphson = new NewtonRaphson(tolerance);
             const root = newtonraphson.solve(initial_guess);
-            // Write root to tag with answer as identifier
+            // Write the value of 'root' to the tag whose 'id' is equal to "answer"
             document.getElementById("answer").innerHTML = root.toFixed(2);
          });
       </script>
