@@ -10,7 +10,10 @@ In this blogpost, we will use web workers to solve this problem by running the c
 Let's have a look at the code we ended up with in last blog. When loading the page, the webassembly is excecuted, after which the page can finish rendering. Because the webassembly code was very quick, this was fine. For this blog we assume we have a more long running task. We create such task artificially by adding a few seconds of sleep in the c++ code (TODO show snippet). Like in the previous post, we compile the c++ code to create webassembly. The resulting page with our slow task is now [here](https://nlesc-jcer.github.io/run-cpp-on-web/js-webapp-async/example-blocking.html).
 
 Notice that we also added a slider input to the page. This slider isn't connected to anything, and is there to illustrate UI blocking. Notice that while the webassembly code is still running, the slider is completely unresponsive. If this were an actual webapp and not just a demo, the UI blocking would surely annoy any users of the system and possibly make working with the app cumbersome and impracticle. We can easily solve this, and keep the UI responsive at all times, using web workers.
+
 ![blocking ui](blocking.gif)
+
+Blocked ui while code is running
 
 ### Web workers
 
@@ -85,7 +88,10 @@ onmessage = function(message) {
 ```
 
 We can see the code in action [here](https://nlesc-jcer.github.io/run-cpp-on-web/js-webapp-async/example-web-worker.html). The calculation still takes the same time to perform, but as you will notice, the slider will be responsive all the time.
+
 ![responsive ui](web-worker.gif)
+
+Responsive ui thanks to web-worker
 
 # Outro
 In this blogpost we have learned how to run, long running c++ code on the web using web workers.
