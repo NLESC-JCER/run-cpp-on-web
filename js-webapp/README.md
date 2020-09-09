@@ -14,6 +14,8 @@ application. Subsequent blogs in this series will expand on the current one by l
 specifically how to [make the app interactive](anotherblog), how to [visualize the results](someotherblog), and
 how to [deal with long running tasks](yetanotherblog).
 
+## Root finding
+
 So today's aim is to have a simple web app that determines the root of a mathematical function _x^3 - x^2 + 2_, i.e. the
 value of _x_ where _y = 0_.
 
@@ -124,6 +126,8 @@ From this definition, ``NewtonRaphson`` instances need to be initialized with a 
 stored as the private member ``tolerance``. Once the object instance has been constructed, users can call its ``solve``
 method to iteratively find ``equation``'s root, with ``equation`` and its ``derivative`` being imported from
 ``algebra.cpp`` via the ``include`` line near the top.
+
+## Check on command line
 
 The following code is a minimal command line program that we can use to check if everything is working correctly:
 
