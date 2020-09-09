@@ -27,18 +27,19 @@ function Heading() {
 
     function handleSubmit(event) {
       event.preventDefault();
-      const worker = new Worker('worker.js');
-      worker.postMessage({
-        type: 'CALCULATE',
-        payload: { epsilon: tolerance, guess: initial_guess }
+      // Wait for module to initialize,
+      createModule().then(({NewtonRaphson}) => {
+        // Hardcoded input values
+        const initial_guess = -4;
+        const tolerance = 0.001;
+        // Perform computation
+        const newtonraphson = new NewtonRaphson(tolerance);
+        const root = newtonraphson.solve(initial_guess);
+        // Write the value of 'root' to the tag whose 'id' is equal to "answer"
+        // document.getElementById("answer").innerHTML = root.toFixed(2);
+        setRoot(root);
       });
-      worker.onmessage = function(message) {
-          if (message.data.type === 'RESULT') {
-            const result = message.data.payload.root;
-            setRoot(result);
-            worker.terminate();
-        }
-      };
+
     }
 
     return (
