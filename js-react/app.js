@@ -34,7 +34,6 @@ function Heading() {
         const root = newtonraphson.solve(initial_guess);
         setRoot(root);
       });
-
     }
 
     return (
