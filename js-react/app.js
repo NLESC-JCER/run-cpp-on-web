@@ -57,5 +57,5 @@ function Heading() {
   }
   ReactDOM.render(
     <App/>,
-    document.getElementById('container')
+    document.getElementById('answer')
   );
