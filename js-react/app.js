@@ -29,9 +29,6 @@ function Heading() {
       event.preventDefault();
       // Wait for module to initialize,
       createModule().then(({NewtonRaphson}) => {
-        // Hardcoded input values
-        const initial_guess = -4;
-        const tolerance = 0.001;
         // Perform computation
         const newtonraphson = new NewtonRaphson(tolerance);
         const root = newtonraphson.solve(initial_guess);
