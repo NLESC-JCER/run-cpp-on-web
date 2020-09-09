@@ -54,8 +54,9 @@ The complete html code will look like this:
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
   </head>
-  <div id="container"></div>
+  <script type="text/javascript" src="newtonraphson.js"></script>
   <script type="text/babel" src="app.js"></script>
+  <div id="answer"></div>
 </html>
 ```
 
