@@ -127,7 +127,7 @@ stored as the private member ``tolerance``. Once the object instance has been co
 method to iteratively find ``equation``'s root, with ``equation`` and its ``derivative`` being imported from
 ``algebra.cpp`` via the ``include`` line near the top.
 
-## Check on command line
+### Check on command line
 
 The following code is a minimal command line program that we can use to check if everything is working correctly:
 
