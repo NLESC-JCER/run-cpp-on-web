@@ -284,19 +284,7 @@ ReactDOM.render(
 );
 ```
 
-Make sure that the App can find the WebAssembly files by
-
-```awk
-cd react && ln -s ../webassembly/newtonraphsonwasm.wasm . && cd -
-```
-
-and
-
-```awk
-cd react && ln -s ../webassembly/newtonraphsonwasm.js . && cd -
-```
-
-Like before, we also need to host the files in a web server with
+Like before, we also need to host the files using a web server with
 
 ```shell
 python3 -m http.server 8000
