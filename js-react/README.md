@@ -163,21 +163,19 @@ function onGuessChange(event) {
 }
 ```
 
-We are now ready to implement the `handleSubmit` function which will process the submitted form data. The function will get, similar to the `onChange` of the input tag, an event object. Normally when you submit a form the form fields will be send to the server, but we want to perform the calculation in the browser so we have to disable the default action with.
+We are now ready to implement the `handleSubmit` function which will process the submitted form data. The function will get, similar to the `onChange` of the input tag, an event object. Normally when you submit a form the form fields will be send to the server, but we want to perform the calculation in the browser so we have to disable the default action with `preventDefault()` function. We will then construct a module as we did in the previous post.
 
 ```jsx
-event.preventDefault();
-```
-
-Like we did in the previous post we have to construct a module.
-
-```js
-createModule().then(({NewtonRaphson}) => {
-  // Perform computation
-  const newtonraphson = new NewtonRaphson(tolerance);
-  const root = newtonraphson.solve(initial_guess);
-  setRoot(root);
-});
+function handleSubmit(event) {
+  event.preventDefault();
+  // Wait for module to initialize,
+  createModule().then(({NewtonRaphson}) => {
+    // Perform computation
+    const newtonraphson = new NewtonRaphson(tolerance);
+    const root = newtonraphson.solve(initial_guess);
+    setRoot(root);
+  });
+}
 ```
 
 We will use the same `newtonraphson.js` and `newtonraphson.wasm` files as in the previous post so we re-use it by
