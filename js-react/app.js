@@ -35,8 +35,6 @@ function Heading() {
         // Perform computation
         const newtonraphson = new NewtonRaphson(tolerance);
         const root = newtonraphson.solve(initial_guess);
-        // Write the value of 'root' to the tag whose 'id' is equal to "answer"
-        // document.getElementById("answer").innerHTML = root.toFixed(2);
         setRoot(root);
       });
 
