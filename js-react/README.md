@@ -303,6 +303,7 @@ python3 -m http.server 8000
 ```
 
 ![js-react.gif](js-react.gif)
+
 _The final page if everything works._
 
 Visit [http://localhost:8000/react/example-app.html](http://localhost:8000/react/example-app.html) to see the root answer. Embedded below is the example app hosted on [GitHub pages](https://nlesc-jcer.github.io/cpp2wasm/react/example-app.html)
