@@ -180,19 +180,11 @@ createModule().then(({NewtonRaphson}) => {
 });
 ```
 
-The `worker.js` is the same as in the previous post so we re-use it by
+We will use the same `newtonraphson.js` and `newtonraphson.wasm` files as in the previous post so we re-use it by
 
-```jsx
-cd react && ln -s ../webassembly/worker.js . && cd -
-```
-
-We have to post a message to the worker with the values from the form.
-
-```jsx
-worker.postMessage({
-  type: 'CALCULATE',
-  payload: { tolerance: tolerance, initial_guess: initial_guess }
-});
+```shell
+ln -s ../ js-webapp/newtonraphson.js .
+ln -s ../ js-webapp/newtonraphson.wasm .
 ```
 
 We need a place to store the result of the calculation (`root` value), we will use `useState` function again. The
@@ -202,18 +194,8 @@ initial value of the result is set to `undefined` as the result is only known af
 const [root, setRoot] = React.useState(undefined);
 ```
 
-When the worker is done it will send a message back to the app. The app needs to store the result value (`root`) using
-`setRoot`. The worker will then be terminated because it did its job.
+When the calculation is done it will send a message back to the app. The app needs to store the result value (`root`) using `setRoot`. The worker will then be terminated because it did its job.
 
-```jsx
-worker.onmessage = function(message) {
-    if (message.data.type === 'RESULT') {
-      const result = message.data.payload.root;
-      setRoot(result);
-      worker.terminate();
-  }
-};
-```
 
 To render the result we can use a React Component which has `root` as a property. When the calculation has not been done
 yet, it will render `Not submitted`. When the `root` property value is set then we will show it.
