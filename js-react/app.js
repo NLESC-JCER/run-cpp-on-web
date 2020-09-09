@@ -7,7 +7,7 @@ function Heading() {
     const root = props.root;
     let message = 'Not submitted';
     if (root !== undefined) {
-      message = 'Root = ' + root;
+      message = 'Function root is approximately at x = ' + root.toFixed(2);
     }
     return <div id="answer">{message}</div>;
   }
