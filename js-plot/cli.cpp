@@ -6,13 +6,13 @@
 int main() {
   double initial_guess = -4;
   double tolerance = 0.001;
-  NewtonRaphson finder(tolerance);
-  double x1 = finder.solve(initial_guess);
+  NewtonRaphson newtonraphson(tolerance);
+  newtonraphson.solve(initial_guess);
 
   std::cout << std::fixed;
   std::cout << std::setprecision(2);
 
-  for (Iteration iteration : finder.iterations) {
+  for (Iteration iteration : newtonraphson.iterations) {
     std::cout << "index = " << iteration.index;
     std::cout << " x = " << iteration.x;
     std::cout << " y = " << iteration.y;
