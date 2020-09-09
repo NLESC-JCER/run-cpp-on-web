@@ -190,7 +190,7 @@ The Newton-Raphson source and its binding can be compiled into a WebAssembly mod
 
 ```shell
 emcc -I. -o newtonraphson.js -Oz -s MODULARIZE=1 \
-   -s EXPORT_NAME=createModule --bind newtonraphson.cpp bindings.cpp
+  -s EXPORT_NAME=createModule --bind newtonraphson.cpp bindings.cpp
 ```
 
 This will generate a WebAssembly module ``newtonraphson.wasm``, along with a JavaScript file ``newtonraphson.js``. Using

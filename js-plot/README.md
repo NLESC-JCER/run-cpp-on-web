@@ -148,14 +148,8 @@ File: _bindings.cpp_.
 Same as in previous blog we can compile to a WebAssembly module with Emscripten using `emcc` command
 
 ```shell
-emcc \
-  -I. \
-  -o newtonraphson.js \
-  -Oz \
-  -s MODULARIZE=1 \
-  -s EXPORT_NAME=createModule \
-  --bind newtonraphson.cpp bindings.cpp
-
+emcc -I. -o newtonraphson.js -Oz -s MODULARIZE=1 \
+  -s EXPORT_NAME=createModule --bind newtonraphson.cpp bindings.cpp
 ```
 
 ## Vega-lite decleration
