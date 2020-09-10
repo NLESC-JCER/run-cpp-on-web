@@ -36,8 +36,7 @@ need to port it first**!
 _Newton (and his hair)._
 
 Now before you say _"That'll be so much slower than running it native!"_ or _"C/C++ from the browser? Impossible!"_,
-just hold your horses for a sec. With the right tools, it is possible to run C/C++ code in the browser, without a
-significant performance penalty. For example, Gabriel Cuvillier was able to run the video game _Doom 3_ [in the
+just hold your horses for a sec. With the right tools, it is possible to run C/C++ code in the browser, with an acceptable performance penalty. For example, Gabriel Cuvillier was able to run the video game _Doom 3_ [in the
 browser](http://wasm.continuation-labs.com/d3demo/). He was able to do this by compiling the game's source code into
 WebAssembly, a low-level language that browsers can run. And if it works for video games, it will likely work for your
 research software, too.
