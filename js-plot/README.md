@@ -34,8 +34,8 @@ struct Iteration {
 
 class NewtonRaphson {
   public:
-    NewtonRaphson(double tolerancein);
-    double solve(double xin);
+    NewtonRaphson(double tolerance_in);
+    double solve(double initial_guess);
     std::vector<Iteration> iterations;
   private:
     double tolerance;
@@ -52,7 +52,7 @@ The `newtonraphson.cpp` is rewritten from a while loop to a do while loop like w
 #include <math.h>
 
 // Define the constructor method of NewtonRaphson instances
-NewtonRaphson::NewtonRaphson(double tolerancein) : tolerance(tolerancein) {}
+NewtonRaphson::NewtonRaphson(double tolerance_in) : tolerance(tolerance_in) {}
 
 // Define the 'solve' method of NewtonRaphson instances
 double NewtonRaphson::solve(double initial_guess) {
@@ -72,13 +72,13 @@ File: _newtonraphson.cpp_.
 Before we go into Emscripten world, lets first test our c++ code. We will check if the iteration property is actually populated correctly by wrapping the code in a main function, adding some print statements, compiling it and running it.
 
 ```cpp
-#include <iomanip>
 #include <iostream>
+#include <iomanip>
 
 #include "newtonraphson.hpp"
 
 int main() {
-  double initial_guess = -4;
+  double initial_guess = -4.0;
   double tolerance = 0.001;
   NewtonRaphson newtonraphson(tolerance);
   newtonraphson.solve(initial_guess);
