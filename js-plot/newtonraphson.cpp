@@ -3,7 +3,7 @@
 #include <math.h>
 
 // Define the constructor method of NewtonRaphson instances
-NewtonRaphson::NewtonRaphson(double tolerance_in) : tolerance(tolerance_in) {}
+NewtonRaphson::NewtonRaphson(double tolerancein) : tolerance(tolerancein) {}
 
 // Define the 'solve' method of NewtonRaphson instances
 double NewtonRaphson::solve(double initial_guess) {
