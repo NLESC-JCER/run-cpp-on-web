@@ -5,9 +5,16 @@ Running C++ code in a web browser is all nice, but we really want to grab someon
 To make a plot we need some data. In a [previous](TODO fix url ../js-webapp) post we found the root of an equation using the Newton-Raphson algorithm implemented in C++ and compiled to a WebAsssembly module.
 A single root value makes for a depressing plot. The Newton-Raphson algorithm uses iterations to find the root so we will capture the data of each iteration and plot those.
 
-Let's make changes to the C++ code to retrieve the data from the iterations.
+Let's make changes to the C++ code to store the data from the iterations.
 
 ## Iterations
+
+To store data of an iteration we will use a structure with the following variables:
+
+* x, x value, starts with initial guess and ends with root result
+* y, result of passing x through equation
+* slope, slope or derivative at value x
+* delta_x, y divided by slope
 
 We will add `iterations` public property to the NewtonRaphson which is a vector of iteration structs. So the `newtonraphson.hpp` becomes
 
@@ -88,6 +95,7 @@ int main() {
   }
   return 0;
 }
+
 ```
 File: _cli.cpp_.
 
@@ -199,7 +207,6 @@ TODO explain vega-spec.json layer construction
     </script>
   </body>
 </html>
-
 ```
 File: _index.html.
 
