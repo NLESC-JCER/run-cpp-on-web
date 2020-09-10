@@ -16,12 +16,12 @@ how to [deal with long running tasks](yetanotherblog).
 
 ## Root finding
 
-So today's aim is to have a simple web app that determines the root of a mathematical function _x^3 - x^2 + 2_, i.e. the
+So today's aim is to have a simple web app that determines the root of a mathematical function _2x^3 - 4x^2 + 6_, i.e. the
 value of _x_ where _y = 0_.
 
 ![equation.svg.png](equation.svg.png)
 
-Function _x^3 - x^2 + 2_.
+Function _2x^3 - 4x^2 + 6_.
 
 For this, we'll use an iterative method known as the [_Newton-Raphson_ root finding
 method](https://www.youtube.com/watch?v=cOmAk82cr9M). Remember Newton? Quiet fellow, fabulous hair? Yes, _that_ Newton.
