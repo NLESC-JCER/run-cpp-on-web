@@ -167,8 +167,8 @@ Now we're ready to move on to the WebAssembly part.
 
 ### Binding
 
-To use the Newton-Raphson code from JavaScript, we'll need to define the _bindings_ file. The binding provides entry
-points to C++ methods and classes, which can then be used by JavaScript (after compilation). For our Newton-Raphson code, the binding file looks like this:
+To use the Newton-Raphson code from JavaScript, we'll need to define the _bindings_ file. The binding allows compiled code
+to be called from JavaScript. For our Newton-Raphson code, the binding file looks like this:
 
 ```cpp
 #include <emscripten/bind.h>
