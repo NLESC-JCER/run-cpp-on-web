@@ -67,12 +67,12 @@ Here is the equation whose root we want to find, along with its derivative, sinc
 ```cpp
 // An example equation
 double equation(double x) {
-  return x * x * x - x * x + 2;
+  return 2 * x * x * x - 4 * x * x + 6;
 }
 
 // Derivative of the above equation
 double derivative(double x) {
-  return 3 * x * x - 2 * x;
+  return 6 * x * x - 8 * x;
 }
 ```
 File: _algebra.cpp_
@@ -137,7 +137,7 @@ The following code is a minimal command line program that we can use to check if
 #include "newtonraphson.hpp"
 
 int main() {
-  double initial_guess = -4;
+  double initial_guess = 2;
   double tolerance = 0.001;
   NewtonRaphson newtonraphson(tolerance);
   double root = newtonraphson.solve(initial_guess);
