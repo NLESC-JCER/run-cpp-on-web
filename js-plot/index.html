@@ -9,8 +9,8 @@
     <div id="plot"></div>
     <script>
       createModule().then(async (rootfinding) => {
+        const initial_guess = 2;
         const tolerance = 0.001;
-        const initial_guess = -4;
         const newtonraphson = new rootfinding.NewtonRaphson(tolerance);
         newtonraphson.solve(initial_guess);
         // newtonraphson.iterations is a vector object which not consumeable by Vega
@@ -28,9 +28,6 @@
         const spec_request = await fetch('vega-spec.json');
         // TODO decide for spec to be fetched and overwrites or fetched or inlined
         const spec = await spec_request.json();
-        // ovewrite equation range
-        spec.layer[0].data.sequence.start = initial_guess;
-        spec.layer[0].data.sequence.stop = -1 * initial_guess;
         // overwrite data
         spec.layer[2].data.values = iterations;
         vegaEmbed(document.getElementById("plot"), spec);

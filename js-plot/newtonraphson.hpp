@@ -13,8 +13,8 @@ struct Iteration {
 
 class NewtonRaphson {
   public:
-    NewtonRaphson(double tolerancein);
-    double solve(double xin);
+    NewtonRaphson(double tolerance_in);
+    double solve(double initial_guess);
     std::vector<Iteration> iterations;
   private:
     double tolerance;
