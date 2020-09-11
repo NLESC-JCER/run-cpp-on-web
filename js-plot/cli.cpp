@@ -4,7 +4,7 @@
 #include "newtonraphson.hpp"
 
 int main() {
-  double initial_guess = 2;
+  double initial_guess = -3;
   double tolerance = 0.001;
   NewtonRaphson newtonraphson(tolerance);
   newtonraphson.solve(initial_guess);
