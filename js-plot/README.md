@@ -236,7 +236,7 @@ Vega-Lite is a JavaScript library which describes a plot using a JSON document. 
  The specification is constructed out the following blocks
 
  * data, the iterations we want to plot as an array of iteration objects
- * mark, for scatter plot this is a [circle](https://vega.github.io/vega-lite/docs/circle.html)
+ * mark, for line plot use [line](https://vega.github.io/vega-lite/docs/line.html) marker
  * encoding, which field should go on which axis
 
 ```js
@@ -252,7 +252,8 @@ const spec = {
     "y": {"field": "y", "type": "quantitative"}
   },
   "mark": {
-    "type": "circle",
+    "type": "line",
+    "point": true,
     // Enable tooltip so on mouseover it shows all data of that iteration
     "tooltip": {"content": "data"}
   },
