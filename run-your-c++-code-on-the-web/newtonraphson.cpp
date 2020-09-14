@@ -6,7 +6,7 @@
 NewtonRaphson::NewtonRaphson(float tolerance_in) : tolerance(tolerance_in) {}
 
 // Define the 'solve' method of NewtonRaphson instances
-double NewtonRaphson::solve(float initial_guess) {
+float NewtonRaphson::solve(float initial_guess) {
   float x = initial_guess;
   float delta_x = 0;
   do {
