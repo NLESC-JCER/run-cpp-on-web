@@ -258,14 +258,6 @@ _The resulting page if everything works. See the live version of the app on [Git
 The nice thing about this solution is that we don't need expensive infrastructure to perform computation as the
 computation is done in the user's web browser--we just need somewhere to host the files.
 
-## Where to go from here?
-
-In upcoming blogs we will see how we can perform the computation without blocking the user interface, how to make a nice
-interactive form, and how to make a visualization to show data from each iteration. We'll wrap up the series in a final
-blog that combines the topics of the whole series in a full-featured web application.
-
-If you enjoyed this article, make sure to give us a clap!
-
 ## Get in touch with us
 
 This blog was written by the Generalization team at NLeSC consisting of Stefan Verhoeven, Faruk Diblen, Jurriaan H. Spaaks, Adam Belloum and Christiaan Meijer.
@@ -273,3 +265,11 @@ This blog was written by the Generalization team at NLeSC consisting of Stefan V
 We thank to Lourens Veen and Patrick Bos for their useful comments which improved the clarity of the final text.
 
 Please feel free to get in touch with the generalization team at the Netherlands eScience Center: generalization@esciencecenter.nl
+
+## Where to go from here?
+
+In upcoming blogs we will see how we can perform the computation without blocking the user interface, how to make a nice
+interactive form, and how to make a visualization to show data from each iteration. We'll wrap up the series in a final
+blog that combines the topics of the whole series in a full-featured web application.
+
+If you enjoyed this article, make sure to give us a clap!
