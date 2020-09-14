@@ -265,3 +265,11 @@ interactive form, and how to make a visualization to show data from each iterati
 blog that combines the topics of the whole series in a full-featured web application.
 
 If you enjoyed this article, make sure to give us a clap!
+
+## Get in touch with us
+
+This blog was written by the Generalization team at NLeSC consisting of Stefan Verhoeven, Faruk Diblen, Jurriaan H. Spaaks, Adam Belloum and Christiaan Meijer.
+
+We thank to Lourens Veen and Patrick Bos for their useful comments which improved the clarity of the final text.
+
+Please feel free to get in touch with the generalization team at the Netherlands eScience Center: generalization@esciencecenter.nl
