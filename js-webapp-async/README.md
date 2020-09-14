@@ -1,15 +1,15 @@
 # Introduction
-In a [previous blogpost](../js-webapp/README.md) we discussed how to run c++ code on the web using Javascript. We created a webapp that executed some C++ code and showed the result. While the page was running the C++ code, the page was blocked and unresponsive. That was not a problem then, because the computation done in the code was very quick. Blocked UI becomes a problem when we are performing tasks that take a bit longer to run. 
+In an [earlier blogpost](../js-webapp/README.md) we discussed how to run c++ code on the web using Javascript. We created a webapp that executed some C++ code and then showed the result. While the page was running the C++ code, the page was blocked and unresponsive. That was not a problem then, because the computation done in the code was very quick. Blocked UI becomes a problem when we are performing tasks that take a bit longer to run. 
 
 How to prevent blocking when running long running tasks in c++?
 
-In this blogpost, we will use web workers to solve this problem by running the code asynchronously.
+In this blogpost, we will use web workers to solve this problem by running the code in another thread.
 
 ### Long-running tasks with web worker
 
-Let's have a look at the code we ended up with in last blog. When loading the page, the webassembly is excecuted, after which the page can finish rendering. Because the webassembly code was very quick, this was fine. For this blog we assume we have a longer running task. We create such task artificially by adding a few seconds of sleep in the c++ code (TODO show snippet). Like in the previous post, we compile the c++ code to create webassembly. The resulting page with our slow task is now [here](https://nlesc-jcer.github.io/run-cpp-on-web/js-webapp-async/example-blocking.html).
+Let's have a look at the code we ended up with in last blog. When loading the page, the webassembly is excecuted, after which the page can finish rendering. Because the webassembly code was very quick, this was fine. For this blog we assume we have a longer running task. We create such task artificially by adding a few seconds of sleep in the [c++ code](newtonraphson.cpp). Like in the previous post, we compile the c++ code to create webassembly. The resulting page with our slow task is now [here](https://nlesc-jcer.github.io/run-cpp-on-web/js-webapp-async/example-blocking.html).
 
-Notice that we also added a slider input to the page. This slider isn't connected to anything, and is there to illustrate UI blocking. Notice that while the webassembly code is still running, the slider is completely unresponsive. If this were an actual webapp and not just a demo, the UI blocking would surely annoy any users of the system and possibly make working with the app cumbersome and impracticle. We can easily solve this, and keep the UI responsive at all times, using web workers.
+Notice that we also added a slider input to the page. This slider isn't connected to anything, and is there just to illustrate UI blocking. Notice that while the webassembly code is still running, the slider is completely unresponsive. If this were an actual webapp and not just a demo, the UI blocking would surely annoy any users of the system and possibly make working with the app cumbersome and impracticle. We can easily solve this, and keep the UI responsive at all times, using web workers.
 
 ![blocking ui](blocking.gif)
 
@@ -17,10 +17,10 @@ Blocked ui while code is running
 
 ### Web workers
 
-A [web worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) is an object that handles execution of a piece of code aynchronously. On completion the web worker will notify so the result can be processed and, in this case, rendered on the page. 
+A [web worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) is an object that handles execution of a piece of code in another thread. On completion the web worker will notify so the result can be processed and, in this case, rendered on the page. 
 
 
-The way the page communicates with the worker object is through sending messages. The page will send a message to the worker to start doing work, and the message will include all data that the worder needs. The worker will perform its execution, using only the data that was in the message. The worker will not be able to access any data in the webapp directly. The worker can only send back results by sending a message back to the webapp. 
+The way the page communicates with the worker object is through sending messages. The page will send a message to the worker to start doing work, and the message will include all data that the worder needs. The worker will perform its execution, using only the data that was in the message, as the worker will not be able to access any data in the webapp directly. When finished the worker needs to communicate the results back to the webapp. It can do this by sending a message. 
 
 ### The resulting page
 
