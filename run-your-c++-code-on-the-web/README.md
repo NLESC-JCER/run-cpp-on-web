@@ -37,6 +37,11 @@ need to port it first**!
 
 ![newton.jpg](newton.jpg)
 
+[Image source](
+https://commons.wikimedia.org/wiki/File:Sir_Isaac_Newton._Wellcome_V0006785EL.jpg)
+
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.en)
+
 _Newton (and his hair)._
 
 Now before you say _"That'll be so much slower than running it native!"_ or _"C++ from the browser? Impossible!"_, just
@@ -47,6 +52,9 @@ WebAssembly, a low-level language that browsers can run. And if it works for vid
 research software, too.
 
 ![hold-your-horses.jpeg](hold-your-horses.jpeg)
+
+[Image source](https://pixabay.com/photos/horse-field-girl-horse-girl-field-2536537)
+ by [Photographer](https://pixabay.com/users/lucianomarelli-5987093/)
 
 _Hold your horses._
 
@@ -71,12 +79,12 @@ Here is the equation whose root we want to find, along with its derivative, sinc
 
 ```cpp
 // An example equation
-double equation(double x) {
+float equation(float x) {
   return 2 * x * x * x - 4 * x * x + 6;
 }
 
 // Derivative of the above equation
-double derivative(double x) {
+float derivative(float x) {
   return 6 * x * x - 8 * x;
 }
 ```
@@ -84,20 +92,20 @@ File: _algebra.cpp_
 
 The snippet below shows the contents of the file ``newtonraphson.hpp``. It is the header file for the Newton-Raphson
 iterative root finding algorithm. It defines a class named ``NewtonRaphson``. Besides the
-constructor method ``NewtonRaphson(double tolerance_in)``, ``NewtonRaphson`` has one other public method, ``solve``,
-which takes a ``double``, and returns another ``double``. Furthermore, ``NewtonRaphson`` also has a private member,
-``tolerance`` of type ``double``, which is used to store the class instance's private data.
+constructor method ``NewtonRaphson(float tolerance_in)``, ``NewtonRaphson`` has one other public method, ``solve``,
+which takes a ``float``, and returns another ``float``. Furthermore, ``NewtonRaphson`` also has a private member,
+``tolerance`` of type ``float``, which is used to store the class instance's private data.
 
 ```cpp
-#ifndef H_NEWTONRAPHSON_H
-#define H_NEWTONRAPHSON_H
+#ifndef H_NEWTONRAPHSON_HPP
+#define H_NEWTONRAPHSON_HPP
 
 class NewtonRaphson {
   public:
-    NewtonRaphson(double tolerance_in);
-    double solve(double initial_guess);
+    NewtonRaphson(float tolerance_in);
+    float solve(float initial_guess);
   private:
-    double tolerance;
+    float tolerance;
 };
 #endif
 ```
@@ -111,12 +119,12 @@ File ``newtonraphson.cpp`` contains the corresponding implementation:
 #include <math.h>
 
 // Define the constructor method of NewtonRaphson instances
-NewtonRaphson::NewtonRaphson(double tolerance_in) : tolerance(tolerance_in) {}
+NewtonRaphson::NewtonRaphson(float tolerance_in) : tolerance(tolerance_in) {}
 
 // Define the 'solve' method of NewtonRaphson instances
-double NewtonRaphson::solve(double initial_guess) {
-  double x = initial_guess;
-  double delta_x = 0;
+float NewtonRaphson::solve(float initial_guess) {
+  float x = initial_guess;
+  float delta_x = 0;
   do {
     delta_x = equation(x) / derivative(x);
     x = x - delta_x;
@@ -127,8 +135,7 @@ double NewtonRaphson::solve(double initial_guess) {
 File: _newtonraphson.cpp_.
 
 From this definition, ``NewtonRaphson`` instances need to be initialized with a value for ``tolerance_in``, which is then
-stored as the private member ``tolerance``. Once the object instance has been constructed, users can call its ``solve``
-method to iteratively find ``equation``'s root, with ``equation`` and its ``derivative`` being imported from
+stored as the private member ``tolerance``. Once the object instance has been constructed, users can call its ``solve`` method to iteratively find ``equation``'s root, with ``equation`` and its ``derivative`` being imported from
 ``algebra.cpp`` via the ``include`` line near the top.
 
 ### Check on command line
@@ -142,10 +149,10 @@ The following code is a minimal command line program that we can use to check if
 #include "newtonraphson.hpp"
 
 int main() {
-  double initial_guess = -4;
-  double tolerance = 0.001;
+  float initial_guess = -4;
+  float tolerance = 0.001;
   NewtonRaphson newtonraphson(tolerance);
-  double root = newtonraphson.solve(initial_guess);
+  float root = newtonraphson.solve(initial_guess);
 
   std::cout << "Function root is approximately at x = ";
   std::cout << std::fixed << std::setprecision(2) << root << std::endl;
@@ -183,7 +190,7 @@ using namespace emscripten;
 
 EMSCRIPTEN_BINDINGS(newtonraphson) {
    class_<NewtonRaphson>("NewtonRaphson")
-      .constructor<double>()
+      .constructor<float>()
       .function("solve", &NewtonRaphson::solve)
       ;
 }
@@ -263,11 +270,24 @@ _The resulting page if everything works. See the live version of the app on [Git
 The nice thing about this solution is that we don't need expensive infrastructure to perform computation as the
 computation is done in the user's web browser--we just need somewhere to host the files.
 
+## Get in touch with us
+
+This blog was written by the Generalization team at NLeSC consisting of Stefan Verhoeven, Faruk Diblen, Jurriaan H. Spaaks, Adam Belloum and Christiaan Meijer.
+
+We thank to Lourens Veen and Patrick Bos for their useful comments which improved the clarity of the final text.
+
+Please feel free to get in touch with the generalization team: generalization@esciencecenter.nl
+
 ## Where to go from here?
 
-In upcoming blogs we will see how we can perform the computation without blocking the user interface, how to make a nice
-interactive form, and how to make a visualization to show data from each iteration. We'll wrap up the series in a final
-blog that combines the topics of the whole series in a full-featured web application.
+In upcoming blogs we will see:
+
+- [use of web-worker: how we can perform the computation without blocking the user interface]()
+- [a react application: how to make a nice interactive form]()
+- [plotting with vega.js: how to make a visualization to show data from each iteration]()
+- [a complete example: combination of web-worker, react, and vega.js]()
+
+We'll wrap up the series in a final blog that combines the topics of the whole series in a full-featured web application.
 
 If you enjoyed this article, make sure to give us a clap!
 
