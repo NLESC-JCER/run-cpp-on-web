@@ -450,7 +450,7 @@ The HTML page with all JavaScript put together to make a composite plot is
   <div id="plot"></div>
   <script>
     createModule().then((rootfinding) => {
-      const initial_guess = -3;
+      const initial_guess = -4;
       const tolerance = 0.001;
       const newtonraphson = new rootfinding.NewtonRaphson(tolerance);
       newtonraphson.solve(initial_guess);
