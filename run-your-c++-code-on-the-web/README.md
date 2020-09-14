@@ -67,12 +67,12 @@ Here is the equation whose root we want to find, along with its derivative, sinc
 
 ```cpp
 // An example equation
-double equation(float x) {
+float equation(float x) {
   return 2 * x * x * x - 4 * x * x + 6;
 }
 
 // Derivative of the above equation
-double derivative(float x) {
+float derivative(float x) {
   return 6 * x * x - 8 * x;
 }
 ```
@@ -80,8 +80,8 @@ File: _algebra.cpp_
 
 The snippet below shows the contents of the file ``newtonraphson.hpp``. It is the header file for the Newton-Raphson
 iterative root finding algorithm. It defines a class named ``NewtonRaphson``. Besides the
-constructor method ``NewtonRaphson(double tolerance_in)``, ``NewtonRaphson`` has one other public method, ``solve``,
-which takes a ``float``, and returns ``double``. Furthermore, ``NewtonRaphson`` also has a private member,
+constructor method ``NewtonRaphson(float tolerance_in)``, ``NewtonRaphson`` has one other public method, ``solve``,
+which takes a ``float``, and returns another ``float``. Furthermore, ``NewtonRaphson`` also has a private member,
 ``tolerance`` of type ``float``, which is used to store the class instance's private data.
 
 ```cpp
@@ -91,7 +91,7 @@ which takes a ``float``, and returns ``double``. Furthermore, ``NewtonRaphson`` 
 class NewtonRaphson {
   public:
     NewtonRaphson(float tolerance_in);
-    double solve(float initial_guess);
+    float solve(float initial_guess);
   private:
     float tolerance;
 };
@@ -110,9 +110,9 @@ File ``newtonraphson.cpp`` contains the corresponding implementation:
 NewtonRaphson::NewtonRaphson(float tolerance_in) : tolerance(tolerance_in) {}
 
 // Define the 'solve' method of NewtonRaphson instances
-double NewtonRaphson::solve(float initial_guess) {
-  double x = initial_guess;
-  double delta_x = 0;
+float NewtonRaphson::solve(float initial_guess) {
+  float x = initial_guess;
+  float delta_x = 0;
   do {
     delta_x = equation(x) / derivative(x);
     x = x - delta_x;
@@ -123,8 +123,7 @@ double NewtonRaphson::solve(float initial_guess) {
 File: _newtonraphson.cpp_.
 
 From this definition, ``NewtonRaphson`` instances need to be initialized with a value for ``tolerance_in``, which is then
-stored as the private member ``tolerance``. Once the object instance has been constructed, users can call its ``solve``
-method to iteratively find ``equation``'s root, with ``equation`` and its ``derivative`` being imported from
+stored as the private member ``tolerance``. Once the object instance has been constructed, users can call its ``solve`` method to iteratively find ``equation``'s root, with ``equation`` and its ``derivative`` being imported from
 ``algebra.cpp`` via the ``include`` line near the top.
 
 ### Check on command line
@@ -139,9 +138,9 @@ The following code is a minimal command line program that we can use to check if
 
 int main() {
   float initial_guess = -4;
-  double tolerance = 0.001;
+  float tolerance = 0.001;
   NewtonRaphson newtonraphson(tolerance);
-  double root = newtonraphson.solve(initial_guess);
+  float root = newtonraphson.solve(initial_guess);
 
   std::cout << "Function root is approximately at x = ";
   std::cout << std::fixed << std::setprecision(2) << root << std::endl;
