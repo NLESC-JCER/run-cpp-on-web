@@ -524,7 +524,7 @@ The HTML page with all JavaScript put together to make a composite plot is
 
 Visiting the page should give us a plot like
 
-[![Image](composite.svg)](https://nlesc-jcer.github.io/run-cpp-on-web/js-plot/index.html)
+[![Image](composite.png)](https://nlesc-jcer.github.io/run-cpp-on-web/js-plot/index.html)
 (Click on image to get interactive version)
 
 TODO outro
