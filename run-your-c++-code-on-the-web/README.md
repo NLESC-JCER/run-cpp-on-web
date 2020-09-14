@@ -33,6 +33,11 @@ need to port it first**!
 
 ![newton.jpg](newton.jpg)
 
+[Image source](
+https://commons.wikimedia.org/wiki/File:Sir_Isaac_Newton._Wellcome_V0006785EL.jpg)
+
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.en)
+
 _Newton (and his hair)._
 
 Now before you say _"That'll be so much slower than running it native!"_ or _"C++ from the browser? Impossible!"_, just
@@ -43,6 +48,9 @@ WebAssembly, a low-level language that browsers can run. And if it works for vid
 research software, too.
 
 ![hold-your-horses.jpeg](hold-your-horses.jpeg)
+
+[Image source](https://pixabay.com/photos/horse-field-girl-horse-girl-field-2536537)
+ by [Photographer](https://pixabay.com/users/lucianomarelli-5987093/)
 
 _Hold your horses._
 
