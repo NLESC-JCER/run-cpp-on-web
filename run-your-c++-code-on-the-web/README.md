@@ -1,10 +1,10 @@
 # Run your C++ code on the web
 
-Let's say you have some C or C++ code laying around that you would like to make available to a wider audience, by putting
+Let's say you have some C++ code laying around that you would like to make available to a wider audience, by putting
 it on the web. Until recently, this used to be pretty difficult, and may even have required reimplementation of the
 software in JavaScript, the programming language that browsers use.
 
-_Wouldn't it be great if you could run your existing C/C++ code on the web with only minor effort?_
+_Wouldn't it be great if you could run your existing C++ code on the web with only minor effort?_
 
 That way, loads more people would be able to see your results, interact with your algorithm, and apply it for their own
 purposes.
@@ -35,8 +35,9 @@ need to port it first**!
 
 _Newton (and his hair)._
 
-Now before you say _"That'll be so much slower than running it native!"_ or _"C/C++ from the browser? Impossible!"_,
-just hold your horses for a sec. With the right tools, it is possible to run C/C++ code in the browser, with an acceptable performance penalty. For example, Gabriel Cuvillier was able to run the video game _Doom 3_ [in the
+Now before you say _"That'll be so much slower than running it native!"_ or _"C++ from the browser? Impossible!"_, just
+hold your horses for a sec. With the right tools, it is possible to run C++ code in the browser, with an acceptable
+performance penalty. For example, Gabriel Cuvillier was able to run the video game _Doom 3_ [in the
 browser](http://wasm.continuation-labs.com/d3demo/). He was able to do this by compiling the game's source code into
 WebAssembly, a low-level language that browsers can run. And if it works for video games, it will likely work for your
 research software, too.
@@ -50,8 +51,8 @@ _Hold your horses._
 OK, now that you're fully on board with this, let's get to it. Here's a list of what we need:
 
 1. We are going to write a small HTML page, so you will need basic knowledge of [HTML](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics) and [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
-1. Some C/C++ code to illustrate the process. We'll use our Newton-Raphson C++ code.
-1. A program that can take our existing C/C++ code and compile it into a WebAssembly module. For this, we'll use
+1. Some C++ code to illustrate the process. We'll use our Newton-Raphson C++ code.
+1. A program that can take our existing C++ code and compile it into a WebAssembly module. For this, we'll use
 [Emscripten](https://emscripten.org/)'s ``emcc`` compiler, the most popular C++ to WebAssembly compiler of the bunch.
 1. To use the WebAssembly functionality from JavaScript, a binding is required. The binding will map C++ constructs to
 their JavaScript equivalent and back. For this, we'll use
