@@ -3,12 +3,12 @@
 #include <math.h>
 
 // Define the constructor method of NewtonRaphson instances
-NewtonRaphson::NewtonRaphson(double tolerance_in) : tolerance(tolerance_in) {}
+NewtonRaphson::NewtonRaphson(float tolerance_in) : tolerance(tolerance_in) {}
 
 // Define the 'solve' method of NewtonRaphson instances
-double NewtonRaphson::solve(double initial_guess) {
-  double x = initial_guess;
-  double delta_x = 0;
+float NewtonRaphson::solve(float initial_guess) {
+  float x = initial_guess;
+  float delta_x = 0;
   do {
     delta_x = equation(x) / derivative(x);
     x = x - delta_x;
