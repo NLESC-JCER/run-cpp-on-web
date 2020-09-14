@@ -272,7 +272,7 @@ computation is done in the user's web browser--we just need somewhere to host th
 
 ## Get in touch with us
 
-This blog was written by NLeSC's Generalization Team. The team consists of Stefan Verhoeven, Faruk Diblen, Jurriaan H. Spaaks, Adam Belloum and Christiaan Meijer. Feel free to get in touch with the generalization team at generalization@esciencecenter.nl
+This blog was written by NLeSC's Generalization Team. The team consists of Stefan Verhoeven, Faruk Diblen, Jurriaan H. Spaaks, Adam Belloum and Christiaan Meijer. Feel free to get in touch with the generalization team at generalization@esciencecenter.nl.
 
 ## Where to go from here?
 
@@ -284,6 +284,6 @@ In upcoming blogs we will cover:
 
 We'll wrap up the series in [a final blog]() that combines the topics of the whole series in a full-featured web application.
 
-If you enjoyed this article, make sure to give us a clap!
+If you enjoyed this article, leave a comment and give us a clap!
 
 _Thank you to our proof readers [Lourens Veen](https://orcid.org/0000-0002-6311-1168) and [Patrick Bos](https://orcid.org/0000-0002-6033-960X)._
