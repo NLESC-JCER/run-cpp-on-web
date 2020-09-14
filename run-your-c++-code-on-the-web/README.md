@@ -67,12 +67,12 @@ Here is the equation whose root we want to find, along with its derivative, sinc
 
 ```cpp
 // An example equation
-double equation(double x) {
+double equation(float x) {
   return 2 * x * x * x - 4 * x * x + 6;
 }
 
 // Derivative of the above equation
-double derivative(double x) {
+double derivative(float x) {
   return 6 * x * x - 8 * x;
 }
 ```
@@ -81,19 +81,19 @@ File: _algebra.cpp_
 The snippet below shows the contents of the file ``newtonraphson.hpp``. It is the header file for the Newton-Raphson
 iterative root finding algorithm. It defines a class named ``NewtonRaphson``. Besides the
 constructor method ``NewtonRaphson(double tolerance_in)``, ``NewtonRaphson`` has one other public method, ``solve``,
-which takes a ``double``, and returns another ``double``. Furthermore, ``NewtonRaphson`` also has a private member,
-``tolerance`` of type ``double``, which is used to store the class instance's private data.
+which takes a ``float``, and returns ``double``. Furthermore, ``NewtonRaphson`` also has a private member,
+``tolerance`` of type ``float``, which is used to store the class instance's private data.
 
 ```cpp
-#ifndef H_NEWTONRAPHSON_H
-#define H_NEWTONRAPHSON_H
+#ifndef H_NEWTONRAPHSON_HPP
+#define H_NEWTONRAPHSON_HPP
 
 class NewtonRaphson {
   public:
-    NewtonRaphson(double tolerance_in);
-    double solve(double initial_guess);
+    NewtonRaphson(float tolerance_in);
+    double solve(float initial_guess);
   private:
-    double tolerance;
+    float tolerance;
 };
 #endif
 ```
@@ -107,10 +107,10 @@ File ``newtonraphson.cpp`` contains the corresponding implementation:
 #include <math.h>
 
 // Define the constructor method of NewtonRaphson instances
-NewtonRaphson::NewtonRaphson(double tolerance_in) : tolerance(tolerance_in) {}
+NewtonRaphson::NewtonRaphson(float tolerance_in) : tolerance(tolerance_in) {}
 
 // Define the 'solve' method of NewtonRaphson instances
-double NewtonRaphson::solve(double initial_guess) {
+double NewtonRaphson::solve(float initial_guess) {
   double x = initial_guess;
   double delta_x = 0;
   do {
@@ -138,7 +138,7 @@ The following code is a minimal command line program that we can use to check if
 #include "newtonraphson.hpp"
 
 int main() {
-  double initial_guess = -4;
+  float initial_guess = -4;
   double tolerance = 0.001;
   NewtonRaphson newtonraphson(tolerance);
   double root = newtonraphson.solve(initial_guess);
@@ -179,7 +179,7 @@ using namespace emscripten;
 
 EMSCRIPTEN_BINDINGS(newtonraphson) {
    class_<NewtonRaphson>("NewtonRaphson")
-      .constructor<double>()
+      .constructor<float>()
       .function("solve", &NewtonRaphson::solve)
       ;
 }
