@@ -19,7 +19,7 @@ how to [deal with long running tasks](yetanotherblog).
 So today's aim is to have a simple web app that determines the root of a mathematical function _2x^3 - 4x^2 + 6_, i.e. the
 value of _x_ where _y = 0_.
 
-![equation.svg.png](equation.svg.png)
+![equation.svg](equation.svg)
 
 Function _2x^3 - 4x^2 + 6_.
 
@@ -247,6 +247,8 @@ From the figure at the top of the article, the root of the equation should be at
 ![result.png](result.png)
 
 _The resulting page if everything works._
+
+If you can not or do not want to host the app yourself then visit a version hosted on [GitHub pages](https://nlesc-jcer.github.io/run-cpp-on-web/run-your-c++-code-on-the-web/index.html).
 
 ## Recap
 
