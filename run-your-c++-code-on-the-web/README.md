@@ -268,8 +268,13 @@ Please feel free to get in touch with the generalization team: generalization@es
 
 ## Where to go from here?
 
-In upcoming blogs we will see how we can perform the computation without blocking the user interface, how to make a nice
-interactive form, and how to make a visualization to show data from each iteration. We'll wrap up the series in a final
-blog that combines the topics of the whole series in a full-featured web application.
+In upcoming blogs we will see:
+
+- [use of web-worker: how we can perform the computation without blocking the user interface]()
+- [a react application: how to make a nice interactive form]()
+- [plotting with vega.js: how to make a visualization to show data from each iteration]()
+- [a complete example: combination of web-worker, react, and vega.js]()
+
+We'll wrap up the series in a final blog that combines the topics of the whole series in a full-featured web application.
 
 If you enjoyed this article, make sure to give us a clap!
