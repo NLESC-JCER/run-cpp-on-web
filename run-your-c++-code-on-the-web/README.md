@@ -246,9 +246,7 @@ From the figure at the top of the article, the root of the equation should be at
 
 ![result.png](result.png)
 
-_The resulting page if everything works._
-
-If you can not or do not want to host the app yourself then visit a version hosted on [GitHub pages](https://nlesc-jcer.github.io/run-cpp-on-web/run-your-c++-code-on-the-web/index.html).
+_The resulting page if everything works. See the live version of the app on [GitHub pages](https://nlesc-jcer.github.io/run-cpp-on-web/run-your-c++-code-on-the-web/index.html)._
 
 ## Recap
 
