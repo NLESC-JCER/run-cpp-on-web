@@ -22,26 +22,26 @@ To store data of an iteration we will use a structure with the following variabl
 We will add `iterations` public property to the NewtonRaphson which is a vector of iteration structs. So the `newtonraphson.hpp` becomes
 
 ```cpp
-#ifndef H_NEWTONRAPHSON_H
-#define H_NEWTONRAPHSON_H
+#ifndef H_NEWTONRAPHSON_HPP
+#define H_NEWTONRAPHSON_HPP
 
 #include <vector>
 
 struct Iteration {
   int index;
-  double x;
-  double y;
-  double slope;
-  double delta_x;
+  float x;
+  float y;
+  float slope;
+  float delta_x;
 };
 
 class NewtonRaphson {
   public:
-    NewtonRaphson(double tolerance_in);
-    double solve(double initial_guess);
+    NewtonRaphson(float tolerance_in);
+    float solve(float initial_guess);
     std::vector<Iteration> iterations;
   private:
-    double tolerance;
+    float tolerance;
 };
 #endif
 ```
@@ -55,12 +55,12 @@ The `newtonraphson.cpp` is rewritten from a while loop to a do while loop like w
 #include <math.h>
 
 // Define the constructor method of NewtonRaphson instances
-NewtonRaphson::NewtonRaphson(double tolerance_in) : tolerance(tolerance_in) {}
+NewtonRaphson::NewtonRaphson(float tolerance_in) : tolerance(tolerance_in) {}
 
 // Define the 'solve' method of NewtonRaphson instances
-double NewtonRaphson::solve(double initial_guess) {
-  double x = initial_guess;
-  double delta_x = 0.0;
+float NewtonRaphson::solve(float initial_guess) {
+  float x = initial_guess;
+  float delta_x = 0.0;
   int i = 0;
   do {
     delta_x = equation(x) / derivative(x);
@@ -81,8 +81,8 @@ Before we go into Emscripten world, lets first test our c++ code. We will check 
 #include "newtonraphson.hpp"
 
 int main() {
-  double initial_guess = -4;
-  double tolerance = 0.001;
+  float initial_guess = -4;
+  float tolerance = 0.001;
   NewtonRaphson newtonraphson(tolerance);
   newtonraphson.solve(initial_guess);
 
@@ -123,7 +123,7 @@ The last iteration has `-1.00` as x, which is what we expected.
 
 ## Bindings
 
-Emscripten can handle simple types like double and int, but needs help exposing more complex types to JavaScript like the iterations property.
+Emscripten can handle simple types like float and int, but needs help exposing more complex types to JavaScript like the iterations property.
 We need to use [value_object](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html#value-types) to expose the Iteration struct and [register_vector](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html#built-in-type-conversions) as the iterations property type.
 
 So the bindings look like
@@ -136,7 +136,7 @@ using namespace emscripten;
 
 EMSCRIPTEN_BINDINGS(newtonraphson) {
   class_<NewtonRaphson>("NewtonRaphson")
-    .constructor<double>()
+    .constructor<float>()
     .function("solve", &NewtonRaphson::solve)
     .property("iterations", &NewtonRaphson::iterations)
     ;
