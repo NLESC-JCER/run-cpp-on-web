@@ -137,7 +137,7 @@ The following code is a minimal command line program that we can use to check if
 #include "newtonraphson.hpp"
 
 int main() {
-  double initial_guess = 2;
+  double initial_guess = -4;
   double tolerance = 0.001;
   NewtonRaphson newtonraphson(tolerance);
   double root = newtonraphson.solve(initial_guess);
