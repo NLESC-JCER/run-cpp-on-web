@@ -5,7 +5,7 @@ Running C++ code in a web browser is all nice, but we really want to grab someon
 To make a plot we need some data. In a [previous](TODO fix url ../js-webapp) post we found the root of an equation using the Newton-Raphson algorithm implemented in C++ and compiled to a WebAsssembly module.
 A single root value makes for a depressing plot. The Newton-Raphson algorithm uses iterations to find the root so we will capture the data of each iteration and plot those.
 
-![Image](root-plot.svg)
+![Image](root-plot.png)
 _A single data point makes for a depressing plot, let's do better_
 
 Let's make changes to the C++ code to store the data from the iterations.
@@ -349,7 +349,7 @@ python3 -m http.server 8000
 
 When we visit the web page at [http://localhost:8000/scatter.html](http://localhost:8000/scatter.html), we will be greeted by the following plot. We can zoom with mouse wheel and pan by dragging. Also when we hover over a point we get a tooltip with all iteration data.
 
-[![Image](scatter.svg)](https://nlesc-jcer.github.io/run-cpp-on-web/js-plot/scatter.html)
+[![Image](scatter.png)](https://nlesc-jcer.github.io/run-cpp-on-web/js-plot/scatter.html)
 (Click on image to get interactive version)
 TODO see if interactive version can be embedded
 
@@ -357,7 +357,7 @@ TODO see if interactive version can be embedded
 
 In the first blog of this series we plotted the equation and root as
 
-![equation.svg](https://nlesc-jcer.github.io/run-cpp-on-web/run-your-c++-code-on-the-web/equation.svg.png)
+![equation.png](https://nlesc-jcer.github.io/run-cpp-on-web/run-your-c++-code-on-the-web/equation.png)
 
 It would be nice to write a specification of this plot together with the iterations the root finding algorithm went through.
 Vega-Lite can superimpose one chart on top of another with [layers](https://vega.github.io/vega-lite/docs/layer.html) keyword.
