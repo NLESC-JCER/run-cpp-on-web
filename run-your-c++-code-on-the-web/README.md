@@ -272,23 +272,18 @@ computation is done in the user's web browser--we just need somewhere to host th
 
 ## Get in touch with us
 
-This blog was written by the Generalization team at NLeSC consisting of Stefan Verhoeven, Faruk Diblen, Jurriaan H. Spaaks, Adam Belloum and Christiaan Meijer.
-
-We thank to Lourens Veen and Patrick Bos for their useful comments which improved the clarity of the final text.
-
-Please feel free to get in touch with the generalization team: generalization@esciencecenter.nl
+This blog was written by NLeSC's Generalization Team. The team consists of Stefan Verhoeven, Faruk Diblen, Jurriaan H. Spaaks, Adam Belloum and Christiaan Meijer. Feel free to get in touch with the generalization team at generalization@esciencecenter.nl.
 
 ## Where to go from here?
 
-In upcoming blogs we will see:
+In upcoming blogs we will cover:
 
-- [use of web-worker: how we can perform the computation without blocking the user interface]()
+- [use of a web-worker: how to perform computations without blocking the user interface]()
 - [a react application: how to make a nice interactive form]()
-- [plotting with vega.js: how to make a visualization to show data from each iteration]()
-- [a complete example: combination of web-worker, react, and vega.js]()
+- [plotting with vega.js: how to visualize data from the algorithm]()
 
-We'll wrap up the series in a final blog that combines the topics of the whole series in a full-featured web application.
+We'll wrap up the series in [a final blog]() that combines the topics of the whole series in a full-featured web application.
 
-If you enjoyed this article, make sure to give us a clap!
+If you enjoyed this article, leave a comment and give us a clap!
 
 _Thank you to our proof readers [Lourens Veen](https://orcid.org/0000-0002-6311-1168) and [Patrick Bos](https://orcid.org/0000-0002-6033-960X)._
