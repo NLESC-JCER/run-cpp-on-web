@@ -1,3 +1,7 @@
+_By [Stefan Verhoeven](https://orcid.org/0000-0002-5821-2060), [Faruk Diblen](https://orcid.org/0000-0002-0989-929X),
+[Jurriaan H. Spaaks](https://orcid.org/0000-0002-7064-4069), [Adam Belloum](https://orcid.org/0000-0001-6306-6937), and
+[Christiaan Meijer](https://orcid.org/0000-0002-5529-5761)._
+
 # Run your C++ code on the web
 
 Let's say you have some C++ code laying around that you would like to make available to a wider audience, by putting
@@ -266,3 +270,5 @@ interactive form, and how to make a visualization to show data from each iterati
 blog that combines the topics of the whole series in a full-featured web application.
 
 If you enjoyed this article, make sure to give us a clap!
+
+_Thank you to our proof readers [Lourens Veen](https://orcid.org/0000-0002-6311-1168) and [Patrick Bos](https://orcid.org/0000-0002-6033-960X)._
