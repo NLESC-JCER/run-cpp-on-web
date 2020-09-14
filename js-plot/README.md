@@ -81,7 +81,7 @@ Before we go into Emscripten world, lets first test our c++ code. We will check 
 #include "newtonraphson.hpp"
 
 int main() {
-  double initial_guess = -3;
+  double initial_guess = -4;
   double tolerance = 0.001;
   NewtonRaphson newtonraphson(tolerance);
   newtonraphson.solve(initial_guess);
@@ -111,12 +111,12 @@ Run with
 
 ```shell
 ./cli.exe
-index = 0 x = -3.00 y = -84.00 slope = 78.00 delta_x = -1.08
-index = 1 x = -1.92 y = -23.02 slope = 37.57 delta_x = -0.61
-index = 2 x = -1.31 y = -5.37 slope = 20.79 delta_x = -0.26
-index = 3 x = -1.05 y = -0.76 slope = 15.06 delta_x = -0.05
-index = 4 x = -1.00 y = -0.03 slope = 14.04 delta_x = -0.00
-index = 5 x = -1.00 y = -0.00 slope = 14.00 delta_x = -0.00
+index = 0 x = -4.00 y = -186.00 slope = 128.00 delta_x = -1.45
+index = 1 x = -2.55 y = -52.99 slope = 59.29 delta_x = -0.89
+index = 2 x = -1.65 y = -13.97 slope = 29.63 delta_x = -0.47
+index = 3 x = -1.18 y = -2.89 slope = 17.83 delta_x = -0.16
+index = 4 x = -1.02 y = -0.28 slope = 14.40 delta_x = -0.02
+index = 5 x = -1.00 y = -0.00 slope = 14.01 delta_x = -0.00
 ```
 
 The last iteration has `-1.00` as x, which is what we expected.
@@ -164,7 +164,7 @@ emcc -I. -o newtonraphson.js -Oz -s MODULARIZE=1 \
 To get the iteration data in JavaScript we use the following code
 
 ```javascript
-const initial_guess = -3;
+const initial_guess = -4;
 const tolerance = 0.001;
 const newtonraphson = new rootfinding.NewtonRaphson(tolerance);
 newtonraphson.solve(initial_guess);
@@ -185,45 +185,45 @@ Let's have a look at the data we want to plot, by logging it to the web browsers
 [
   {
     "index": 0,
-    "x": -3,
-    "y": -84,
-    "slope": 78,
-    "delta_x": -1.0769230769230769
+    "x": -4,
+    "y": -186,
+    "slope": 128,
+    "delta_x": -1.453125
   },
   {
     "index": 1,
-    "x": -1.9230769230769231,
-    "y": -23.01684114701866,
-    "slope": 37.57396449704142,
-    "delta_x": -0.6125741974560871
+    "x": -2.546875,
+    "y": -52.987266540527344,
+    "slope": 59.29443359375,
+    "delta_x": -0.8936296938691481
   },
   {
     "index": 2,
-    "x": -1.310502725620836,
-    "y": -5.371029926801942,
-    "slope": 20.788526168124527,
-    "delta_x": -0.25836511368648407
+    "x": -1.6532453061308519,
+    "y": -13.97024657989909,
+    "slope": 29.62528270250898,
+    "delta_x": -0.4715650048030071
   },
   {
     "index": 3,
-    "x": -1.0521376119343517,
-    "y": -0.7573933273926876,
-    "slope": 15.059062222156337,
-    "delta_x": -0.050294853439036724
+    "x": -1.1816803013278447,
+    "y": -2.8855952468476467,
+    "slope": 17.831652417900354,
+    "delta_x": -0.16182433232889476
   },
   {
     "index": 4,
-    "x": -1.001842758495315,
-    "y": -0.025832589038255804,
-    "slope": 14.03687554445953,
-    "delta_x": -0.0018403375421001107
+    "x": -1.01985596899895,
+    "y": -0.28194181784318495,
+    "slope": 14.39948493700832,
+    "delta_x": -0.01957999324813086
   },
   {
     "index": 5,
-    "x": -1.0000024209532148,
-    "y": -0.00003389340361792392,
-    "slope": 14.00004841909946,
-    "delta_x": -0.0000024209490284108664
+    "x": -1.000275975750819,
+    "y": -0.0038644221796557687,
+    "slope": 14.005519971992072,
+    "delta_x": -0.00027592136438945176
   }
 ]
 ```
@@ -299,7 +299,7 @@ The complete HTML pages looks like
     <div id="plot"></div>
     <script>
       createModule().then((rootfinding) => {
-        const initial_guess = -3;
+        const initial_guess = -4;
         const tolerance = 0.001;
         const newtonraphson = new rootfinding.NewtonRaphson(tolerance);
         newtonraphson.solve(initial_guess);
