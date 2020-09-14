@@ -264,7 +264,7 @@ This blog was written by the Generalization team at NLeSC consisting of Stefan V
 
 We thank to Lourens Veen and Patrick Bos for their useful comments which improved the clarity of the final text.
 
-Please feel free to get in touch with the generalization team at the Netherlands eScience Center: generalization@esciencecenter.nl
+Please feel free to get in touch with the generalization team: generalization@esciencecenter.nl
 
 ## Where to go from here?
 
