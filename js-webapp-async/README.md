@@ -92,6 +92,7 @@ We can see the code in action [here](https://nlesc-jcer.github.io/run-cpp-on-web
 Responsive ui thanks to web-worker
 
 # Outro
-In this blogpost we have learned how to run, long running c++ code on the web using web workers.
+In this blog post we have learned how to run long running C++ code on the web using web workers.
+
 
 In the [next blogpost](../js-react/README.md) we will show how to expand the code to an interactive React webapp.
