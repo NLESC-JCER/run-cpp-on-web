@@ -10,7 +10,8 @@ In this blogpost, we will use web workers to solve this problem by running the c
 
 Let's have a look at the code we ended up with in the last blog. When loading the page, the WebAssembly code is executed, after which the page can finish rendering. Because the WebAssembly code was very quick, this was fine. For this blog, we assume we have a longer running task. We create such task artificially by adding a few seconds of sleep in the [c++ code](newtonraphson.cpp). Like in the previous post, we compile the C++ code to create WebAssembly code. The example page with our slow task is can be found [here](https://nlesc-jcer.github.io/run-cpp-on-web/js-webapp-async/example-blocking.html).
 
-Notice that we also added a slider input to the page. This slider isn't connected to anything, and is there just to illustrate UI blocking. Notice that while the webassembly code is still running, the slider is completely unresponsive. If this were an actual webapp and not just a demo, the UI blocking would surely annoy any users of the system and possibly make working with the app cumbersome and impracticle. We can easily solve this, and keep the UI responsive at all times, using web workers.
+Notice that we also added a slider input to the page. This slider has no function, and is there just to illustrate UI blockage. Notice that while the WebAssembly code is still running, the slider is completely unresponsive. If this was an actual web app and not just a demo, the UI blocking would surely annoy users and possibly make working with the app cumbersome and impractical. We can easily solve this, and keep the UI responsive at all times, using web workers.
+
 
 ![blocking ui](blocking.gif)
 
