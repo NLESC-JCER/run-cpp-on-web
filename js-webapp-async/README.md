@@ -34,7 +34,8 @@ The webpage that uses the worker will look like:
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Example web worker</title>
+    <title>Web worker example</title>
+
     <script>
       const worker = new Worker('worker.js');
       worker.postMessage({
