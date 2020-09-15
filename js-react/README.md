@@ -12,7 +12,7 @@ If you haven't read the first two parts please have a look at:
 
 The web application we developed so far in needs to update the entire page to display the results. Even for small changes in the webpage this has to happen. Thanks to the advance web-browsers and JavaScript, Single Page Applications (SPA) can update only required elements in the webpage. We will use one of the most popular web-frameworks, React, to develop the SPA.
 
-The form in the web application will collect the user inputs and use them to initialize the algorithm(**add link?**). When the form is submitted, a web worker loads the wasm file, starts the calculation, renders the result. With this architecture the application only needs cheap static file hosting to host the HTML, JavaScript and WebAssembly files. The algorithm will be running in the web browser on the end users machine instead of a server.
+The form in the web application will collect the user inputs and use them to initialize the algorithm(**add link?**). When the form is submitted, a WebAssembly code starts the calculation and the result is rendered. With this architecture the application only needs cheap static file hosting to host the HTML, JavaScript and WebAssembly files. The algorithm will be running in the web browser on the end users machine instead of a server.
 
 ### The Html code
 
