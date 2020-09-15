@@ -61,7 +61,8 @@ The webpage that uses the worker will look like:
 </html>
 ```
 
-The worker code will contain only handling the incoming message. In this case, the worker will unpack the message, do the calculation, and pack the results in a new message that it will send back.
+The web worker code will contain only handling the incoming message. In this case, the web worker will unpack the message, do the calculation, and pack the results in a new message that it will send back.
+
 The code for the worker in worker.js will now look like:
 ```js
 importScripts('newtonraphson.js');
