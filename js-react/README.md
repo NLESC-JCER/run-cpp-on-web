@@ -187,7 +187,7 @@ initial value of the result is set to `undefined` as the result is only known af
 const [root, setRoot] = React.useState(undefined);
 ```
 
-When the calculation is done it will send a message back to the app. The app needs to store the result value (`root`) using `setRoot`. The worker will then be terminated because it did its job.
+When the calculation is done it will store the result value (`root`) using `setRoot`.
 
 
 To render the result we can use a React Component which has `root` as a property. When the calculation has not been done
