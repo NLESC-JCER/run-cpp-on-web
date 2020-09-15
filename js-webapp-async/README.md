@@ -22,7 +22,8 @@ Blocked ui while code is running
 A [web worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) is an object that handles execution of a piece of code in another thread. On completion the web worker will notify so the result can be processed and, in this case, rendered on the page. 
 
 
-The way the page communicates with the worker object is through sending messages. The page will send a message to the worker to start doing work, and the message will include all data that the worder needs. The worker will perform its execution, using only the data that was in the message, as the worker will not be able to access any data in the webapp directly. When finished the worker needs to communicate the results back to the webapp. It can do this by sending a message. 
+The way the page communicates with the worker object is through sending messages. The page will send a message to the worker to start doing work, and the message will include all data that the worker needs. The worker will perform its execution, using only the data that was in the message, as the worker will not be able to access any data in the web app directly. When finished the worker needs to communicate the results back to the web app. It will do this by sending a message. 
+
 
 ### The resulting page
 
