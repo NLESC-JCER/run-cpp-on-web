@@ -178,12 +178,7 @@ function handleSubmit(event) {
 }
 ```
 
-We will use the same `newtonraphson.js` and `newtonraphson.wasm` files as in the previous post so we re-use it by
-
-```shell
-ln -s ../ js-webapp/newtonraphson.js .
-ln -s ../ js-webapp/newtonraphson.wasm .
-```
+We will use the same `newtonraphson.js` and `newtonraphson.wasm` files as in the [previous post](). Make sure you download these files from [here]().
 
 We need a place to store the result of the calculation (`root` value), we will use `useState` function again. The
 initial value of the result is set to `undefined` as the result is only known after the calculation has been completed.
