@@ -1,6 +1,6 @@
 <html>
    <head>
-      <!-- Load WebAssemlby module -->
+      <!-- Load WebAssembly module -->
       <script type="text/javascript" src="newtonraphson.js"></script>
    </head>
    <body>
@@ -12,11 +12,12 @@
          // Wait for module to initialize,
          createModule().then(({NewtonRaphson}) => {
             // Hardcoded input values
+            const initial_guess = -4;
             const tolerance = 0.001;
-            const initial_guess = -20;
+            // Perform computation
             const newtonraphson = new NewtonRaphson(tolerance);
             const root = newtonraphson.solve(initial_guess);
-            // Write root to tag with answer as id
+            // Write the value of 'root' to the tag whose 'id' is equal to "answer"
             document.getElementById("answer").innerHTML = root.toFixed(2);
          });
       </script>

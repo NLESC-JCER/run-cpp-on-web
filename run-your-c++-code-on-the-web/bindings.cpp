@@ -5,7 +5,7 @@ using namespace emscripten;
 
 EMSCRIPTEN_BINDINGS(newtonraphson) {
    class_<NewtonRaphson>("NewtonRaphson")
-      .constructor<double>()
+      .constructor<float>()
       .function("solve", &NewtonRaphson::solve)
       ;
 }

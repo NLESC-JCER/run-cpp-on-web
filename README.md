@@ -1,14 +1,19 @@
+[Rendered version](https://nlesc-jcer.github.io/run-cpp-on-web/)
+
 - audience: RSEs
 - approach: text before code, include code if it supports the story
+- each blog has a focus and will try to minimize distractions, for example React blog should not use web worker and plot blog should use straight vegalite not react.
+- each blog has its own code, will make sure all they expand the first blog
 
 The blog topics are
 
 1. web assembly, [small static web page without user interaction](js-webapp)
 1. unblock ui with web worker, [how to deal with tasks that take longer to complete](js-webapp-async)
 1. interactive form with React, [gathering user inputs through a form in a simple react app](js-react)
-1. plot with Vega, displaying results from the algorithm in a more complex web app
+1. plot with Vega, [displaying results from the algorithm in a more complex web app](js-plot)
+1. blog which combines web-worker, form with React and plot with vega into single example
 
-The order will be 
+The order will be
 - 1-2-3-4, or
 - 1-3-4-2
 
@@ -24,4 +29,3 @@ Blog ideas:
 1. is it done yet?, give progress during calculation, use Celery (Python)
 1. My C++ program needs sockets, can I use those? Explain limitations of Emscripten, use [web socket](https://emscripten.org/docs/porting/networking.html) and in-memory filesystem as examples
 1. How to build WebAssembly with a dependencies like boost, explain [bundled standard libs](https://emscripten.org/docs/compiling/Building-Projects.html#using-libraries) and https://github.com/emscripten-ports
-
