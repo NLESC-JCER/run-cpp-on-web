@@ -1,5 +1,6 @@
 # Introduction
-In an [earlier blogpost](../js-webapp/README.md) we discussed how to run c++ code on the web using Javascript. We created a webapp that executed some C++ code and then showed the result. While the page was running the C++ code, the page was blocked and unresponsive. That was not a problem then, because the computation done in the code was very quick. Blocked UI becomes a problem when we are performing tasks that take a bit longer to run. 
+In an [earlier blogpost](../js-webapp/README.md) we discussed how to run C++ code on the web using JavaScript. We created a web app that executed some C++ code and then showed the result. While the page was running the C++ code, the page was blocked and unresponsive. That was not a problem then, because the computation done in the code was very quick. Blocked UI becomes a problem when we are performing tasks that take a bit longer to run. 
+
 
 How to prevent blocking when running long running tasks in c++?
 
