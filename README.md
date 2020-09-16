@@ -11,7 +11,7 @@ The blog topics are
 1. unblock ui with web worker, [how to deal with tasks that take longer to complete](js-webapp-async)
 1. interactive form with React, [gathering user inputs through a form in a simple react app](js-react)
 1. plot with Vega, [displaying results from the algorithm in a more complex web app](js-plot)
-1. blog which combines web-worker, form with React and plot with vega into single example
+1. blog which combines web-worker, [form with React and plot with vega into single example](js-kitchen-sink)
 
 Blog ideas:
 
