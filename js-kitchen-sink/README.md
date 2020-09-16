@@ -1,13 +1,13 @@
 # Run C++ on the web with web assembly, web workers, React and Vega
 
-In previous blogs in the series we learned about
+In previous blogs in the series we learned
 
 * [how to compile C++ to WebAssembly](TODO)
 * [how to perform computations without blocking the user interface](TODO)
 * [how to make a nice interactive form](TODO)
 * [how to visualize data from the algorithm](TODO)
 
-Those pieces by them selves are useful, but how can all those lessons by combined into a single web application. This blog will tell you how to do build the web application including everyhing but the kitchen sink.
+Those topics by them selves are useful, but how can all those topics be put together into a single web application. This blog will tell you how to do build the web application including everything but the kitchen sink.
 
 ![Pack everything but the kitchen sink](1024px-Pack_Gong_(3144438149).jpg)
 
@@ -15,11 +15,14 @@ We want to make an React application which will find the root of an equation usi
 
 ## 1. WebAssembly module
 
-The WebAssembly module contains the equation and Newton-Raphson algorithm. We will reuse the module made in the visualization blog post, namely [newtonraphson.js](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/js-plot/newtonraphson.js) and [newtonraphson.wasm](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/js-plot/newtonraphson.wasm)
+The WebAssembly module contains the equation and Newton-Raphson algorithm. We will reuse the module made in the visualization blog post, so we will download [newtonraphson.js](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/js-plot/newtonraphson.js) and [newtonraphson.wasm](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/js-plot/newtonraphson.wasm).
 
 ## 3. Web Worker
 
-In the [web worker blog](TODO) we used a Web Worker thread to not block the user interface while computation. The application we are going to make here we want to use that as well.
+In the [web worker blog](TODO) we used a Web Worker thread to not block the user interface while busy with a computation. A Web Worker is not needed for the quick computation we are using, but let's be a good citizen and not claim the main thread when we don't need to.
+
+![High five](high-five.jpg)
+_UI and worker thread working together from [pxhere](https://pxhere.com/en/photo/1451159)_
 
 The work code of the Web Worker blog needs to be enhanced with returning the iterations like
 
