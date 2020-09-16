@@ -90,7 +90,6 @@ function iterations2spec(iterations) {
 }
 
 function IterationsPlot({ iterations }) {
-
   const container = React.useRef(null);
 
   function didUpdate() {
@@ -169,6 +168,7 @@ function App() {
     </div>
   );
 }
+
 ReactDOM.render(
   <App />,
   document.getElementById('container')
