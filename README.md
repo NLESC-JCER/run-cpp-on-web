@@ -13,10 +13,6 @@ The blog topics are
 1. plot with Vega, [displaying results from the algorithm in a more complex web app](js-plot)
 1. blog which combines web-worker, form with React and plot with vega into single example
 
-The order will be
-- 1-2-3-4, or
-- 1-3-4-2
-
 Blog ideas:
 
 1. when stuff goes wrong, handling exceptions from C++
