@@ -7,17 +7,18 @@ function Heading() {
     const root = props.root;
     let message = 'Not submitted';
     if (root !== undefined) {
-      message = 'Root = ' + root;
+      message = 'Function root is approximately at x = ' + root.toFixed(2);
     }
     return <div id="answer">{message}</div>;
   }
 
   function App() {
     const [tolerance, setTolerance] = React.useState(0.001);
+    const [initial_guess, setGuess] = React.useState(-4);
+
     function onToleranceChange(event) {
-      setEpsilon(Number(event.target.value));
+      setTolerance(Number(event.target.value));
     }
-    const [initial_guess, setGuess] = React.useState(-20);
 
     function onGuessChange(event) {
       setGuess(Number(event.target.value));
@@ -26,18 +27,13 @@ function Heading() {
 
     function handleSubmit(event) {
       event.preventDefault();
-      const worker = new Worker('worker.js');
-      worker.postMessage({
-        type: 'CALCULATE',
-        payload: { epsilon: tolerance, guess: initial_guess }
+      // Wait for module to initialize,
+      createModule().then(({NewtonRaphson}) => {
+        // Perform computation
+        const newtonraphson = new NewtonRaphson(tolerance);
+        const root = newtonraphson.solve(initial_guess);
+        setRoot(root);
       });
-      worker.onmessage = function(message) {
-          if (message.data.type === 'RESULT') {
-            const result = message.data.payload.root;
-            setRoot(result);
-            worker.terminate();
-        }
-      };
     }
 
     return (
@@ -50,7 +46,7 @@ function Heading() {
           </label>
           <label>
             Initial guess:
-            <input name="initial_guess" type="number" value={inital_guess} onChange={onGuessChange}/>
+            <input name="initial_guess" type="number" value={initial_guess} onChange={onGuessChange}/>
           </label>
           <input type="submit" value="Submit" />
         </form>
@@ -60,5 +56,5 @@ function Heading() {
   }
   ReactDOM.render(
     <App/>,
-    document.getElementById('container')
+    document.getElementById('answer')
   );
