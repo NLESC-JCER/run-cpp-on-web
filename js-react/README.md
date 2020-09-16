@@ -37,13 +37,14 @@ We will keep the html code very minimal. The code will contain three essential e
   <div id="container"></div>
   ```
 
-- **\<script\>** element to load the Javascript application
+- **\<script\>** elements to load the Javascript application and the ``NewtonRaphson`` class.
 
   ```html
+    <script type="text/javascript" src="newtonraphson.js"></script>
     <script type="text/babel" src="app.js"></script>
   ```
 
-We will use the same `newtonraphson.js` and `newtonraphson.wasm` files as in the [previous post](). Make sure you download these files from [here]().
+**Note:** We use the same `newtonraphson.js` and `newtonraphson.wasm` files as in the [previous post](). Make sure you download these files from [here]().
 
 The complete html code will look like this:
 
