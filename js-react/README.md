@@ -43,6 +43,8 @@ We will keep the html code very minimal. The code will contain three essential e
     <script type="text/babel" src="app.js"></script>
   ```
 
+We will use the same `newtonraphson.js` and `newtonraphson.wasm` files as in the [previous post](). Make sure you download these files from [here]().
+
 The complete html code will look like this:
 
 ```html
@@ -177,8 +179,6 @@ function handleSubmit(event) {
   });
 }
 ```
-
-We will use the same `newtonraphson.js` and `newtonraphson.wasm` files as in the [previous post](). Make sure you download these files from [here]().
 
 We need a place to store the result of the calculation (`root` value), we will use `useState` function again. The
 initial value of the result is set to `undefined` as the result is only known after the calculation has been completed.
