@@ -154,19 +154,38 @@ EMSCRIPTEN_BINDINGS(newtonraphson) {
 ```
 File: _bindings.cpp_.
 
-Same as in previous blog we can compile to a WebAssembly module with Emscripten using `emcc` command
+Same as in [previous blog](TODO) we can compile to a WebAssembly module with Emscripten using `emcc` command
 
 ```shell
 emcc -I. -o newtonraphson.js -Oz -s MODULARIZE=1 \
   -s EXPORT_NAME=createModule --bind newtonraphson.cpp bindings.cpp
 ```
 
+<!--
+TODO do we want to explain how we can run snippet below?
+
+To run test the WebAssembly module in a web browser we can use it's build-in console
+
+1. startup a web server to host newtonraphson.js and newtonraphson.wasm with `python3 -m http.server 8000`
+2. goto webserver adress [http://localhost:8000](http://localhost:8080) in browser
+3. open the console in the web browsers DevTools (press F12 to open)
+
+Import the WebAssembly JavaScript binding file with
+
+```javascript
+const response = await fetch('http://localhost:8000/newtonraphson.js');
+const text = await response.text();
+eval(text);
+const {NewtonRaphson} = await createModule();
+```
+-->
+
 To get the iteration data in JavaScript we use the following code
 
 ```javascript
 const initial_guess = -4;
 const tolerance = 0.001;
-const newtonraphson = new rootfinding.NewtonRaphson(tolerance);
+const newtonraphson = new NewtonRaphson(tolerance);
 newtonraphson.solve(initial_guess);
 // newtonraphson.iterations is a vector object which not consumeable by Vega
 // So convert Emscripten vector of objects to JavaScript array of objects
@@ -179,7 +198,7 @@ const iterations = new Array(
 );
 ```
 
-Let's have a look at the data we want to plot, by logging it to the web browsers DevTools (press F12 to open) with `console.log(JSON.stringify(iterations))` to get
+Let's have a look at the data we want to plot, by logging it to the  with `console.log(JSON.stringify(iterations, null, 2))` to get
 
 ```json
 [
@@ -228,6 +247,8 @@ Let's have a look at the data we want to plot, by logging it to the web browsers
 ]
 ```
 
+Great, that looks very similar to the output we got from the command line.
+
 ## Vega-Lite specification
 
 There [many ways to do visualizations](https://github.com/sorrycc/awesome-javascript#data-visualization) on the web. My personal favorite at the moment is [Vega-Lite](https://vega.github.io/vega-lite/), so we will use it here.
@@ -236,7 +257,7 @@ Vega-Lite is a JavaScript library which describes a plot using a JSON document. 
 The root finding algorithm tries to find the x where y is zero.
 So let's plot the iteration index against the y found in each iteration to see how quickly it converged to an answer.
 
-The specification is constructed out the following blocks
+The Vega-Lite specification is constructed out of the following blocks
 
 * data, the iterations we want to plot as an array of iteration objects
 * mark, for line plot use [line](https://vega.github.io/vega-lite/docs/line.html) marker
@@ -298,10 +319,10 @@ The complete HTML pages looks like
   <body>
     <div id="plot"></div>
     <script>
-      createModule().then((rootfinding) => {
+      createModule().then(({NewtonRaphson}) => {
         const initial_guess = -4;
         const tolerance = 0.001;
-        const newtonraphson = new rootfinding.NewtonRaphson(tolerance);
+        const newtonraphson = new NewtonRaphson(tolerance);
         newtonraphson.solve(initial_guess);
         // newtonraphson.iterations is a vector object which not consumeable by Vega
         // So convert Emscripten vector of objects to JavaScript array of objects
@@ -351,7 +372,6 @@ When we visit the web page at [http://localhost:8000/scatter.html](http://localh
 
 [![Image](scatter.png)](https://nlesc-jcer.github.io/run-cpp-on-web/js-plot/scatter.html)
 (Click on image to get interactive version)
-TODO see if interactive version can be embedded
 
 ## Advanced plot
 
@@ -361,9 +381,9 @@ In the first blog of this series we plotted the equation and root as
 
 It would be nice to write a specification of this plot together with the iterations the root finding algorithm went through.
 Vega-Lite can superimpose one chart on top of another with [layers](https://vega.github.io/vega-lite/docs/layer.html) keyword.
-Let's construct each layer separately and super impose them at the end.
+Let's construct each layer separately and then super impose them at the end.
 
-The 2x^3 - 4x^2 + 6 equation is plotted by using a [sequence generator](https://vega.github.io/vega-lite/docs/data.html#sequence) and a [formula transform](https://vega.github.io/vega-lite/docs/calculate.html).
+The 2x^3 - 4x^2 + 6 equation is plotted by using a [sequence generator](https://vega.github.io/vega-lite/docs/data.html#sequence) to generate a range of x values and a [formula transform](https://vega.github.io/vega-lite/docs/calculate.html) is used to calculate the y values.
 
 ```js
 const equation_line = {
@@ -449,10 +469,10 @@ The HTML page with all JavaScript put together to make a composite plot is
 <body>
   <div id="plot"></div>
   <script>
-    createModule().then((rootfinding) => {
+    createModule().then(({NewtonRaphson}) => {
       const initial_guess = -4;
       const tolerance = 0.001;
-      const newtonraphson = new rootfinding.NewtonRaphson(tolerance);
+      const newtonraphson = new NewtonRaphson(tolerance);
       newtonraphson.solve(initial_guess);
       // newtonraphson.iterations is a vector object which not consumeable by Vega
       // So convert Emscripten vector of objects to JavaScript array of objects
@@ -521,10 +541,22 @@ The HTML page with all JavaScript put together to make a composite plot is
 </body>
 </html>
 ```
+File: _app.html_
 
 Visiting the page should give us a plot like
 
-[![Image](composite.png)](https://nlesc-jcer.github.io/run-cpp-on-web/js-plot/index.html)
+[![Image](composite.png)](https://nlesc-jcer.github.io/run-cpp-on-web/js-plot/app.html)
 (Click on image to get interactive version)
 
-TODO outro
+## Wrap up
+
+In this blog we have learned how to get complex data types from a WebAssembly module using Emscripten bindings and how to write a Vega-Lite specifications to get interactive visualizations.
+
+In other blogs of the series that might be of interest we cover
+
+* [use of a web-worker: how to perform computations without blocking the user interface](TODO)
+* [a react application: how to make a nice interactive form](TODO)
+
+We'll wrap up the series in a [final blog](TODO) that combines the topics of the whole series in a full-featured web application.
+
+If you enjoyed this article, leave a comment and give us a clap!
