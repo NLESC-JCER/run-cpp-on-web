@@ -8,10 +8,10 @@
   <body>
     <div id="plot"></div>
     <script>
-      createModule().then((rootfinding) => {
+      createModule().then(({NewtonRaphson}) => {
         const initial_guess = -4;
         const tolerance = 0.001;
-        const newtonraphson = new rootfinding.NewtonRaphson(tolerance);
+        const newtonraphson = new NewtonRaphson(tolerance);
         newtonraphson.solve(initial_guess);
         // newtonraphson.iterations is a vector object which not consumeable by Vega
         // So convert Emscripten vector of objects to JavaScript array of objects
