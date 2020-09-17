@@ -1,17 +1,5 @@
-function Heading() {
-  const title = 'Root finding web application';
-  return <h1>{title}</h1>
-}
-
-function IterationsPlot({ iterations }) {
-
-  const container = React.useRef(null);
-
-  function didUpdate() {
-    if (container.current === null || iterations.length === 0) {
-      return;
-    }
-    // Scale equation line to iterations
+function iterations2spec(iterations) {
+    // Because the initial guess can be changed now we need to scale equation line to iterations
     const max_x = Math.max(...iterations.map(d => d.x));
     const min_x = Math.min(...iterations.map(d => d.x));
     const equation_line = {
@@ -86,7 +74,7 @@ function IterationsPlot({ iterations }) {
       "selection": { "grid": { "type": "interval", "bind": "scales" } }
     };
 
-    const spec = {
+    return {
       "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
       "hconcat": [
         {
@@ -99,6 +87,16 @@ function IterationsPlot({ iterations }) {
         , iteration_vs_y
       ]
     };
+}
+
+function IterationsPlot({ iterations }) {
+  const container = React.useRef(null);
+
+  function didUpdate() {
+    if (container.current === null || iterations.length === 0) {
+      return;
+    }
+    const spec = iterations2spec(iterations);
     vegaEmbed(container.current, spec);
   }
 
@@ -106,6 +104,11 @@ function IterationsPlot({ iterations }) {
   React.useEffect(didUpdate, dependencies);
 
   return <div ref={container} />;
+}
+
+function Heading() {
+  const title = 'Root finding web application';
+  return <h1>{title}</h1>
 }
 
 function Result({ root }) {
@@ -129,7 +132,6 @@ function App() {
     setGuess(Number(event.target.value));
   }
   const [result, setResult] = React.useState({ root: undefined, iterations: [] });
-
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -166,6 +168,7 @@ function App() {
     </div>
   );
 }
+
 ReactDOM.render(
   <App />,
   document.getElementById('container')
