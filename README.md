@@ -7,7 +7,7 @@
 
 The blog topics are
 
-1. web assembly, [small static web page without user interaction](js-webapp)
+1. web assembly, [small static web page without user interaction](run-your-c%2B%2B-code-on-the-web)
 1. unblock ui with web worker, [how to deal with tasks that take longer to complete](js-webapp-async)
 1. interactive form with React, [gathering user inputs through a form in a simple react app](js-react)
 1. plot with Vega, [displaying results from the algorithm in a more complex web app](js-plot)
