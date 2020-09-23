@@ -38,7 +38,7 @@ We will keep the html code very minimal. The code will contain three essential e
     <script type="text/babel" src="app.js"></script>
   ```
 
-**Note:** We use the same `newtonraphson.js` and `newtonraphson.wasm` files as in the [previous post](). Make sure you download these files from [here]().
+**Note:** We use the same `newtonraphson.js` and `newtonraphson.wasm` files as in the [previous post](TODO). Make sure you download these files from [here](TODO).
 
 The complete html code will look like this:
 
@@ -247,7 +247,6 @@ function App() {
       const root = newtonraphson.solve(initial_guess);
       setRoot(root);
     });
-
   }
 
   return (
@@ -291,3 +290,15 @@ Visit [http://localhost:8000/app.html](http://localhost:8000/app.html) to see th
 ## Extra notes
 
 The code supplied here should not be used in production as converting JSX in the web browser is slow. It's better to use [Create React App](http://create-react-app.dev/) which gives you an infrastructure to perform the transformation offline.
+
+## Conclusion
+
+By writing React components we where able to create an interactive page with a form which executes the WebAssembly module compiled from the C++ code we introduced in the [first blog](TODO) of the series.
+We went though the components, JSX, props and state which are the core building blocks of React web application.
+
+In other blogs of the series that might be of interest we cover
+
+- [use of a web-worker: how to perform computations without blocking the user interface](TODO)
+- [use of vega-lite: how to make visualization](TODO)
+
+We'll wrap up the series in a [final blog](TODO) that combines the topics of the whole series in a full-featured web application.
