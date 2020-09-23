@@ -13,11 +13,11 @@ Those topics by them selves are useful, but how can all those topics be put toge
 
 We want to make an React application which will find the root of an equation using Newton-Raphson algorithm and plot each iteration of the algorithm. Let us go over the pieces for this application next.
 
-## 1. WebAssembly module
+## WebAssembly module
 
 The WebAssembly module contains the equation and Newton-Raphson algorithm. We will reuse the module made in the visualization blog post, so we will download [newtonraphson.js](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/js-plot/newtonraphson.js) and [newtonraphson.wasm](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/js-plot/newtonraphson.wasm).
 
-## 3. Web Worker
+## Web Worker
 
 In the [web worker blog](TODO) we used a Web Worker thread to not block the user interface while busy with a computation. A Web Worker is not needed for the quick computation we are using, but let's be a good citizen and not claim the main thread when we don't need to.
 
@@ -63,7 +63,7 @@ onmessage = function(message) {
 ```
 File: _worker.js_
 
-## 3. React
+## React
 
 In a previous blog we wrote several React components to make a form let's re-use most of it, but instead of calling the WebAssembly module directly we will use a Web Worker.
 
@@ -87,7 +87,7 @@ function handleSubmit(event) {
 }
 ```
 
-## 4. Visualization
+## Visualization
 
 In the previous blog post about visualization using Vega-Lite we made 2 plots. Let's combine the 2 plots into a single visualization where zooming and panning in one plot will be reflected in other plot.
 
