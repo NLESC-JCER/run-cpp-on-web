@@ -1,20 +1,14 @@
 # Run your C++ code on the web: Part X - Interactive form with React
 
-In the previous blog posts we compiled the C++ algorithm into a webassembly code, added a web worker to unblock the ui when running long running tasks. In this blog post we will create a web application using [React](https://reactjs.org/). The web application will have a web-form which allows us to change the parameters of the algorithm.
-
-If you haven't read the first two parts please have a look at:
-
--[Part 1: web assembly](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/js-webapp)
-
--[Part 2: unblock ui with web worker](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/js-webapp-async)
+In the [previous blog post](TODO add link) we compiled the C++ algorithm into a webassembly code. In this blog post we will create a web application using [React](https://reactjs.org/). The web application will have a web-form which allows us to change the parameters of the algorithm.
 
 ## React web application
 
-The web application we developed so far in needs to update the entire page to display the results. Even for small changes in the webpage this has to happen. Thanks to the advance web-browsers and JavaScript, Single Page Applications (SPA) can update only required elements in the webpage. We will use one of the most popular web-frameworks, React, to develop the SPA.
+The web application we developed so far in needs to update the entire page to display the results. Even for small changes in the webpage this has to happen. Thanks to the web-browsers and JavaScript, Single Page Applications (SPA) can update only required elements in the webpage. We will use one of the most popular web-frameworks, React, to develop the SPA.
 
 The form in the web application will collect the user inputs and use them to initialize the algorithm(**add link?**). When the form is submitted, a WebAssembly code starts the calculation and the result is rendered. With this architecture the application only needs cheap static file hosting to host the HTML, JavaScript and WebAssembly files. The algorithm will be running in the web browser on the end users machine instead of a server.
 
-### The Html code
+### The HTML code
 
 To render the React application we need a HTML element as a container. We will give it the identifier **container** which will use later when we implement the **React** application in the [javascript section](js-section).
 
@@ -85,7 +79,7 @@ function Heading() {
 }
 ```
 
-I now can hear what you are saying: but wait... How do I use Babel? We haven't inclueded it anywhere. Yes, we did. Babel was already added to the HTML code.
+I now can hear what you are saying: but wait... How do I use Babel? We haven't included it anywhere. Yes, we did. Babel was already added to the HTML code.
 
 ```html
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
@@ -117,7 +111,7 @@ ReactDOM.render(
 When the page is rendered, the generated HTML code will be like:
 
 ```html
-<h1>Root finding web application</h1>;
+<h1>Root finding web application</h1>
 ```
 
 ## Adding the  web form
@@ -205,7 +199,16 @@ function Result(props) {
 }
 ```
 
-We can combine the heading, form and result components and all the states and handleSubmit function into the `App` React component and save it as `app.js`.
+Finally we can render the `App` component to the HTML container with `container` as identifier.
+
+```js
+ReactDOM.render(
+  <App/>,
+  document.getElementById('container')
+);
+```
+
+We can combine the heading, form and result components and all the states and handleSubmit function into the `App` React component and its rendering and save it as `app.js`.
 
 ```js
 function Heading() {
@@ -271,16 +274,7 @@ ReactDOM.render(
 );
 ```
 
-Finally we can render the `App` component to the HTML container with `container` as identifier.
-
-```js
-ReactDOM.render(
-  <App/>,
-  document.getElementById('container')
-);
-```
-
-Like before, we also need to host the files using a web server with
+Like before, we also need to host the files in a web server with
 
 ```shell
 python3 -m http.server 8000
