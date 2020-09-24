@@ -2,7 +2,7 @@
 
 Running C++ code in a web browser is all nice, but we really want to grab someones attention by visualizing something. In this blog we are going to make a plot from the results coming from our C++ code.
 
-To make a plot we need some data. In a [previous](TODO fix url ../js-webapp) post we found the root of an equation using the Newton-Raphson algorithm implemented in C++ and compiled to a WebAsssembly module.
+To make a plot we need some data. In the [previous post](../run-your-c++-on-the-web) we found the root of an equation using the Newton-Raphson algorithm implemented in C++ and compiled to a WebAsssembly module.
 A single root value makes for a depressing plot. The Newton-Raphson algorithm uses iterations to find the root so we will capture the data of each iteration and plot those.
 
 ![Image](root-plot.png)
@@ -154,31 +154,12 @@ EMSCRIPTEN_BINDINGS(newtonraphson) {
 ```
 File: _bindings.cpp_.
 
-We can now compile our C++ code to a WebAssembly module with Emscripten using `emcc` command, exactly like we did [before](TODO):
+We can now compile our C++ code to a WebAssembly module with Emscripten using `emcc` command, exactly [like we did before](../run-your-c++-code-on-the-web):
 
 ```shell
 emcc -I. -o newtonraphson.js -Oz -s MODULARIZE=1 \
   -s EXPORT_NAME=createModule --bind newtonraphson.cpp bindings.cpp
 ```
-
-<!--
-TODO do we want to explain how we can run snippet below?
-
-To run test the WebAssembly module in a web browser we can use it's build-in console
-
-1. startup a web server to host newtonraphson.js and newtonraphson.wasm with `python3 -m http.server 8000`
-2. goto webserver adress [http://localhost:8000](http://localhost:8080) in browser
-3. open the console in the web browsers DevTools (press F12 to open)
-
-Import the WebAssembly JavaScript binding file with
-
-```javascript
-const response = await fetch('http://localhost:8000/newtonraphson.js');
-const text = await response.text();
-eval(text);
-const {NewtonRaphson} = await createModule();
-```
--->
 
 To get the iteration data in JavaScript we use the following code
 
@@ -260,9 +241,9 @@ So let's plot the iteration index against the y found in each iteration to see h
 
 The Vega-Lite specification is constructed out of the following blocks
 
-* data, the iterations we want to plot as an array of iteration objects
-* mark, for line plot use [line](https://vega.github.io/vega-lite/docs/line.html) marker
-* encoding, which field should go on which axis
+* `"data"`, the iterations we want to plot as an array of iteration objects
+* `"encoding"`, which field should go on which axis
+* `"mark"`, for line plot use [line](https://vega.github.io/vega-lite/docs/line.html) marker
 
 ```js
 const spec = {
@@ -287,7 +268,7 @@ const spec = {
 };
 ```
 
-To render a specification we need to use the `vegaEmbed(element, spec)` method which accepts a HTML element and a Vega-Lite specification.
+To render a specification we need to use the `vegaEmbed(element, spec)` method which accepts an HTML element and a Vega-Lite specification.
 
 ```html
 <html>
@@ -307,7 +288,7 @@ To render a specification we need to use the `vegaEmbed(element, spec)` method w
 </html>
 ```
 
-The complete HTML pages looks like
+The complete HTML page looks like this:
 
 ```html
 <html>
@@ -361,15 +342,15 @@ The complete HTML pages looks like
   </body>
 </html>
 ```
-File: _scatter.html.
+File: _scatter.html_.
 
-We'll need a web server to display the HTML page in a web browser. For this, we'll use the http.server module from Python 3 to host all files on port 8000, like so:
+We'll need a web server to display the HTML page in a web browser. For this, we'll use the `http.server` module from Python 3 to host all files on port 8000, like so:
 
 ```shell
 python3 -m http.server 8000
 ```
 
-When we visit the web page at [http://localhost:8000/scatter.html](http://localhost:8000/scatter.html), we will be greeted by the following plot. We can zoom with mouse wheel and pan by dragging. Also when we hover over a point we get a tooltip with all iteration data.
+When we visit the web page at [http://localhost:8000/scatter.html](http://localhost:8000/scatter.html), we will be greeted by the following plot. We can zoom with the mouse wheel and pan by dragging. Hovering over a point shows a tooltip with relevant data at that point.
 
 [![Image](scatter.png)](https://nlesc-jcer.github.io/run-cpp-on-web/js-plot/scatter.html)
 (Click on image to get interactive version)
