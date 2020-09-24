@@ -14,12 +14,12 @@ Let's make changes to the C++ code to store the data from the iterations.
 
 To store data of an iteration we will use a structure with the following variables:
 
-* x, x value, starts with initial guess and ends with root result
-* y, result of passing x through equation
-* slope, slope or derivative at value x
-* delta_x, y divided by slope
+* `x`: x value, starting with the value of  `initial_guess` and ending with the estimate of the `equation`'s root
+* `y`: result of passing `x` through `equation`
+* `slope`: result of passing `x` through `derivative`
+* `delta_x`: `y` divided by `slope`
 
-We will add `iterations` public property to the NewtonRaphson which is a vector of iteration structs. So the `newtonraphson.hpp` becomes
+We will add a vector of `Iteration` `structs` named `iterations` as a public property to the `NewtonRaphson` class. So `newtonraphson.hpp` becomes:
 
 ```cpp
 #ifndef H_NEWTONRAPHSON_HPP
@@ -47,7 +47,7 @@ class NewtonRaphson {
 ```
 File: _newtonraphson.hpp_
 
-The `newtonraphson.cpp` is rewritten from a while loop to a do while loop like with a push to the iterations vector each cycle.
+The `do` loop in `newtonraphson.cpp` is updated to include a `push_back` to the `iterations` vector. This way, we can record the value of relevant variables in each cycle, as follows:
 
 ```cpp
 #include "newtonraphson.hpp"
@@ -72,7 +72,7 @@ float NewtonRaphson::solve(float initial_guess) {
 ```
 File: _newtonraphson.cpp_.
 
-Before we go into Emscripten world, lets first test our c++ code. We will check if the iteration property is actually populated correctly by wrapping the code in a main function, adding some print statements, compiling it and running it.
+Before we go into Emscripten world, lets first test our C++ code. We will check if the iteration property is actually populated correctly by wrapping the code in a `main` function, adding some `print` statements, compiling it and running it.
 
 ```cpp
 #include <iostream>
@@ -101,13 +101,13 @@ int main() {
 ```
 File: _cli.cpp_.
 
-Compile it with
+Compile it with:
 
 ```shell
 g++ -o cli.exe newtonraphson.cpp cli.cpp
 ```
 
-Run with
+Run with:
 
 ```shell
 ./cli.exe
@@ -119,14 +119,14 @@ index = 4 x = -1.02 y = -0.28 slope = 14.40 delta_x = -0.02
 index = 5 x = -1.00 y = -0.00 slope = 14.01 delta_x = -0.00
 ```
 
-The last iteration has `-1.00` as x, which is what we expected.
+The last iteration has `x = -1.00`, which is what we expected.
 
 ## Bindings
 
-Emscripten can handle simple types like float and int, but needs help exposing more complex types to JavaScript like the iterations property.
-We need to use [value_object](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html#value-types) to expose the Iteration struct and [register_vector](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html#built-in-type-conversions) as the iterations property type.
+Emscripten can handle simple types like `float` and `int`, but needs help exposing more complex types to JavaScript like the `iterations` property.
+We need to use [`value_object`](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html#value-types) to expose the `Iteration` `struct` and [`register_vector`](https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html#built-in-type-conversions) as the `iterations` property type.
 
-So the bindings look like
+So the bindings look like this:
 
 ```cpp
 #include <emscripten/bind.h>
@@ -154,7 +154,7 @@ EMSCRIPTEN_BINDINGS(newtonraphson) {
 ```
 File: _bindings.cpp_.
 
-Same as in [previous blog](TODO) we can compile to a WebAssembly module with Emscripten using `emcc` command
+We can now compile our C++ code to a WebAssembly module with Emscripten using `emcc` command, exactly like we did [before](TODO):
 
 ```shell
 emcc -I. -o newtonraphson.js -Oz -s MODULARIZE=1 \
@@ -187,8 +187,9 @@ const initial_guess = -4;
 const tolerance = 0.001;
 const newtonraphson = new NewtonRaphson(tolerance);
 newtonraphson.solve(initial_guess);
-// newtonraphson.iterations is a vector object which not consumeable by Vega
-// So convert Emscripten vector of objects to JavaScript array of objects
+// newtonraphson.iterations is a vector object, which is not
+// consumeable by Vega, so we need to convert Emscripten's
+// vector of objects to a JavaScript array of objects first
 const iterations = new Array(
     newtonraphson.iterations.size()
 ).fill().map(
@@ -198,7 +199,7 @@ const iterations = new Array(
 );
 ```
 
-Let's have a look at the data we want to plot, by logging it to the  with `console.log(JSON.stringify(iterations, null, 2))` to get
+Let's have a look at the data we want to plot, by logging it to the console with `console.log(JSON.stringify(iterations, null, 2))`, which should return the following data:
 
 ```json
 [
