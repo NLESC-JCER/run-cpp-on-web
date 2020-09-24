@@ -2,7 +2,7 @@
 
 Running C++ code in a web browser is all nice, but we really want to grab someones attention by visualizing something. In this blog we are going to make a plot from the results coming from our C++ code.
 
-To make a plot we need some data. In the [previous post](../run-your-c++-on-the-web) we found the root of an equation using the Newton-Raphson algorithm implemented in C++ and compiled to a WebAsssembly module.
+To make a plot we need some data. In the [previous post](../run-your-c%2B%2B-code-on-the-web) we found the root of an equation using the Newton-Raphson algorithm implemented in C++ and compiled to a WebAsssembly module.
 A single root value makes for a depressing plot. The Newton-Raphson algorithm uses iterations to find the root so we will capture the data of each iteration and plot those.
 
 ![Image](root-plot.png)
@@ -72,7 +72,7 @@ float NewtonRaphson::solve(float initial_guess) {
 ```
 File: _newtonraphson.cpp_.
 
-Before we go into the Emscripten world, let's first test our C++ code. We can check if the iteration property is populated correctly, by extending the command line interface we made in the [previous blog](../run-your-c++-code-on-the-web) as follows:
+Before we go into the Emscripten world, let's first test our C++ code. We can check if the iteration property is populated correctly, by extending the command line interface we made in the [previous blog](../run-your-c%2B%2B-code-on-the-web) as follows:
 
 ```cpp
 #include <iostream>
@@ -154,7 +154,7 @@ EMSCRIPTEN_BINDINGS(newtonraphson) {
 ```
 File: _bindings.cpp_.
 
-We can now compile our C++ code to a WebAssembly module with Emscripten using `emcc` command, exactly [like we did before](../run-your-c++-code-on-the-web):
+We can now compile our C++ code to a WebAssembly module with Emscripten using `emcc` command, exactly [like we did before](../run-your-c%2B%2B-code-on-the-web):
 
 ```shell
 emcc -I. -o newtonraphson.js -Oz -s MODULARIZE=1 \
@@ -359,7 +359,7 @@ When we visit the web page at [http://localhost:8000/scatter.html](http://localh
 
 In the first blog of this series we plotted the equation and root as
 
-![equation.png](https://nlesc-jcer.github.io/run-cpp-on-web/run-your-c++-code-on-the-web/equation.png)
+![equation.png](https://nlesc-jcer.github.io/run-cpp-on-web/run-your-c%2B%2B-code-on-the-web/equation.png)
 
 It would be nice to write a specification of this plot together with the iterations the root finding algorithm went through.
 Vega-Lite can superimpose one chart on top of another with [layers](https://vega.github.io/vega-lite/docs/layer.html) keyword.
