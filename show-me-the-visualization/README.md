@@ -72,7 +72,7 @@ float NewtonRaphson::solve(float initial_guess) {
 ```
 File: _newtonraphson.cpp_.
 
-Before we go into Emscripten world, lets first test our C++ code. We will check if the iteration property is actually populated correctly by wrapping the code in a `main` function, adding some `print` statements, compiling it and running it.
+Before we go into Emscripten world, let's first test our C++ code. We can check if the iteration property is populated correctly by extending the command line interface we made in the [previous blog](../run-your-c++-code-on-the-web), as follows:
 
 ```cpp
 #include <iostream>
