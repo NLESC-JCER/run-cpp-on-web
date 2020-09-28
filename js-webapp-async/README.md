@@ -37,7 +37,7 @@ The way the page communicates with the worker object is through sending messages
 worker to start doing work, and the message will include all data that the worker needs. The worker then starts
 executing the task, using only the data that was in the message. The worker will not be able to access any data in the
 web app directly. When finished, the worker needs to communicate the results back to the web app. It will do this by
-sending a message, so the web app knows when to update. 
+sending a message, so the web app knows when to update.
 
 ## The resulting page
 
@@ -100,6 +100,10 @@ onmessage = function(message) {
   }
 };
 ```
+
+The figure below illustrates what is happening in parallel in the two threads.
+
+![threads](threads.png)
 
 We can see the code in action
 [here](https://nlesc-jcer.github.io/run-cpp-on-web/js-webapp-async/example-web-worker.html). The calculation still takes
