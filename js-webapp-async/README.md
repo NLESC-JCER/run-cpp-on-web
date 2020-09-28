@@ -36,7 +36,7 @@ a piece of code in another thread.
 The way the page communicates with the worker object is through sending messages. The page will send a message to the
 worker to start doing work, and the message will include all data that the worker needs. The worker then starts
 executing the task, using only the data that was in the message. The worker will not be able to access any data in the
-web app directly. When finished the worker needs to communicate the results back to the web app. It will do this by
+web app directly. When finished, the worker needs to communicate the results back to the web app. It will do this by
 sending a message, so the web app knows when to update. 
 
 ## The resulting page
