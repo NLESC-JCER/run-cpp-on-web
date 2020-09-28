@@ -400,6 +400,7 @@ python3 -m http.server 8000
 When we visit the web page at [http://localhost:8000/scatter.html](http://localhost:8000/scatter.html), we will be greeted by the following plot. We can zoom with the mouse wheel and pan by dragging. Hovering over a point shows a tooltip with relevant data at that point.
 
 [![Image](scatter.png)](https://nlesc-jcer.github.io/run-cpp-on-web/show-me-the-visualization/scatter.html)
+
 (Click on image to get interactive version)
 
 ## Advanced plot
@@ -487,7 +488,8 @@ The HTML page with all JavaScript put together to make a composite plot is avail
 
 Visiting the page should give us a plot like
 
-[![Image](composite.png)](https://nlesc-jcer.github.io/run-cpp-on-web/show-me-the-visualization/app.html)
+[![Image](app.png)](https://nlesc-jcer.github.io/run-cpp-on-web/show-me-the-visualization/app.html)
+
 (Click on image to get interactive version)
 
 ## Wrap up
