@@ -1,11 +1,11 @@
-#ifndef H_NEWTONRAPHSON_H
-#define H_NEWTONRAPHSON_H
+#ifndef H_NEWTONRAPHSON_HPP
+#define H_NEWTONRAPHSON_HPP
 
 class NewtonRaphson {
-   public:
-      NewtonRaphson(double tolerancein);
-      double solve(double xin);
-   private:
-      double tolerance;
+  public:
+    NewtonRaphson(float tolerance_in);
+    float solve(float initial_guess);
+  private:
+    float tolerance;
 };
 #endif
