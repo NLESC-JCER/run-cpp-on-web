@@ -240,7 +240,8 @@ We went though the components, JSX, props and state which are the core building 
 
 In other blogs of the series that might be of interest we cover
 
-- [use of a web-worker: how to perform computations without blocking the user interface](TODO)
-- [use of vega-lite: how to make visualization](TODO)
+- web assembly, [small static web page without user interaction](run-your-c%2B%2B-code-on-the-web)
+- unblock ui with web worker, [how to deal with tasks that take longer to complete](js-webapp-async)
+- plot with Vega, [displaying results from the algorithm in a more complex web app](show-me-the-visualization)
 
-We'll wrap up the series in a [final blog](TODO) that combines the topics of the whole series in a full-featured web application.
+We'll wrap up the series in a [final blog](js-kitchen-sink) that combines the topics of the whole series in a full-featured web application.
