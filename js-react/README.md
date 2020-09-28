@@ -1,20 +1,14 @@
 # Run your C++ code on the web: Part X - Interactive form with React
 
-In the previous blog posts we compiled the C++ algorithm into a webassembly code, added a web worker to unblock the ui when running long running tasks. In this blog post we will create a web application using [React](https://reactjs.org/). The web application will have a web-form which allows us to change the parameters of the algorithm.
-
-If you haven't read the first two parts please have a look at:
-
--[Part 1: web assembly](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/js-webapp)
-
--[Part 2: unblock ui with web worker](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/js-webapp-async)
+In the [previous blog post](TODO add link) we compiled the C++ algorithm into a webassembly code. In this blog post we will create a web application using [React](https://reactjs.org/). The web application will have a web-form which allows us to change the parameters of the algorithm.
 
 ## React web application
 
-The web application we developed so far in needs to update the entire page to display the results. Even for small changes in the webpage this has to happen. Thanks to the advance web-browsers and JavaScript, Single Page Applications (SPA) can update only required elements in the webpage. We will use one of the most popular web-frameworks, React, to develop the SPA.
+The web application we developed so far in needs to update the entire page to display the results. Even for small changes in the webpage this has to happen. Thanks to the web-browsers and JavaScript, Single Page Applications (SPA) can update only required elements in the webpage. We will use one of the most popular web-frameworks, React, to develop the SPA.
 
-The form in the web application will collect the user inputs and use them to initialize the algorithm(**add link?**). When the form is submitted, a web worker loads the wasm file, starts the calculation, renders the result. With this architecture the application only needs cheap static file hosting to host the HTML, JavaScript and WebAssembly files. The algorithm will be running in the web browser on the end users machine instead of a server.
+The form in the web application will collect the user inputs and use them to initialize the algorithm(**add link?**). When the form is submitted, a WebAssembly code starts the calculation and the result is rendered. With this architecture the application only needs cheap static file hosting to host the HTML, JavaScript and WebAssembly files. The algorithm will be running in the web browser on the end users machine instead of a server.
 
-### The Html code
+### The HTML code
 
 To render the React application we need a HTML element as a container. We will give it the identifier **container** which will use later when we implement the **React** application in the [javascript section](js-section).
 
@@ -37,11 +31,14 @@ We will keep the html code very minimal. The code will contain three essential e
   <div id="container"></div>
   ```
 
-- **\<script\>** element to load the Javascript application
+- **\<script\>** elements to load the Javascript application and the ``NewtonRaphson`` class.
 
   ```html
+    <script type="text/javascript" src="newtonraphson.js"></script>
     <script type="text/babel" src="app.js"></script>
   ```
+
+**Note:** We use the same `newtonraphson.js` and `newtonraphson.wasm` files as in the [previous post](TODO). Make sure you download these files from [here](TODO).
 
 The complete html code will look like this:
 
@@ -54,8 +51,9 @@ The complete html code will look like this:
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
   </head>
-  <div id="container"></div>
+  <script type="text/javascript" src="newtonraphson.js"></script>
   <script type="text/babel" src="app.js"></script>
+  <div id="answer"></div>
 </html>
 ```
 
@@ -81,7 +79,7 @@ function Heading() {
 }
 ```
 
-I now can hear what you are saying: but wait... How do I use Babel? We haven't inclueded it anywhere. Yes, we did. Babel was already added to the HTML code.
+I now can hear what you are saying: but wait... How do I use Babel? We haven't included it anywhere. Yes, we did. Babel was already added to the HTML code.
 
 ```html
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
@@ -92,7 +90,7 @@ In order the header element to be rendered we need to tell **ReactDOM** which el
 ```js
 ReactDOM.render(
   <Heading/>,
-  document.getElementById('container')
+  document.getElementById('answer')
 );
 ```
 
@@ -113,7 +111,7 @@ ReactDOM.render(
 When the page is rendered, the generated HTML code will be like:
 
 ```html
-<h1>Root finding web application</h1>;
+<h1>Root finding web application</h1>
 ```
 
 ## Adding the  web form
@@ -162,31 +160,19 @@ function onGuessChange(event) {
 }
 ```
 
-We are now ready to implement the `handleSubmit` function which will process the submitted form data. The function will get, similar to the `onChange` of the input tag, an event object. Normally when you submit a form the form fields will be send to the server, but we want to perform the calculation in the browser so we have to disable the default action with.
+We are now ready to implement the `handleSubmit` function which will process the submitted form data. The function will get, similar to the `onChange` of the input tag, an event object. Normally when you submit a form the form fields will be send to the server, but we want to perform the calculation in the browser so we have to disable the default action with `preventDefault()` function. We will then construct a module as we did in the previous post.
 
 ```jsx
-event.preventDefault();
-```
-
-Like we did in the previous post we have to construct a web worker.
-
-```jsx
-const worker = new Worker('worker.js');
-```
-
-The `worker.js` is the same as in the previous post so we re-use it by
-
-```jsx
-cd react && ln -s ../webassembly/worker.js . && cd -
-```
-
-We have to post a message to the worker with the values from the form.
-
-```jsx
-worker.postMessage({
-  type: 'CALCULATE',
-  payload: { tolerance: tolerance, initial_guess: initial_guess }
-});
+function handleSubmit(event) {
+  event.preventDefault();
+  // Wait for module to initialize,
+  createModule().then(({NewtonRaphson}) => {
+    // Perform computation
+    const newtonraphson = new NewtonRaphson(tolerance);
+    const root = newtonraphson.solve(initial_guess);
+    setRoot(root);
+  });
+}
 ```
 
 We need a place to store the result of the calculation (`root` value), we will use `useState` function again. The
@@ -196,18 +182,8 @@ initial value of the result is set to `undefined` as the result is only known af
 const [root, setRoot] = React.useState(undefined);
 ```
 
-When the worker is done it will send a message back to the app. The app needs to store the result value (`root`) using
-`setRoot`. The worker will then be terminated because it did its job.
+When the calculation is done it will store the result value (`root`) using `setRoot`.
 
-```jsx
-worker.onmessage = function(message) {
-    if (message.data.type === 'RESULT') {
-      const result = message.data.payload.root;
-      setRoot(result);
-      worker.terminate();
-  }
-};
-```
 
 To render the result we can use a React Component which has `root` as a property. When the calculation has not been done
 yet, it will render `Not submitted`. When the `root` property value is set then we will show it.
@@ -217,13 +193,22 @@ function Result(props) {
   const root = props.root;
   let message = 'Not submitted';
   if (root !== undefined) {
-    message = 'Root = ' + root;
+    message = 'Function root is approximately at x = ' + root.toFixed(2);
   }
   return <div id="answer">{message}</div>;
 }
 ```
 
-We can combine the heading, form and result components and all the states and handleSubmit function into the `App` React component and save it as `app.js`.
+Finally we can render the `App` component to the HTML container with `container` as identifier.
+
+```js
+ReactDOM.render(
+  <App/>,
+  document.getElementById('container')
+);
+```
+
+We can combine the heading, form and result components and all the states and handleSubmit function into the `App` React component and its rendering and save it as `app.js`.
 
 ```js
 function Heading() {
@@ -235,17 +220,18 @@ function Result(props) {
   const root = props.root;
   let message = 'Not submitted';
   if (root !== undefined) {
-    message = 'Root = ' + root;
+    message = 'Function root is approximately at x = ' + root.toFixed(2);
   }
   return <div id="answer">{message}</div>;
 }
 
 function App() {
   const [tolerance, setTolerance] = React.useState(0.001);
+  const [initial_guess, setGuess] = React.useState(-4);
+
   function onToleranceChange(event) {
     setTolerance(Number(event.target.value));
   }
-  const [initial_guess, setGuess] = React.useState(-20);
 
   function onGuessChange(event) {
     setGuess(Number(event.target.value));
@@ -254,18 +240,13 @@ function App() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const worker = new Worker('worker.js');
-    worker.postMessage({
-      type: 'CALCULATE',
-      payload: { epsilon: tolerance, guess: initial_guess }
+    // Wait for module to initialize,
+    createModule().then(({NewtonRaphson}) => {
+      // Perform computation
+      const newtonraphson = new NewtonRaphson(tolerance);
+      const root = newtonraphson.solve(initial_guess);
+      setRoot(root);
     });
-    worker.onmessage = function(message) {
-        if (message.data.type === 'RESULT') {
-          const result = message.data.payload.root;
-          setRoot(result);
-          worker.terminate();
-      }
-    };
   }
 
   return (
@@ -278,7 +259,7 @@ function App() {
         </label>
         <label>
           Initial guess:
-          <input name="initial_guess" type="number" value={inital_guess} onChange={onGuessChange}/>
+          <input name="initial_guess" type="number" value={initial_guess} onChange={onGuessChange}/>
         </label>
         <input type="submit" value="Submit" />
       </form>
@@ -288,29 +269,8 @@ function App() {
 }
 ReactDOM.render(
   <App/>,
-  document.getElementById('container')
+  document.getElementById('answer')
 );
-```
-
-Finally we can render the `App` component to the HTML container with `container` as identifier.
-
-```js
-ReactDOM.render(
-  <App/>,
-  document.getElementById('container')
-);
-```
-
-Make sure that the App can find the WebAssembly files by
-
-```awk
-cd react && ln -s ../webassembly/newtonraphsonwasm.wasm . && cd -
-```
-
-and
-
-```awk
-cd react && ln -s ../webassembly/newtonraphsonwasm.js . && cd -
 ```
 
 Like before, we also need to host the files in a web server with
@@ -319,10 +279,26 @@ Like before, we also need to host the files in a web server with
 python3 -m http.server 8000
 ```
 
-Visit [http://localhost:8000/react/example-app.html](http://localhost:8000/react/example-app.html) to see the root answer. Embedded below is the example app hosted on [GitHub pages](https://nlesc-jcer.github.io/cpp2wasm/react/example-app.html)
+![js-react.gif](js-react.gif)
+
+_The final page if everything works._
+
+Visit [http://localhost:8000/app.html](http://localhost:8000/app.html) to see the root answer. Embedded below is the example app hosted on [GitHub pages](https://nlesc-jcer.github.io/cpp2wasm/react/example-app.html)
 
 <iframe width="100%" height="160" src="https://nlesc-jcer.github.io/cpp2wasm/react/example-app.html" /></iframe>
 
 ## Extra notes
 
 The code supplied here should not be used in production as converting JSX in the web browser is slow. It's better to use [Create React App](http://create-react-app.dev/) which gives you an infrastructure to perform the transformation offline.
+
+## Conclusion
+
+By writing React components we where able to create an interactive page with a form which executes the WebAssembly module compiled from the C++ code we introduced in the [first blog](TODO) of the series.
+We went though the components, JSX, props and state which are the core building blocks of React web application.
+
+In other blogs of the series that might be of interest we cover
+
+- [use of a web-worker: how to perform computations without blocking the user interface](TODO)
+- [use of vega-lite: how to make visualization](TODO)
+
+We'll wrap up the series in a [final blog](TODO) that combines the topics of the whole series in a full-featured web application.

@@ -1,0 +1,25 @@
+<html>
+   <head>
+      <!-- Load WebAssembly module -->
+      <script type="text/javascript" src="newtonraphson.js"></script>
+   </head>
+   <body>
+      <div>
+         Function root is approximately at x =
+         <span id="answer"/>
+      </div>
+      <script>
+         // Wait for module to initialize,
+         createModule().then(({NewtonRaphson}) => {
+            // Hardcoded input values
+            const initial_guess = -4;
+            const tolerance = 0.001;
+            // Perform computation
+            const newtonraphson = new NewtonRaphson(tolerance);
+            const root = newtonraphson.solve(initial_guess);
+            // Write the value of 'root' to the tag whose 'id' is equal to "answer"
+            document.getElementById("answer").innerHTML = root.toFixed(2);
+         });
+      </script>
+   </body>
+</html>

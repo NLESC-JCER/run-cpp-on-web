@@ -7,15 +7,11 @@
 
 The blog topics are
 
-1. web assembly, [small static web page without user interaction](js-webapp)
+1. web assembly, [small static web page without user interaction](run-your-c%2B%2B-code-on-the-web)
 1. unblock ui with web worker, [how to deal with tasks that take longer to complete](js-webapp-async)
 1. interactive form with React, [gathering user inputs through a form in a simple react app](js-react)
-1. plot with Vega, [displaying results from the algorithm in a more complex web app](js-plot)
-1. blog which combines web-worker, form with React and plot with vega into single example
-
-The order will be
-- 1-2-3-4, or
-- 1-3-4-2
+1. plot with Vega, [displaying results from the algorithm in a more complex web app](show-me-the-visualization)
+1. blog which combines web-worker, [form with React and plot with vega into single example](js-kitchen-sink)
 
 Blog ideas:
 
