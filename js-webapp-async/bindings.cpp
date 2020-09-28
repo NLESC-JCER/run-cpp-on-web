@@ -4,8 +4,8 @@
 using namespace emscripten;
 
 EMSCRIPTEN_BINDINGS(newtonraphson) {
-   class_<rootfinding::NewtonRaphson>("NewtonRaphson")
-      .constructor<double>()
-      .function("solve", &rootfinding::NewtonRaphson::solve)
+   class_<NewtonRaphson>("NewtonRaphson")
+      .constructor<float>()
+      .function("solve", &NewtonRaphson::solve)
       ;
 }
