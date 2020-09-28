@@ -25,3 +25,6 @@ Blog ideas:
 1. is it done yet?, give progress during calculation, use Celery (Python)
 1. My C++ program needs sockets, can I use those? Explain limitations of Emscripten, use [web socket](https://emscripten.org/docs/porting/networking.html) and in-memory filesystem as examples
 1. How to build WebAssembly with a dependencies like boost, explain [bundled standard libs](https://emscripten.org/docs/compiling/Building-Projects.html#using-libraries) and https://github.com/emscripten-ports
+1. Using a web worker and WebAssembly I would like to know how to report progress of the calculation back to the user. Also my computation should be stopped when the user submits again or presses a cancel button.
+1. Current code does not throw exceptions, but may be usefull to explain how to convert error number to message.
+See https://emscripten.org/docs/optimizing/Optimizing-Code.html#optimizing-code-exception-catching
