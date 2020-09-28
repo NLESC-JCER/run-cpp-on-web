@@ -3,24 +3,20 @@
 #include <math.h>
 #include <unistd.h> // for sleep
 
-using namespace algebra;
+// Define the constructor method of NewtonRaphson instances
+NewtonRaphson::NewtonRaphson(float tolerance_in) : tolerance(tolerance_in) {}
 
-namespace rootfinding {
-   // Define the constructor method of NewtonRaphson instances
-   NewtonRaphson::NewtonRaphson(double tolerancein) : tolerance(tolerancein) {}
+// Define the 'solve' method of NewtonRaphson instances
+float NewtonRaphson::solve(float initial_guess) {
+  float x = initial_guess;
+  float delta_x = 0;
+  do {
+    delta_x = equation(x) / derivative(x);
+    x = x - delta_x;
+  } while (fabs(delta_x) >= tolerance);
 
-   // Define the 'solve' method of NewtonRaphson instances
-   double NewtonRaphson::solve(double xin) {
-      double x = xin;
-      double delta_x = equation(x) / derivative(x);
+  // Artificially make this code slow
+  sleep(5);
 
-      while (fabs(delta_x) >= tolerance) {
-         delta_x = equation(x) / derivative(x);
-         x = x - delta_x;
-      }
-
-      // Make this code slow artificially
-      sleep(5);
-      return x;
-   };
-}
+  return x;
+};
