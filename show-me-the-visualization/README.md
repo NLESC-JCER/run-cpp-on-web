@@ -382,11 +382,11 @@ In the first blog of this series we plotted the equation and root as
 
 ![equation.png](https://nlesc-jcer.github.io/run-cpp-on-web/run-your-c%2B%2B-code-on-the-web/equation.png)
 
-It would be nice to write a specification of this plot together with the iterations the root finding algorithm went through.
-Vega-Lite can superimpose one chart on top of another with [layers](https://vega.github.io/vega-lite/docs/layer.html) keyword.
-Let's construct each layer separately and then super impose them at the end.
+It would be nice to write a specification of this plot together with the iterations that the rootfinding algorithm went through.
+Vega-Lite can superimpose one chart on top of another with the [`layers`](https://vega.github.io/vega-lite/docs/layer.html) keyword.
+Let's construct each layer separately and then superimpose them at the end.
 
-The 2x^3 - 4x^2 + 6 equation is plotted by using a [sequence generator](https://vega.github.io/vega-lite/docs/data.html#sequence) to generate a range of x values and a [formula transform](https://vega.github.io/vega-lite/docs/calculate.html) is used to calculate the y values.
+The 2x^3 - 4x^2 + 6 equation is plotted by using a [sequence generator](https://vega.github.io/vega-lite/docs/data.html#sequence) to generate a range of `x` values and a [formula transform](https://vega.github.io/vega-lite/docs/calculate.html) is used to calculate the `y` values.
 
 ```js
 const equation_line = {
@@ -406,7 +406,8 @@ const equation_line = {
 };
 ```
 
-To show where the root is we draw a dotted vertical line at x is -1 with an title. For the ruler and title we reuse the data via layers and use a [rule marker](https://vega.github.io/vega-lite/docs/rule.html) and [text marker](https://vega.github.io/vega-lite/docs/text.html) respectivly.
+To show where the root is, we draw a dotted vertical line at `x = -1` and label it `root`. For the ruler and title we
+reuse the data via `layers` and use a [rule marker](https://vega.github.io/vega-lite/docs/rule.html) and [text marker](https://vega.github.io/vega-lite/docs/text.html) respectively.
 
 ```js
 const root_rule = {
@@ -414,13 +415,13 @@ const root_rule = {
   "encoding": {"x": {"field": "x", "type": "quantitative"}},
   "layer": [
     {"mark": {"type": "rule", "strokeDash": [4, 8]}},
-    {"mark": {"type": "text", "align": "left", "dx": 4, "text": "Root"}}
+    {"mark": {"type": "text", "align": "left", "dx": 4, "text": "root"}}
   ]
 };
 ```
 
-When we plot the x and y of each iteration we can no longer see the order of iterations.
-So we will use a text marker above each circle to tell us to which iteration it belongs.
+When we plot the `x` and `y` of each iteration we can no longer see the order of iterations, so we will use a text
+marker above each circle to indicate which iteration it belongs to.
 
 ```js
 const iterations_scatter = {
@@ -442,7 +443,7 @@ const iterations_scatter = {
 };
 ```
 
-Superimpose the equation, root ruler and iteration plot into a single visualization with
+Superimpose the equation line, root ruler, and iteration scatter into a single visualization with:
 
 ```js
 const spec = {
