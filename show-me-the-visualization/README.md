@@ -10,7 +10,7 @@ _Visualization allows us to track what's going on under the hood of our program.
 ## Iterations
 
 The Newton-Raphson algorithm approximates the value of the target equation's root in a series of iterations. We capture
-the data of each iteration using the following `struct` array:
+the data of each iteration using the following `struct`:
 
 * `x`: x value, starting with the value of  `initial_guess` and ending with the estimate of the `equation`'s root
 * `y`: result of passing `x` through `equation`
