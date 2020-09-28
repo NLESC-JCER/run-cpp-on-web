@@ -1,4 +1,4 @@
-# Run your C++ code on the web: Part X - Interactive form with React
+# C++ on the web: Interactive form with React
 
 In the [previous blog post](TODO add link) we compiled the C++ algorithm into a webassembly code. In this blog post we will create a web application using [React](https://reactjs.org/). The web application will have a web-form which allows us to change the parameters of the algorithm.
 
