@@ -5,22 +5,20 @@
 
 using namespace algebra;
 
-namespace rootfinding {
-   // Define the constructor method of NewtonRaphson instances
-   NewtonRaphson::NewtonRaphson(double tolerancein) : tolerance(tolerancein) {}
 
-   // Define the 'solve' method of NewtonRaphson instances
-   double NewtonRaphson::solve(double xin) {
-      double x = xin;
-      double delta_x = equation(x) / derivative(x);
+// Define the constructor method of NewtonRaphson instances
+NewtonRaphson::NewtonRaphson(double tolerancein) : tolerance(tolerancein) {}
 
-      while (fabs(delta_x) >= tolerance) {
-         delta_x = equation(x) / derivative(x);
-         x = x - delta_x;
-      }
+// Define the 'solve' method of NewtonRaphson instances
+double NewtonRaphson::solve(double xin) {
+  double x = xin;
+  double delta_x = equation(x) / derivative(x);
 
-      // Make this code slow artificially
-      sleep(5);
-      return x;
-   };
-}
+  while (fabs(delta_x) >= tolerance) {
+    delta_x = equation(x) / derivative(x);
+    x = x - delta_x;
+  }
+
+  sleep(5); // Make this code slow artificially
+  return x;
+};
