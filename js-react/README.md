@@ -235,12 +235,12 @@ The code supplied here should not be used in production as converting JSX in the
 
 ## Conclusion
 
-By writing React components we were able to create an interactive page with a form which executes the WebAssembly module compiled from the C++ code we introduced in the [first blog](TODO) of the series.
+By writing React components we were able to create an interactive page with a form which executes the WebAssembly module compiled from the C++ code we introduced in the [first blog](run-your-c%2B%2B-code-on-the-web) of the series.
 We went though the components, JSX, props and state which are the core building blocks of React web application.
 
 In other blogs of the series that might be of interest we cover
 
-- web assembly, [small static web page without user interaction](run-your-c%2B%2B-code-on-the-web)
+- web assembly, [small static web page without user interaction]()
 - unblock ui with web worker, [how to deal with tasks that take longer to complete](js-webapp-async)
 - plot with Vega, [displaying results from the algorithm in a more complex web app](show-me-the-visualization)
 
