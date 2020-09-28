@@ -2,7 +2,8 @@
 
 In an [earlier blogpost](../js-webapp/README.md) we discussed how to run C++ code on the web using JavaScript. We
 created a web app that executed some C++ code and then showed the result in the browser. While the page was running the
-C++ code, the page was blocked and unresponsive. This wan't noticable, because the computation done in the code
+C++ code, the page was blocked and unresponsive. This was not noticeable, because the computation done in the code
+
 was very quick. An unresponsive User Interface (UI) becomes a problem when we are performing tasks that take a bit longer to
 run.
 
