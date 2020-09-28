@@ -2,8 +2,8 @@
 
 In an [earlier blogpost](../js-webapp/README.md) we discussed how to run C++ code on the web using JavaScript. We
 created a web app that executed some C++ code and then showed the result in the browser. While the page was running the
-C++ code, the page was blocked and unresponsive. That was not a problem then, because the computation done in the code
-was very quick. Blocked User Interface (UI) becomes a problem when we are performing tasks that take a bit longer to
+C++ code, the page was blocked and unresponsive. This wan't noticable, because the computation done in the code
+was very quick. An unresponsive User Interface (UI) becomes a problem when we are performing tasks that take a bit longer to
 run.
 
 _How to prevent blocking when running long running tasks in C++?_
@@ -19,12 +19,12 @@ this blog, we assume we have a longer running task. We create such a task artifi
 WebAssembly code. The example page with our slow task can be found
 [here](https://nlesc-jcer.github.io/run-cpp-on-web/js-webapp-async/example-blocking.html).
 
-Notice that we also added a slider to the page. This slider simply serves to illustrate UI blockage--it has no attached
-function. Notice that while the WebAssembly code is still running, the slider is completely unresponsive. If this was an
-actual web app and not just a demo, the UI blocking would surely annoy users and possibly make working with the app
+Notice that we also added a slider to the page. This slider simply serves to illustrate UI unresponsiveness--it has no attached
+function. Notice that while the WebAssembly code is still running, the slider is completely blocked. If this was an
+actual web app and not just a demo, the blocked UI would surely annoy users and possibly make working with the app
 cumbersome and impractical. We can easily solve this, and keep the UI responsive at all times, using web workers.
 
-![blocking ui](blocking.gif)
+![blocked ui](blocking.gif)
 
 _Blocked UI while code is running._
 
@@ -37,7 +37,7 @@ The way the page communicates with the worker object is through sending messages
 worker to start doing work, and the message will include all data that the worker needs. The worker then starts
 executing the task, using only the data that was in the message. The worker will not be able to access any data in the
 web app directly. When finished, the worker needs to communicate the results back to the web app. It will do this by
-sending a message, so the web app knows when to update. 
+sending a message, so the web app knows when to update.
 
 ## The resulting page
 
@@ -100,6 +100,10 @@ onmessage = function(message) {
   }
 };
 ```
+
+The figure below illustrates what is happening in parallel in the two threads.
+
+![threads](threads.png)
 
 We can see the code in action
 [here](https://nlesc-jcer.github.io/run-cpp-on-web/js-webapp-async/example-web-worker.html). The calculation still takes
