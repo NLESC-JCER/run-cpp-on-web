@@ -282,8 +282,13 @@ In upcoming blogs we will cover:
 - [a react application: how to make a nice interactive form]()
 - [plotting with vega.js: how to visualize data from the algorithm]()
 
-We'll wrap up the series in [a final blog]() that combines the topics of the whole series in a full-featured web application.
+We'll wrap up the series in [a final blog]() that combines the topics of the whole series in a full-featured web
+application. If you're curious what that's going to look like, make sure to check out the [live demo](https://nlesc-jcer.github.io/run-cpp-on-web/js-kitchen-sink/app.html) on GitHub
+Pages.
 
 If you enjoyed this article, leave a comment and give us a clap!
+
+_These blogs were written as part of the "Passing XSAMS" project. To learn more about the project, check out its
+[project page](https://www.esciencecenter.nl/projects/passing-xsams/)._
 
 _Thank you to our proof readers [Lourens Veen](https://orcid.org/0000-0002-6311-1168) and [Patrick Bos](https://orcid.org/0000-0002-6033-960X)._
