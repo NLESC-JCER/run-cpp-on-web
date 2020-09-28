@@ -2,7 +2,7 @@
 
 In the [previous blog post](TODO add link) we compiled the C++ algorithm into a webassembly code. In this blog post we will create a web application using [React](https://reactjs.org/). The web application will have a web-form which allows us to change the parameters of the algorithm.
 
-I can feel your pain: there are too many things to learn, too many skills to get but too little time available which reminds me our extra-ordinary friend [Napoleon Dynamite](https://www.imdb.com/title/tt0374900/).
+I can feel your pain: there are too many things to learn, too many skills to get but too little time available which reminds me our extra-ordinary friend [Napoleon Dynamite](https://www.imdb.com/title/tt0374900/). This blog post will guide you through the process of making a React web application whithout getting lost.
 
 ![dynamite_gosh.png](dynamite_gosh.png)
 _If you haven't met Napoleon yet, [click here](https://www.youtube.com/watch?v=XsiiIa6bs9I) to see how he was struggling with his skills._
