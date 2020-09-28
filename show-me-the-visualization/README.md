@@ -232,18 +232,14 @@ Great, that looks very similar to the output we got from the command line.
 
 ## Vega-Lite specification
 
-There [many ways to do visualizations](https://github.com/sorrycc/awesome-javascript#data-visualization) on the web. My personal favorite at the moment is [Vega-Lite](https://vega.github.io/vega-lite/), so we will use it here.
-Vega-Lite is a JavaScript library which describes a plot using a JSON document. In Vega-Lite the JSON Document is called a specification and can be rendered to an interactive visualization.
+There [many ways to do visualizations](https://github.com/sorrycc/awesome-javascript#data-visualization) on the web. One
+of our favorites is [Vega-Lite](https://vega.github.io/vega-lite/), a JavaScript library which describes a plot using a
+JSON document called a specification.
 
-The root finding algorithm tries to find the x where y is zero.
-So let's plot the iteration index against the y found in each iteration to see how quickly it converged to an answer.
+The root finding algorithm tries to find the `x` where `y` is zero using a series of iterations.
+Let's plot the iteration `index` against the `y` found in each iteration to see how quickly it converged to an answer.
 
-Besides `width`, `height` and `title`, the Vega-Lite specification has the following blocks
-
-* `"data"`, the iterations we want to plot as an array of iteration objects
-* `"encoding"`, which field should go on which axis
-* `"mark"`, for line plot use [line](https://vega.github.io/vega-lite/docs/line.html) marker
-* `"selection"`, for defining how users can interact with the plot
+Our Vega-Lite specification looks like this:
 
 ```js
 const spec = {
@@ -251,43 +247,20 @@ const spec = {
   "width": 800,
   "height": 600,
   "title": {
-    "text": "Iterations",
-    "fontSize": 20,
-    "fontWeight": "normal"
+    (stuff related to the title)
   },
   "data": {
-    "values": iterations
+    (holds the iterations we want to plot as an array of iteration objects)
   },
   "encoding": {
-    "x": {
-      "field": "index",
-      "type": "quantitative",
-      "title": "Iteration index",
-      "axis": {
-        "labelFontSize": 20,
-        "titleFontSize": 20,
-        "labelFontWeight": "lighter",
-        "tickMinStep": 1.0
-      }
-    },
-    "y": {
-      "field": "y",
-      "type": "quantitative",
-      "axis": {
-        "labelFontSize": 20,
-        "titleFontSize": 20,
-        "labelFontWeight": "lighter"
-      }
-    }
+    (defines stuff related to which field should go on which axis)
   },
   "mark": {
-    "type": "line",
-    "point": true,
-    // Enable tooltip so on mouseover it shows all data of that iteration
-    "tooltip": {"content": "data"}
+    (defines the line plot)
   },
-  // Enable zooming and panning
-  "selection": {"grid": {"type": "interval", "bind": "scales"}}
+  "selection": {
+    (defines how users can interact with the plot)
+  }
 };
 ```
 
