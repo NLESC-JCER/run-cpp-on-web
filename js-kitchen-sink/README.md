@@ -75,9 +75,9 @@ function handleSubmit(event) {
     const worker = new Worker('worker.js');
     worker.onmessage = function (message) {
         if (message.data.type === 'RESULT') {
-        const result = message.data.payload;
-        setResult(result);
-        worker.terminate();
+          const result = message.data.payload;
+          setResult(result);
+          worker.terminate();
         }
     };
     worker.postMessage({
