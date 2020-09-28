@@ -51,7 +51,6 @@ The web page that uses the worker will look like:
 <html lang="en">
   <head>
     <title>Web worker example</title>
-
     <script>
       const worker = new Worker('worker.js');
       worker.postMessage({
@@ -61,9 +60,8 @@ The web page that uses the worker will look like:
       worker.onmessage = function(message) {
         if (message.data.type === 'RESULT') {
           const root = message.data.payload.root;
-          document.getElementById('answer')
-		     .innerHTML = "Function root is approximately at x = " +
-                          root.toFixed(2);
+          document.getElementById('answer').innerHTML = 
+            "Function root is approximately at x = " + root.toFixed(2);
         }
       }
     </script>
@@ -87,7 +85,7 @@ importScripts('newtonraphson.js');
 
 onmessage = function(message) {
   if (message.data.type === 'CALCULATE') {
-    createModule().then(({rootfinding}) => {
+    createModule().then(({NewtonRaphson}) => {
       const tolerance = message.data.payload.tolerance;
       const finder = new NewtonRaphson(tolerance);
       const initial_guess = message.data.payload.initial_guess;
