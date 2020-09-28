@@ -1,25 +1,23 @@
 # Show me the visualization
 
-Running C++ code in a web browser is all nice, but we really want to grab someones attention by visualizing something. In this blog we are going to make a plot from the results coming from our C++ code.
+In a [previous blog](../run-your-c%2B%2B-code-on-the-web) we found the root of an equation using the Newton-Raphson
+algorithm implemented in C++ and compiled to a WebAsssembly module. In this blog, we're going to expand on that by
+visualizing the iterations that Newton-Raphson used to get from the initial guess to the estimate of the root. 
 
-To make a plot we need some data. In the [previous post](../run-your-c%2B%2B-code-on-the-web) we found the root of an equation using the Newton-Raphson algorithm implemented in C++ and compiled to a WebAsssembly module.
-A single root value makes for a depressing plot. The Newton-Raphson algorithm uses iterations to find the root so we will capture the data of each iteration and plot those.
-
-![Image](root-plot.png)
-_A single data point makes for a depressing plot, let's do better_
-
-Let's make changes to the C++ code to store the data from the iterations.
+![Under the hood](peugeot.jpg)
+_Visualization allows us to track what's going on under the hood of our program. Image courtesy of [Nenad Stojkovic](https://www.flickr.com/photos/nenadstojkovic/49044775348)._
 
 ## Iterations
 
-To store data of an iteration we will use a structure with the following variables:
+The Newton-Raphson algorithm approximates the value of the target equation's root in a series of iterations. We capture
+the data of each iteration using the following `struct`:
 
 * `x`: x value, starting with the value of  `initial_guess` and ending with the estimate of the `equation`'s root
 * `y`: result of passing `x` through `equation`
 * `slope`: result of passing `x` through `derivative`
 * `delta_x`: `y` divided by `slope`
 
-We will add a vector of `Iteration` `structs` named `iterations` as a public property to the `NewtonRaphson` class. So `newtonraphson.hpp` becomes:
+Extending the `NewtonRaphson` class accordingly yields the following header file:
 
 ```cpp
 #ifndef H_NEWTONRAPHSON_HPP
@@ -47,7 +45,8 @@ class NewtonRaphson {
 ```
 File: _newtonraphson.hpp_
 
-The `do` loop in `newtonraphson.cpp` is updated to include a `push_back` to the `iterations` vector. This way, we can record the value of relevant variables in each cycle, as follows:
+The `do` loop in `newtonraphson.cpp` is updated to include a `push_back` to the `iterations` vector. This way, we can
+record the value of relevant variables in each cycle, as follows:
 
 ```cpp
 #include "newtonraphson.hpp"
