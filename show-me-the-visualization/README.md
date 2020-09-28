@@ -234,7 +234,7 @@ Great, that looks very similar to the output we got from the command line.
 
 There [many ways to do visualizations](https://github.com/sorrycc/awesome-javascript#data-visualization) on the web. One
 of our favorites is [Vega-Lite](https://vega.github.io/vega-lite/), a JavaScript library which describes a plot using a
-JSON document called a specification.
+JSON document called a _specification_.
 
 The root finding algorithm tries to find the `x` where `y` is zero using a series of iterations.
 Let's plot the iteration `index` against the `y` found in each iteration to see how quickly it converged to an answer.
