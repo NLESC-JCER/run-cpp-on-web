@@ -238,23 +238,47 @@ Vega-Lite is a JavaScript library which describes a plot using a JSON document. 
 The root finding algorithm tries to find the x where y is zero.
 So let's plot the iteration index against the y found in each iteration to see how quickly it converged to an answer.
 
-The Vega-Lite specification is constructed out of the following blocks
+Besides `width`, `height` and `title`, the Vega-Lite specification has the following blocks
 
 * `"data"`, the iterations we want to plot as an array of iteration objects
 * `"encoding"`, which field should go on which axis
 * `"mark"`, for line plot use [line](https://vega.github.io/vega-lite/docs/line.html) marker
+* `"selection"`, for defining how users can interact with the plot
 
 ```js
 const spec = {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
   "width": 800,
   "height": 600,
+  "title": {
+    "text": "Iterations",
+    "fontSize": 20,
+    "fontWeight": "normal"
+  },
   "data": {
     "values": iterations
   },
   "encoding": {
-    "x": {"field": "index", "type": "ordinal"},
-    "y": {"field": "y", "type": "quantitative"}
+    "x": {
+      "field": "index",
+      "type": "quantitative",
+      "title": "Iteration index",
+      "axis": {
+        "labelFontSize": 20,
+        "titleFontSize": 20,
+        "labelFontWeight": "lighter",
+        "tickMinStep": 1.0
+      }
+    },
+    "y": {
+      "field": "y",
+      "type": "quantitative",
+      "axis": {
+        "labelFontSize": 20,
+        "titleFontSize": 20,
+        "labelFontWeight": "lighter"
+      }
+    }
   },
   "mark": {
     "type": "line",
@@ -320,15 +344,39 @@ The complete HTML page looks like this:
           "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
           "width": 800,
           "height": 600,
+          "title": {
+            "text": "Iterations",
+            "fontSize": 20,
+            "fontWeight": "normal"
+          },
           "data": {
             "values": iterations
           },
           "encoding": {
-            "x": {"field": "index", "type": "ordinal", "title": "Iteration index"},
-            "y": {"field": "y", "type": "quantitative"}
+            "x": {
+              "field": "index",
+              "type": "quantitative",
+              "title": "Iteration index",
+              "axis": {
+                "labelFontSize": 20,
+                "titleFontSize": 20,
+                "labelFontWeight": "lighter",
+                "tickMinStep": 1.0
+              }
+            },
+            "y": {
+              "field": "y",
+              "type": "quantitative",
+              "axis": {
+                "labelFontSize": 20,
+                "titleFontSize": 20,
+                "labelFontWeight": "lighter"
+              }
+            }
           },
           "mark": {
-            "type": "circle",
+            "type": "line",
+            "point": true,
             // Enable tooltip so on mouseover it shows all data of that iteration
             "tooltip": {"content": "data"}
           },

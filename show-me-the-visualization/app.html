@@ -46,7 +46,7 @@
         "encoding": { "x": { "field": "x", "type": "quantitative" } },
         "layer": [
           { "mark": { "type": "rule", "strokeDash": [4, 8] } },
-          { "mark": { "type": "text", "align": "left", "dx": 4, "text": "Root" } }
+          { "mark": { "type": "text", "align": "left", "dx": 4, "text": "root" } }
         ]
       };
       const iterations_scatter = {
@@ -54,8 +54,25 @@
           "values": iterations
         },
         "encoding": {
-          "x": { "field": "x", "type": "quantitative" },
-          "y": { "field": "y", "type": "quantitative" },
+          "x": {
+            "field": "x",
+            "type": "quantitative",
+            "axis": {
+              "labelFontSize": 20,
+              "titleFontSize": 20,
+              "labelFontWeight": "lighter",
+              "tickMinStep": 1.0
+            }
+          },
+          "y": {
+            "field": "y",
+            "type": "quantitative",
+            "axis": {
+              "labelFontSize": 20,
+              "titleFontSize": 20,
+              "labelFontWeight": "lighter"
+            }
+          },
           "text": { "field": "index", "type": "nominal" }
         },
         "layer": [
@@ -70,6 +87,7 @@
         "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
         "width": 800,
         "height": 600,
+        "title": {"text": "Iterative rootfinding", "fontSize": 20, "fontWeight": "normal"},
         "layer": [
           equation_line,
           root_rule,
