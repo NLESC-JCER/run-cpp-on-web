@@ -239,7 +239,7 @@ JSON document called a _specification_.
 The root finding algorithm tries to find the `x` where `y` is zero using a series of iterations.
 Let's plot the iteration `index` against the `y` found in each iteration to see how quickly it converged to an answer.
 
-Our Vega-Lite specification looks like this:
+The generic structure of our Vega-Lite specification looks like this:
 
 ```js
 const spec = {
@@ -284,7 +284,7 @@ To render a specification we need to use the `vegaEmbed(element, spec)` method w
 </html>
 ```
 
-The complete HTML page looks like this:
+Combining the two snippets above and filling in their respective details yields an HTML document with the complete web app:
 
 ```html
 <html>
@@ -364,7 +364,7 @@ The complete HTML page looks like this:
 ```
 File: _scatter.html_.
 
-We'll need a web server to display the HTML page in a web browser. For this, we'll use the `http.server` module from Python 3 to host all files on port 8000, like so:
+We'll need a web server to display the HTML page in a web browser. For this, we'll use the `http.server` module from Python 3 again to host all files on port 8000, like so:
 
 ```shell
 python3 -m http.server 8000
@@ -372,7 +372,7 @@ python3 -m http.server 8000
 
 When we visit the web page at [http://localhost:8000/scatter.html](http://localhost:8000/scatter.html), we will be greeted by the following plot. We can zoom with the mouse wheel and pan by dragging. Hovering over a point shows a tooltip with relevant data at that point.
 
-[![Image](scatter.png)](https://nlesc-jcer.github.io/run-cpp-on-web/show-me-the-visualization/scatter.html)
+[![scatter](scatter.png)](https://nlesc-jcer.github.io/run-cpp-on-web/show-me-the-visualization/scatter.html)
 
 (Click on image to get interactive version)
 
