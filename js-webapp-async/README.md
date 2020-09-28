@@ -100,9 +100,9 @@ onmessage = function(message) {
     });
   }
 };
-```
 
 The figure below illustrates what is happening in parallel in the two threads.
+
 
 ![threads](threads.png)
 
