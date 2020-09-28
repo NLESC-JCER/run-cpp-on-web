@@ -25,31 +25,27 @@ Below is the code for the webapp. Notice the creation of the Worker object, the 
 The webpage that uses the worker will look like:
 ```html
 <!doctype html>
-<!-- this HTML page is stored as webassembly/example-web-worker.html -->
 <html lang="en">
   <head>
     <title>Example web worker</title>
     <script>
-      // this JavaScript snippet is later referred to as <<worker-consumer>>
       const worker = new Worker('worker.js');
-      // this JavaScript snippet is appended to <<worker-consumer>>
       worker.postMessage({
         type: 'CALCULATE',
         payload: { epsilon: 0.001, guess: -20 }
       });
-      // this JavaScript snippet is appended to <<worker-consumer>>
       worker.onmessage = function(message) {
         if (message.data.type === 'RESULT') {
           const root = message.data.payload.root;
-          document.getElementById("answer")
-               .innerHTML = "Function root is approximately at x = " +
-                            root.toFixed(2);
-
+          document.getElementById('answer').innerHTML = root.toFixed(2);
         }
       }
     </script>
   </head>
   <body>
+<div class="slidecontainer">
+  <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+</div>
     <span id="answer"> </span>
   </body>
 </html>
@@ -58,20 +54,15 @@ The webpage that uses the worker will look like:
 The worker code will contain only handling the incoming message. In this case, the worker will unpack the message, do the calculation, and pack the results in a new message that it will send back.
 The code for the worker in worker.js will now look like:
 ```js
-// this JavaScript snippet is stored as webassembly/worker.js
-importScripts('newtonraphsonwasm.js');
+importScripts('newtonraphson.js');
 
-// this JavaScript snippet is later referred to as <<worker-provider-onmessage>>
 onmessage = function(message) {
-  // this JavaScript snippet is before referred to as <<handle-message>>
   if (message.data.type === 'CALCULATE') {
     createModule().then((module) => {
-      // this JavaScript snippet is before referred to as <<perform-calc-in-worker>>
       const epsilon = message.data.payload.epsilon;
       const finder = new module.NewtonRaphson(epsilon);
       const guess = message.data.payload.guess;
       const root = finder.solve(guess);
-      // this JavaScript snippet is before referred to as <<post-result>>
       postMessage({
         type: 'RESULT',
         payload: {
