@@ -94,7 +94,7 @@ I now can hear what you are saying: but wait... How do I use Babel? We haven't i
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 ```
 
-In order for the header element to be rendered we need to tell **ReactDOM** which element it should render and where it should be displayed. Do you still remember the **container** div we defined in the HTML part?
+In order for the header element to be rendered we need to tell **ReactDOM** which element it should render and where it should be displayed. Do you still remember the **container** `div` we defined in the HTML part?
 
 ```js
 ReactDOM.render(
@@ -103,7 +103,7 @@ ReactDOM.render(
 );
 ```
 
-The complete code should like this.
+The complete code should like this:
 
 ```js
 function Heading() {
@@ -123,9 +123,9 @@ When the page is rendered, the generated HTML code will be like:
 <h1>Root finding web application</h1>
 ```
 
-## Adding the  web form
+## Adding the web form
 
-The web application in our example should have a form with ``tolerance`` and ``initial_guess`` input fields, as well as, a submit button. The form in JSX can be written in the following way:
+The web application in our example should have a form with ``tolerance`` and ``initial_guess`` input fields, as well as a submit button. The form in JSX can be written in the following way:
 
 ```js
 <form onSubmit={handleSubmit}>
@@ -141,8 +141,8 @@ The web application in our example should have a form with ``tolerance`` and ``i
 </form>
 ```
 
-The form tag has a `onSubmit` property, which is set to a function (`handleSubmit`) that will handle the form
-submission. The input tag has a `value` property to set the variable (`tolerance` and `initial_guess`) and it also has `onChange`
+The form tag has an `onSubmit` property, which is set to a function (`handleSubmit`) that will handle the form
+submission. The input tag has a `value` property to set the variable (`tolerance` and `initial_guess`) and it also has an `onChange`
 property to set the function (`onToleranceChange` and `onGuessChange`) which will be triggered when the user changes the
 value.
 
@@ -156,7 +156,7 @@ const [initial_guess, setGuess] = React.useState(-4);
 
 The argument of the `useState` function is the initial value. The `tolerance` variable contains the current value for tolerance and `setTolerance` is a function to set the `tolerance` to a new value. The same logic is also used for the `initial_guess` variable.
 
-The input tag in the form will call the `onChange` function with a event object. We need to extract the user input from the event and pass it to `setTolerance` or `setGuess`. The value should be a number, so we use `Number()` to cast the string from the
+The input tag in the form will call the `onChange` function with an event object. We need to extract the user input from the event and pass it to `setTolerance` or `setGuess`. The value should be a number, so we use `Number()` to cast the string from the
 event to a number.
 
 ```js
@@ -169,7 +169,7 @@ function onGuessChange(event) {
 }
 ```
 
-We are now ready to implement the `handleSubmit` function which will process the submitted form data. The function will get, similar to the `onChange` of the input tag, an event object. Normally when you submit a form the form fields will be sent to the server, but we want to perform the calculation in the browser so we have to disable the default action with `preventDefault()` function. We will then construct a module as we did in the previous post.
+We are now ready to implement the `handleSubmit` function which will process the submitted form data. The function will get an event object, similar to the `onChange` of the input tag. Normally when you submit a form, the form fields will be sent to the server, but we want to perform the calculation in the browser, so we have to disable the default action with `preventDefault()`. We will then construct a module as we did in the previous post.
 
 ```jsx
 function handleSubmit(event) {
@@ -195,7 +195,7 @@ When the calculation is done it will store the result value (`root`) using `setR
 
 
 To render the result we can use a React Component which has `root` as a property. When the calculation has not been done
-yet, it will render `Not submitted`. When the `root` property value is set then we will show it.
+yet, it will render `Not submitted`. We will show the `root` property value once it is set.
 
 ```jsx
 function Result(props) {
@@ -208,7 +208,7 @@ function Result(props) {
 }
 ```
 
-Finally we can render the `App` component to the HTML container with `container` as identifier.
+Finally we can render the `App` component to the HTML container with `id` equal to `container`.
 
 ```js
 ReactDOM.render(
@@ -217,7 +217,7 @@ ReactDOM.render(
 );
 ```
 
-We can combine the heading, form and result components and all the states and `handleSubmit` function into the `App` React component and its rendering and save it as `app.js`. If you are lazy, you can find the code from [here](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/react/app.js).
+We can combine the heading, form and result components and all the states and `handleSubmit` function into the `App` React component and its rendering and save it as `app.js`. You can find the resulting code [here](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/react/app.js).
 
 Like before, we also need to host the files in a web server with
 
@@ -229,17 +229,17 @@ python3 -m http.server 8000
 
 _The final page if everything works._
 
-Visit [http://localhost:8000/app.html](http://localhost:8000/app.html) to see the root answer or see the example app hosted on [GitHub pages](https://nlesc-jcer.github.io/run-cpp-on-web/react/app.html).
+Visit [http://localhost:8000/app.html](http://localhost:8000/app.html) to see the root answer, or got to [GitHub pages](https://nlesc-jcer.github.io/run-cpp-on-web/react/app.html) to see a hosted version of the example app.
 
 ## Extra notes
 
-The code supplied here should not be used in production as converting JSX in the web browser is slow. It's better to use [Create React App](http://create-react-app.dev/) which gives you an infrastructure to perform the transformation offline.
+The code supplied here should not be used in production as converting JSX in the web browser is slow. It's better to use [Create React App](http://create-react-app.dev/), which gives you an infrastructure to perform the transformation offline.
 
 ## Conclusion
 
 By writing React components we were able to create an interactive page with a form that executes the WebAssembly module compiled from the C++ code we introduced in the [first blog](../webassembly/README.md) of the series.
 
-We went through the components, JSX, props, and state which are the core building blocks of React web application.
+We went over JSX, props, state, and components, which together constitute the core building blocks of a React web application.
 
 In other blogs of the series that might be of interest we cover
 
@@ -251,7 +251,7 @@ We'll wrap up the series in a [final blog](../kitchen-sink/README.md) that combi
 
 ## Get in touch with us
 
-This blog was written by Generalization Team of Netherlands eScience Center. The team consists of Stefan Verhoeven, Faruk Diblen, Jurriaan H. Spaaks, Adam Belloum and Christiaan Meijer. Feel free to get in touch with the generalization team at generalization@esciencecenter.nl.
+This blog was written by the Generalization Team of the Netherlands eScience Center. The team consists of Stefan Verhoeven, Faruk Diblen, Jurriaan H. Spaaks, Adam Belloum and Christiaan Meijer. Feel free to get in touch with the generalization team at generalization@esciencecenter.nl.
 
 If you enjoyed this article, leave a comment and give us a clap!
 
