@@ -429,9 +429,26 @@ const iterations_scatter = {
     "values": iterations
   },
   "encoding": {
-    "x": {"field": "x", "type": "quantitative"},
-    "y": {"field": "y", "type": "quantitative"},
-    "text": {"field": "index", "type": "nominal"}
+    "x": {
+      "field": "x",
+      "type": "quantitative",
+      "axis": {
+        "labelFontSize": 20,
+        "titleFontSize": 20,
+        "labelFontWeight": "lighter",
+        "tickMinStep": 1.0
+      }
+    },
+    "y": {
+      "field": "y",
+      "type": "quantitative",
+      "axis": {
+        "labelFontSize": 20,
+        "titleFontSize": 20,
+        "labelFontWeight": "lighter"
+      }
+    },
+    "text": { "field": "index", "type": "quantitative" }
   },
   "layer": [
     {
