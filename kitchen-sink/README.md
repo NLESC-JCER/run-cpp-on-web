@@ -95,7 +95,7 @@ function handleSubmit(event) {
 
 ## Visualization
 
-In the visualization [blog](TODO) post we used Vega-Lite to make 2 plots. Let's connect these 2 plots into a single visualization where zooming and panning in one plot will be reflected in other plot.
+In the visualization [blog](../vega/README.md) post we used Vega-Lite to make 2 plots. Let's connect these 2 plots into a single visualization where zooming and panning in one plot will be reflected in other plot.
 
 To generate the Vega-Lite specification we can write a function like so
 
