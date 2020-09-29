@@ -94,7 +94,7 @@ I now can hear what you are saying: but wait... How do I use Babel? We haven't i
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 ```
 
-In order the header element to be rendered we need to tell **ReactDOM** which element it should render and where it should be displayed. Do you still remember the **container** div we defined in the HTML part?
+In order for the header element to be rendered we need to tell **ReactDOM** which element it should render and where it should be displayed. Do you still remember the **container** div we defined in the HTML part?
 
 ```js
 ReactDOM.render(
@@ -125,7 +125,7 @@ When the page is rendered, the generated HTML code will be like:
 
 ## Adding the  web form
 
-The web application in our example should have a form with ``tolerance`` and ``initial_guess`` input fields, as well as a submit button. The form in JSX can be written in the following way:
+The web application in our example should have a form with ``tolerance`` and ``initial_guess`` input fields, as well as, a submit button. The form in JSX can be written in the following way:
 
 ```js
 <form onSubmit={handleSubmit}>
@@ -141,7 +141,7 @@ The web application in our example should have a form with ``tolerance`` and ``i
 </form>
 ```
 
-The form tag has a `onSubmit` property, which is set to a function (`handleSubmit`) that will handle the form
+The form tag has a `onSubmit` the property, which is set to a function (`handleSubmit`) that will handle the form
 submission. The input tag has a `value` property to set the variable (`tolerance` and `initial_guess`) and it also has `onChange`
 property to set the function (`onToleranceChange` and `onGuessChange`) which will be triggered when the user changes the
 value.
@@ -154,7 +154,7 @@ const [tolerance, setTolerance] = React.useState(0.001);
 const [initial_guess, setGuess] = React.useState(-4);
 ```
 
-The argument of the `useState` function is the initial value. The `tolerance` variable contains the current value for tolerance and `setTolerance` is a function to set tolerance to a new value. The same logic is also used for initial_guess variable.
+The argument of the `useState` function is the initial value. The `tolerance` variable contains the current value for tolerance and `setTolerance` is a function to set the `tolerance` to a new value. The same logic is also used for the `initial_guess` variable.
 
 The input tag in the form will call the `onChange` function with a event object. We need to extract the user input from the event and pass it to `setTolerance` or `setGuess`. The value should be a number, so we use `Number()` to cast the string from the
 event to a number.
@@ -169,7 +169,7 @@ function onGuessChange(event) {
 }
 ```
 
-We are now ready to implement the `handleSubmit` function which will process the submitted form data. The function will get, similar to the `onChange` of the input tag, an event object. Normally when you submit a form the form fields will be send to the server, but we want to perform the calculation in the browser so we have to disable the default action with `preventDefault()` function. We will then construct a module as we did in the previous post.
+We are now ready to implement the `handleSubmit` function which will process the submitted form data. The function will get, similar to the `onChange` of the input tag, an event object. Normally when you submit a form the form fields will be sent to the server, but we want to perform the calculation in the browser so we have to disable the default action with `preventDefault()` function. We will then construct a module as we did in the previous post.
 
 ```jsx
 function handleSubmit(event) {
@@ -237,9 +237,9 @@ The code supplied here should not be used in production as converting JSX in the
 
 ## Conclusion
 
-By writing React components we were able to create an interactive page with a form which executes the WebAssembly module compiled from the C++ code we introduced in the [first blog](../webassembly/README.md) of the series.
+By writing React components we were able to create an interactive page with a form that executes the WebAssembly module compiled from the C++ code we introduced in the [first blog](../webassembly/README.md) of the series.
 
-We went though the components, JSX, props and state which are the core building blocks of React web application.
+We went through the components, JSX, props, and state which are the core building blocks of React web application.
 
 In other blogs of the series that might be of interest we cover
 
