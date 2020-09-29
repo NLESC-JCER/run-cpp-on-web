@@ -1,10 +1,9 @@
 _By [Stefan Verhoeven](https://orcid.org/0000-0002-5821-2060), [Christiaan Meijer](https://orcid.org/0000-0002-5529-5761), [Faruk Diblen](https://orcid.org/0000-0002-0989-929X),
-[Jurriaan H. Spaaks](https://orcid.org/0000-0002-7064-4069), and [Adam Belloum](https://orcid.org/0000-0001-6306-6937) 
-._
+[Jurriaan H. Spaaks](https://orcid.org/0000-0002-7064-4069), and [Adam Belloum](https://orcid.org/0000-0001-6306-6937)._
 
-# Responsive C++ in the browser using web workers
+# Help! My C++ web app is not responding
 
-In an [earlier blogpost](../webassembly) we discussed how to run C++ code on the web using JavaScript. We
+In an [earlier blogpost](../webassembly/README.md) we discussed how to run C++ code on the web using JavaScript. We
 created a web app that executed some C++ code and then showed the result in the browser. While the page was running the
 C++ code, the page was blocked and unresponsive. This was not noticeable, because the computation done in the code
 
@@ -20,9 +19,9 @@ In this blogpost, we will use web workers to solve this problem by offloading ta
 Let's have a look at the code we ended up with in the last blog. When loading the page, the WebAssembly code is
 executed, after which the page can finish rendering. Because the WebAssembly code was very quick, this was fine. For
 this blog, we assume we have a longer running task. We create such a task artificially, by adding a few seconds of
-`sleep` in the [C++ code](newtonraphson.cpp). Like in the previous post, we compile the C++ code to create
+`sleep` in the [C++ code](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/web-worker/newtonraphson.cpp). Like in the previous post, we compile the C++ code to create
 WebAssembly code. The example page with our slow task can be found
-[here](https://nlesc-jcer.github.io/run-cpp-on-web/js-webapp-async/example-blocking.html).
+[here](https://nlesc-jcer.github.io/run-cpp-on-web/web-worker/example-blocking.html).
 
 Notice that we also added a slider to the page. This slider simply serves to illustrate UI unresponsiveness--it has no attached
 function. Notice that while the WebAssembly code is still running, the slider is completely blocked. If this was an
@@ -112,7 +111,7 @@ The figure below illustrates what is happening in parallel in the two threads.
 ![threads](threads.png)
 
 We can see the code in action
-[here](https://nlesc-jcer.github.io/run-cpp-on-web/js-webapp-async/example-web-worker.html). The calculation still takes
+[here](https://nlesc-jcer.github.io/run-cpp-on-web/web-worker/example-web-worker.html). The calculation still takes
 the same time to perform, but as you will notice, the slider will be responsive all the time.
 
 ![responsive ui](web-worker.gif)
@@ -121,13 +120,20 @@ _Responsive UI thanks to the web worker._
 
 ## Recap and what next?
 
-In this blog post we have learned how to keep a web app from freezing while executing computationally intensive C++ code. We learned how to create a web worker and how to use the web worker in a simple web app. 
+In this blog post we have learned how to keep a web app from freezing while executing computationally intensive C++
+code. We learned how to create a web worker and how to use the web worker in a simple web app. 
 
-Now take your web app a step further by continue reading our blog series. Other blog posts in this series, about C++ in web apps, will show you [how to interact with your app using forms](../react) and [how to spice up your app up with visualizations](../vega). A final blog shows you [how to combine all of the above in a single web app](../kitchen-sink). Looking for the first blog and introduction to this series? This blog post will show you [how to get started running your C++ on the web using webassembly](../webassembly).
+Now take your web app a step further by continue reading our blog series. Other blog posts in this series, about C++ in
+web apps, will show you [how to interact with your app using forms](../react/README.md) and [how to spice up your app up with
+visualizations](../vega/README.md). A final blog shows you [how to combine all of the above in a single web app](../kitchen-sink/README.md).
+Looking for the first blog and introduction to this series? This blog post will show you [how to get started running
+your C++ on the web using webassembly](../webassembly/README.md).
 
 ## Get in touch with us
 
-This blog was written by NLeSC's Generalization Team. The team consists of Stefan Verhoeven, Faruk Diblen, Jurriaan H. Spaaks, Adam Belloum and Christiaan Meijer. Feel free to get in touch with the generalization team at generalization@esciencecenter.nl.
+This blog was written by NLeSC's Generalization Team. The team consists of Stefan Verhoeven, Faruk Diblen, Jurriaan H.
+Spaaks, Adam Belloum and Christiaan Meijer. Feel free to get in touch with the generalization team at
+generalization@esciencecenter.nl.
 
 _These blogs were written as part of the "Passing XSAMS" project. To learn more about the project, check out its
 [project page](https://www.esciencecenter.nl/projects/passing-xsams/)._

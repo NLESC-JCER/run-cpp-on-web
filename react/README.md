@@ -4,7 +4,7 @@ _By [Stefan Verhoeven](https://orcid.org/0000-0002-5821-2060), [Faruk Diblen](ht
 
 # Interact with your C++ web app using React forms
 
-In the [previous blog post](TODO add link) we compiled the C++ algorithm into a webassembly code. In this blog post we will create a web application using [React](https://reactjs.org/). The web application will have a web-form which allows us to change the parameters of the algorithm.
+In a [previous blog post](../webassembly/README.md) we compiled the C++ algorithm into a webassembly code. In this blog post we will create a web application using [React](https://reactjs.org/). The web application will have a web-form which allows us to change the parameters of the algorithm.
 
 I can feel your pain: there are too many things to learn, too many skills to get but too little time available which reminds me our extra-ordinary friend [Napoleon Dynamite](https://www.imdb.com/title/tt0374900/). This blog post will guide you through the process of making a React web application whithout getting lost.
 
@@ -19,7 +19,7 @@ The form in the web application will collect the user inputs and use them to ini
 
 ### The HTML code
 
-To render the React application we need a HTML element as a container. We will give it the identifier **container** which will use later when we implement the **React** application in the [javascript section](js-section).
+To render the React application we need a HTML element as a container. We will give it the identifier **container** which will use later when we implement the **React** application.
 
 We will keep the html code very minimal. The code will contain three essential elements:
 
@@ -47,7 +47,7 @@ We will keep the html code very minimal. The code will contain three essential e
     <script type="text/babel" src="app.js"></script>
   ```
 
-**Note:** We use the same `newtonraphson.js` and `newtonraphson.wasm` files as in the [previous post](TODO). Make sure you download these files from [here](TODO).
+**Note:** We use the same `newtonraphson.js` and `newtonraphson.wasm` files as in the [first post](../webassembly/README.md) of this series. Make sure you download [newtonraphson.js](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/react/newtonraphson.js) and [newtonraphson.wasm](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/react/newtonraphson.wasm) files from GitHub.
 
 The complete html code will look like this:
 
@@ -217,7 +217,7 @@ ReactDOM.render(
 );
 ```
 
-We can combine the heading, form and result components and all the states and handleSubmit function into the `App` React component and its rendering and save it as `app.js`. If you are lazy, you can find the code from [here](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/js-react/app.js).
+We can combine the heading, form and result components and all the states and handleSubmit function into the `App` React component and its rendering and save it as `app.js`. If you are lazy, you can find the code from [here](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/react/app.js).
 
 Like before, we also need to host the files in a web server with
 
@@ -237,16 +237,17 @@ The code supplied here should not be used in production as converting JSX in the
 
 ## Conclusion
 
-By writing React components we were able to create an interactive page with a form which executes the WebAssembly module compiled from the C++ code we introduced in the [first blog](run-your-c%2B%2B-code-on-the-web) of the series.
+By writing React components we were able to create an interactive page with a form which executes the WebAssembly module compiled from the C++ code we introduced in the [first blog](../webassembly/README.md) of the series.
+
 We went though the components, JSX, props and state which are the core building blocks of React web application.
 
 In other blogs of the series that might be of interest we cover
 
-- web assembly, [small static web page without user interaction]()
-- unblock ui with web worker, [how to deal with tasks that take longer to complete](js-webapp-async)
-- plot with Vega, [displaying results from the algorithm in a more complex web app](show-me-the-visualization)
+- [Using C++ in a web app with WebAssembly](../webassembly/README.md): How to turn C++ code into a web app.
+- [Help! My C++ web app is not responding](../web-worker/README.md): How to use web workers to perform computations without blocking the user interface.
+- [Spice up your C++ web app with visualizations](../vega/README.md): Plotting data from the C++ web app using web visualization.
 
-We'll wrap up the series in a [final blog](js-kitchen-sink) that combines the topics of the whole series in a full-featured web application.
+We'll wrap up the series in a [final blog](../kitchen-sink/README.md) that combines the topics of the whole series in a full-featured web application.
 
 ## Get in touch with us
 
