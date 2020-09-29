@@ -247,19 +247,19 @@ const spec = {
   "width": 800,
   "height": 600,
   "title": {
-    (stuff related to the title)
+    <stuff related to the title>
   },
   "data": {
-    (holds the iterations we want to plot as an array of iteration objects)
+    <holds the iterations we want to plot as an array of iteration objects>
   },
   "encoding": {
-    (defines stuff related to which field should go on which axis)
+    <defines stuff related to which field should go on which axis>
   },
   "mark": {
-    (defines the line plot)
+    <defines the line plot>
   },
   "selection": {
-    (defines how users can interact with the plot)
+    <defines how users can interact with the plot>
   }
 };
 ```
