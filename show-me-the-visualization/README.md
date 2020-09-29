@@ -284,7 +284,7 @@ To render a specification we need to use the `vegaEmbed(element, spec)` method w
 </html>
 ```
 
-Combining the two snippets above and filling in their respective details yields an HTML document with the complete web app:
+Combining the three snippets above (get iteration data, Vega specification and vegaEmbed) and filling in their respective details yields an HTML document with the complete web app:
 
 ```html
 <html>
