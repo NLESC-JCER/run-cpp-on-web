@@ -1,4 +1,5 @@
-[Rendered version](https://nlesc-jcer.github.io/run-cpp-on-web/)
+Repository for draft blog post based on [cpp2wasm guide](https://github.com/NLESC-JCER/cpp2wasm).
+Blogs will be published at [https://medium.com/@eScienceCenter](https://medium.com/@eScienceCenter)
 
 - audience: RSEs
 - approach: text before code, include code if it supports the story
@@ -7,11 +8,11 @@
 
 The blog topics are
 
-1. web assembly, [small static web page without user interaction](run-your-c%2B%2B-code-on-the-web)
-1. unblock ui with web worker, [how to deal with tasks that take longer to complete](js-webapp-async)
-1. interactive form with React, [gathering user inputs through a form in a simple react app](js-react)
-1. plot with Vega, [displaying results from the algorithm in a more complex web app](show-me-the-visualization)
-1. blog which combines web-worker, [form with React and plot with vega into single example](js-kitchen-sink)
+1. [Using C++ in a web app with WebAssembly](webassembly/README.md)
+1. [Help! My C++ web app is not responding](web-worker/README.md)
+1. [Interact with your C++ web app using React forms](react/README.md)
+1. [Spice up your C++ web app with visualizations](vega/README.md)
+1. [C++ web app with WebAssembly, Vega, Web Worker and React](kitchen-sink/README.md)
 
 Blog ideas:
 

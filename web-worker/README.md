@@ -131,7 +131,7 @@ your C++ on the web using webassembly](../webassembly/README.md).
 
 ## Get in touch with us
 
-This blog was written by NLeSC's Generalization Team. The team consists of Stefan Verhoeven, Faruk Diblen, Jurriaan H.
+This blog was written by Generalization Team of Netherlands eScience Center. The team consists of Stefan Verhoeven, Faruk Diblen, Jurriaan H.
 Spaaks, Adam Belloum and Christiaan Meijer. Feel free to get in touch with the generalization team at
 generalization@esciencecenter.nl.
 
