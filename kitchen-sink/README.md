@@ -9,7 +9,7 @@ In previous blogs in the series we learned
 * [using C++ in a web app with WebAssembly](../webassembly/README.md)
 * [how to perform computations without blocking the user interface](../web-worker/README.md)
 * [how to interact with your C++ web app using React forms](TODO)
-* [how to visualize data from the algorithm](TODO)
+* [how to visualize data from the algorithm](../vega/README.md)
 
 Those topics by them selves are useful, but how can all those topics be put together into a single web application. This blog will tell you how to do build the web application including everything but the kitchen sink.
 
