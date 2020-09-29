@@ -6,7 +6,7 @@ _By [Stefan Verhoeven](https://orcid.org/0000-0002-5821-2060), [Faruk Diblen](ht
 
 In previous blogs in the series we learned
 
-* [using C++ in a web app with WebAssembly](TODO)
+* [using C++ in a web app with WebAssembly](../webassembly/README.md)
 * [how to perform computations without blocking the user interface](TODO)
 * [how to interact with your C++ web app using React forms](TODO)
 * [how to visualize data from the algorithm](TODO)
