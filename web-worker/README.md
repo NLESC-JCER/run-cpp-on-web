@@ -1,3 +1,7 @@
+_By [Stefan Verhoeven](https://orcid.org/0000-0002-5821-2060), [Christiaan Meijer](https://orcid.org/0000-0002-5529-5761), [Faruk Diblen](https://orcid.org/0000-0002-0989-929X),
+[Jurriaan H. Spaaks](https://orcid.org/0000-0002-7064-4069), and [Adam Belloum](https://orcid.org/0000-0001-6306-6937) 
+._
+
 # Responsive C++ in the browser using web workers
 
 In an [earlier blogpost](../webassembly) we discussed how to run C++ code on the web using JavaScript. We
@@ -124,3 +128,6 @@ Now take your web app a step further by continue reading our blog series. Other 
 ## Get in touch with us
 
 This blog was written by NLeSC's Generalization Team. The team consists of Stefan Verhoeven, Faruk Diblen, Jurriaan H. Spaaks, Adam Belloum and Christiaan Meijer. Feel free to get in touch with the generalization team at generalization@esciencecenter.nl.
+
+_These blogs were written as part of the "Passing XSAMS" project. To learn more about the project, check out its
+[project page](https://www.esciencecenter.nl/projects/passing-xsams/)._
