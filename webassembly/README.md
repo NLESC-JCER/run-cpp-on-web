@@ -2,7 +2,7 @@ _By [Stefan Verhoeven](https://orcid.org/0000-0002-5821-2060), [Faruk Diblen](ht
 [Jurriaan H. Spaaks](https://orcid.org/0000-0002-7064-4069), [Adam Belloum](https://orcid.org/0000-0001-6306-6937), and
 [Christiaan Meijer](https://orcid.org/0000-0002-5529-5761)._
 
-# Run your C++ code on the web
+# Using C++ in a web app with WebAssembly
 
 Let's say you have some C++ code laying around that you would like to make available to a wider audience, by putting
 it on the web. Until recently, this used to be pretty difficult, and may even have required reimplementation of the
@@ -15,8 +15,8 @@ purposes.
 
 In this blog, we'll show you how to take a simple algorithm written in C++ and make it available as a web
 application. Subsequent blogs in this series will expand on the current one by laying out more advanced topics,
-specifically how to [make the app interactive](anotherblog), how to [visualize the results](someotherblog), and
-how to [deal with long running tasks](yetanotherblog).
+specifically how to [make the app interactive](../react/README.md), how to [visualize the results](../vega/README.md), and
+how to [deal with long running tasks](../web-worker/README.md).
 
 ## Root finding
 
@@ -258,7 +258,7 @@ From the figure at the top of the article, the root of the equation should be at
 
 ![result.png](result.png)
 
-_The resulting page if everything works. See the live version of the app on [GitHub pages](https://nlesc-jcer.github.io/run-cpp-on-web/run-your-c++-code-on-the-web/index.html)._
+_The resulting page if everything works. See the live version of the app on [GitHub pages](https://nlesc-jcer.github.io/run-cpp-on-web/webassembly/index.html)._
 
 ## Recap
 
@@ -283,7 +283,7 @@ In upcoming blogs we will cover:
 - [plotting with vega.js: how to visualize data from the algorithm]()
 
 We'll wrap up the series in [a final blog]() that combines the topics of the whole series in a full-featured web
-application. If you're curious what that's going to look like, make sure to check out the [live demo](https://nlesc-jcer.github.io/run-cpp-on-web/js-kitchen-sink/app.html) on GitHub
+application. If you're curious what that's going to look like, make sure to check out the [live demo](https://nlesc-jcer.github.io/run-cpp-on-web/kitchen-sink/app.html) on GitHub
 Pages.
 
 If you enjoyed this article, leave a comment and give us a clap!
