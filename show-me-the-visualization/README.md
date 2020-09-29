@@ -232,38 +232,35 @@ Great, that looks very similar to the output we got from the command line.
 
 ## Vega-Lite specification
 
-There [many ways to do visualizations](https://github.com/sorrycc/awesome-javascript#data-visualization) on the web. My personal favorite at the moment is [Vega-Lite](https://vega.github.io/vega-lite/), so we will use it here.
-Vega-Lite is a JavaScript library which describes a plot using a JSON document. In Vega-Lite the JSON Document is called a specification and can be rendered to an interactive visualization.
+There [many ways to do visualizations](https://github.com/sorrycc/awesome-javascript#data-visualization) on the web. One
+of our favorites is [Vega-Lite](https://vega.github.io/vega-lite/), a JavaScript library which describes a plot using a
+JSON document called a _specification_.
 
-The root finding algorithm tries to find the x where y is zero.
-So let's plot the iteration index against the y found in each iteration to see how quickly it converged to an answer.
+The root finding algorithm tries to find the `x` where `y` is zero using a series of iterations.
+Let's plot the iteration `index` against the `y` found in each iteration to see how quickly it converged to an answer.
 
-The Vega-Lite specification is constructed out of the following blocks
-
-* `"data"`, the iterations we want to plot as an array of iteration objects
-* `"encoding"`, which field should go on which axis
-* `"mark"`, for line plot use [line](https://vega.github.io/vega-lite/docs/line.html) marker
+The generic structure of our Vega-Lite specification looks like this:
 
 ```js
 const spec = {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
   "width": 800,
   "height": 600,
+  "title": {
+    <stuff related to the title>
+  },
   "data": {
-    "values": iterations
+    <holds the iterations we want to plot as an array of iteration objects>
   },
   "encoding": {
-    "x": {"field": "index", "type": "ordinal"},
-    "y": {"field": "y", "type": "quantitative"}
+    <defines stuff related to which field should go on which axis>
   },
   "mark": {
-    "type": "line",
-    "point": true,
-    // Enable tooltip so on mouseover it shows all data of that iteration
-    "tooltip": {"content": "data"}
+    <defines the line plot>
   },
-  // Enable zooming and panning
-  "selection": {"grid": {"type": "interval", "bind": "scales"}}
+  "selection": {
+    <defines how users can interact with the plot>
+  }
 };
 ```
 
@@ -287,7 +284,7 @@ To render a specification we need to use the `vegaEmbed(element, spec)` method w
 </html>
 ```
 
-The complete HTML page looks like this:
+Combining the three snippets above (get iteration data, Vega specification and vegaEmbed) and filling in their respective details yields an HTML document with the complete web app:
 
 ```html
 <html>
@@ -320,15 +317,39 @@ The complete HTML page looks like this:
           "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
           "width": 800,
           "height": 600,
+          "title": {
+            "text": "Iterations",
+            "fontSize": 20,
+            "fontWeight": "normal"
+          },
           "data": {
             "values": iterations
           },
           "encoding": {
-            "x": {"field": "index", "type": "ordinal", "title": "Iteration index"},
-            "y": {"field": "y", "type": "quantitative"}
+            "x": {
+              "field": "index",
+              "type": "quantitative",
+              "title": "Iteration index",
+              "axis": {
+                "labelFontSize": 20,
+                "titleFontSize": 20,
+                "labelFontWeight": "lighter",
+                "tickMinStep": 1.0
+              }
+            },
+            "y": {
+              "field": "y",
+              "type": "quantitative",
+              "axis": {
+                "labelFontSize": 20,
+                "titleFontSize": 20,
+                "labelFontWeight": "lighter"
+              }
+            }
           },
           "mark": {
-            "type": "circle",
+            "type": "line",
+            "point": true,
             // Enable tooltip so on mouseover it shows all data of that iteration
             "tooltip": {"content": "data"}
           },
@@ -343,7 +364,7 @@ The complete HTML page looks like this:
 ```
 File: _scatter.html_.
 
-We'll need a web server to display the HTML page in a web browser. For this, we'll use the `http.server` module from Python 3 to host all files on port 8000, like so:
+We'll need a web server to display the HTML page in a web browser. For this, we'll use the `http.server` module from Python 3 again to host all files on port 8000, like so:
 
 ```shell
 python3 -m http.server 8000
@@ -351,7 +372,8 @@ python3 -m http.server 8000
 
 When we visit the web page at [http://localhost:8000/scatter.html](http://localhost:8000/scatter.html), we will be greeted by the following plot. We can zoom with the mouse wheel and pan by dragging. Hovering over a point shows a tooltip with relevant data at that point.
 
-[![Image](scatter.png)](https://nlesc-jcer.github.io/run-cpp-on-web/show-me-the-visualization/scatter.html)
+[![scatter](scatter.png)](https://nlesc-jcer.github.io/run-cpp-on-web/show-me-the-visualization/scatter.html)
+
 (Click on image to get interactive version)
 
 ## Advanced plot
@@ -360,11 +382,11 @@ In the first blog of this series we plotted the equation and root as
 
 ![equation.png](https://nlesc-jcer.github.io/run-cpp-on-web/run-your-c%2B%2B-code-on-the-web/equation.png)
 
-It would be nice to write a specification of this plot together with the iterations the root finding algorithm went through.
-Vega-Lite can superimpose one chart on top of another with [layers](https://vega.github.io/vega-lite/docs/layer.html) keyword.
-Let's construct each layer separately and then super impose them at the end.
+It would be nice to write a specification of this plot together with the iterations that the rootfinding algorithm went through.
+Vega-Lite can superimpose one chart on top of another with the [`layers`](https://vega.github.io/vega-lite/docs/layer.html) keyword.
+Let's construct each layer separately and then superimpose them at the end.
 
-The 2x^3 - 4x^2 + 6 equation is plotted by using a [sequence generator](https://vega.github.io/vega-lite/docs/data.html#sequence) to generate a range of x values and a [formula transform](https://vega.github.io/vega-lite/docs/calculate.html) is used to calculate the y values.
+The 2x^3 - 4x^2 + 6 equation is plotted by using a [sequence generator](https://vega.github.io/vega-lite/docs/data.html#sequence) to generate a range of `x` values and a [formula transform](https://vega.github.io/vega-lite/docs/calculate.html) is used to calculate the `y` values.
 
 ```js
 const equation_line = {
@@ -384,7 +406,8 @@ const equation_line = {
 };
 ```
 
-To show where the root is we draw a dotted vertical line at x is -1 with an title. For the ruler and title we reuse the data via layers and use a [rule marker](https://vega.github.io/vega-lite/docs/rule.html) and [text marker](https://vega.github.io/vega-lite/docs/text.html) respectivly.
+To show where the root is, we draw a dotted vertical line at `x = -1` and label it `root`. For the ruler and title we
+reuse the data via `layers` and use a [rule marker](https://vega.github.io/vega-lite/docs/rule.html) and [text marker](https://vega.github.io/vega-lite/docs/text.html) respectively.
 
 ```js
 const root_rule = {
@@ -392,13 +415,13 @@ const root_rule = {
   "encoding": {"x": {"field": "x", "type": "quantitative"}},
   "layer": [
     {"mark": {"type": "rule", "strokeDash": [4, 8]}},
-    {"mark": {"type": "text", "align": "left", "dx": 4, "text": "Root"}}
+    {"mark": {"type": "text", "align": "left", "dx": 4, "text": "root"}}
   ]
 };
 ```
 
-When we plot the x and y of each iteration we can no longer see the order of iterations.
-So we will use a text marker above each circle to tell us to which iteration it belongs.
+When we plot the `x` and `y` of each iteration we can no longer see the order of iterations, so we will use a text
+marker above each circle to indicate which iteration it belongs to.
 
 ```js
 const iterations_scatter = {
@@ -406,9 +429,26 @@ const iterations_scatter = {
     "values": iterations
   },
   "encoding": {
-    "x": {"field": "x", "type": "quantitative"},
-    "y": {"field": "y", "type": "quantitative"},
-    "text": {"field": "index", "type": "nominal"}
+    "x": {
+      "field": "x",
+      "type": "quantitative",
+      "axis": {
+        "labelFontSize": 20,
+        "titleFontSize": 20,
+        "labelFontWeight": "lighter",
+        "tickMinStep": 1.0
+      }
+    },
+    "y": {
+      "field": "y",
+      "type": "quantitative",
+      "axis": {
+        "labelFontSize": 20,
+        "titleFontSize": 20,
+        "labelFontWeight": "lighter"
+      }
+    },
+    "text": { "field": "index", "type": "quantitative" }
   },
   "layer": [
     {
@@ -420,13 +460,14 @@ const iterations_scatter = {
 };
 ```
 
-Superimpose the equation, root ruler and iteration plot into a single visualization with
+Superimpose the equation line, root ruler, and iteration scatter into a single visualization with:
 
 ```js
 const spec = {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
   "width": 800,
   "height": 600,
+  "title": {"text": "Iterative rootfinding", "fontSize": 20, "fontWeight": "normal"},
   "layer": [
     equation_line,
     root_rule,
@@ -439,7 +480,8 @@ The HTML page with all JavaScript put together to make a composite plot is avail
 
 Visiting the page should give us a plot like
 
-[![Image](composite.png)](https://nlesc-jcer.github.io/run-cpp-on-web/show-me-the-visualization/app.html)
+[![Image](app.png)](https://nlesc-jcer.github.io/run-cpp-on-web/show-me-the-visualization/app.html)
+
 (Click on image to get interactive version)
 
 ## Wrap up
