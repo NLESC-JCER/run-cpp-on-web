@@ -2,13 +2,13 @@ _By [Stefan Verhoeven](https://orcid.org/0000-0002-5821-2060), [Faruk Diblen](ht
 [Jurriaan H. Spaaks](https://orcid.org/0000-0002-7064-4069), [Adam Belloum](https://orcid.org/0000-0001-6306-6937), and
 [Christiaan Meijer](https://orcid.org/0000-0002-5529-5761)._
 
-# Run C++ on the web with web assembly, web workers, React and Vega
+# C++ web app with WebAssembly, Vega, Web Worker and React
 
 In previous blogs in the series we learned
 
-* [how to compile C++ to WebAssembly](TODO)
+* [using C++ in a web app with WebAssembly](TODO)
 * [how to perform computations without blocking the user interface](TODO)
-* [how to make a nice interactive form](TODO)
+* [how to interact with your C++ web app using React forms](TODO)
 * [how to visualize data from the algorithm](TODO)
 
 Those topics by them selves are useful, but how can all those topics be put together into a single web application. This blog will tell you how to do build the web application including everything but the kitchen sink.
@@ -71,7 +71,7 @@ File: _worker.js_
 
 ## React
 
-In a previous blog we wrote several React components to make a form let's re-use most of it, but instead of calling the WebAssembly module directly we will use a Web Worker.
+In the [React blog post](TODO) we wrote several React components to make a form let's re-use most of it, but instead of calling the WebAssembly module directly we will use a Web Worker.
 
 ```js
 const [result, setResult] = React.useState({ root: undefined, iterations: [] });
@@ -95,7 +95,7 @@ function handleSubmit(event) {
 
 ## Visualization
 
-In the previous blog post about visualization using Vega-Lite we made 2 plots. Let's combine the 2 plots into a single visualization where zooming and panning in one plot will be reflected in other plot.
+In the visualization [blog](TODO) post we used Vega-Lite to make 2 plots. Let's connect these 2 plots into a single visualization where zooming and panning in one plot will be reflected in other plot.
 
 To generate the Vega-Lite specification we can write a function like so
 
@@ -216,7 +216,7 @@ function IterationsPlot({ iterations }) {
 
 ## Pack it up
 
-The React components and React render call can be packed up all together in a JavaScript file called [app.js](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/js-kitchen-sink/app.js).
+The React components and React render call can be packed up all together in a JavaScript file called [app.js](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/kitchen-sink/app.js).
 
 The web applications needs a HTML page to fetch all the React and Vega dependencies, define a HTML tag for rendering the React app to and finally include the application JavaScript file.
 
@@ -246,7 +246,7 @@ python3 -m http.server 8000
 
 Visiting the page at [http://localhost:8000/app.html](http://localhost:8000/app.html) should give us a plot like
 
-[![Image](app.gif)](https://nlesc-jcer.github.io/run-cpp-on-web/js-kitchen-sink/app.html)
+[![Image](app.gif)](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/kitchen-sink/app.html)
 (Click on image to get interactive version)
 
 You can try out different initial guesses to get different amount of iterations.
