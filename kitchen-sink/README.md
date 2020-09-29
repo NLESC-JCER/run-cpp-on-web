@@ -1,3 +1,7 @@
+_By [Stefan Verhoeven](https://orcid.org/0000-0002-5821-2060), [Faruk Diblen](https://orcid.org/0000-0002-0989-929X),
+[Jurriaan H. Spaaks](https://orcid.org/0000-0002-7064-4069), [Adam Belloum](https://orcid.org/0000-0001-6306-6937), and
+[Christiaan Meijer](https://orcid.org/0000-0002-5529-5761)._
+
 # Run C++ on the web with web assembly, web workers, React and Vega
 
 In previous blogs in the series we learned
@@ -254,4 +258,9 @@ In this series of blog posts we introduced a lot of different technologies to ab
 
 All the source code shown is available at [https://github.com/NLESC-JCER/run-cpp-on-web](https://github.com/NLESC-JCER/run-cpp-on-web).
 
+This blog was written by NLeSC's Generalization Team. The team consists of Stefan Verhoeven, Faruk Diblen, Jurriaan H. Spaaks, Adam Belloum and Christiaan Meijer. Feel free to get in touch with the generalization team at generalization@esciencecenter.nl.
+
 Hope you enjoyed this series of blogs and if you have suggestions or questions please post a comment below.
+
+_These blogs were written as part of the "Passing XSAMS" project. To learn more about the project, check out its
+[project page](https://www.esciencecenter.nl/projects/passing-xsams/)._
