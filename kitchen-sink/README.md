@@ -71,7 +71,7 @@ File: _worker.js_
 
 ## React
 
-In the [React blog post](TODO) we wrote several React components to make a form let's re-use most of it, but instead of calling the WebAssembly module directly we will use a Web Worker.
+In the [React blog post](../react/README.md) we wrote several React components to make a form let's re-use most of it, but instead of calling the WebAssembly module directly we will use a Web Worker.
 
 ```js
 const [result, setResult] = React.useState({ root: undefined, iterations: [] });
