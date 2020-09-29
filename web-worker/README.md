@@ -42,7 +42,7 @@ results back to the web app. It will do this by sending a message, so the web ap
 
 ## The resulting page
 
-The snippet below shows the web page that uses a web worker. Notice the creation of the `Worker` object, posting of the
+The code snippet below shows the web page that uses a web worker. Notice the creation of the `Worker` object, posting of the
 message, as well as the instructions for handling of any returned messages containing results.
 
 ```html
