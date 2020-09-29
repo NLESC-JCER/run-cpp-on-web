@@ -141,7 +141,7 @@ The web application in our example should have a form with ``tolerance`` and ``i
 </form>
 ```
 
-The form tag has a `onSubmit` the property, which is set to a function (`handleSubmit`) that will handle the form
+The form tag has a `onSubmit` property, which is set to a function (`handleSubmit`) that will handle the form
 submission. The input tag has a `value` property to set the variable (`tolerance` and `initial_guess`) and it also has `onChange`
 property to set the function (`onToleranceChange` and `onGuessChange`) which will be triggered when the user changes the
 value.
