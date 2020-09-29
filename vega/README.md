@@ -417,7 +417,18 @@ const root_rule = {
   "encoding": {"x": {"field": "x", "type": "quantitative"}},
   "layer": [
     {"mark": {"type": "rule", "strokeDash": [4, 8]}},
-    {"mark": {"type": "text", "align": "left", "dx": 4, "text": "root"}}
+    {"mark":
+      {
+        "type": "text",
+        "align": "right",
+        "baseline": "bottom",
+        "dx": -4,
+        "dy": 10,
+        "x": "width",
+        "fontSize": 20,
+        "text": "root = -1.0"
+      }
+    }
   ]
 };
 ```
@@ -457,7 +468,7 @@ const iterations_scatter = {
       "mark": {"type": "circle", "tooltip": {"content": "data"}},
       "selection": {"grid": {"type": "interval", "bind": "scales"}}
     },
-    {"mark": {"type": "text", "dy": -10}}
+    {"mark": {"type": "text", "dy": -10, "fontSize": 16}}
   ]
 };
 ```
