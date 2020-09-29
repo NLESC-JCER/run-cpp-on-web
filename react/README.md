@@ -217,7 +217,7 @@ ReactDOM.render(
 );
 ```
 
-We can combine the heading, form and result components and all the states and handleSubmit function into the `App` React component and its rendering and save it as `app.js`. If you are lazy, you can find the code from [here](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/js-react/app.js).
+We can combine the heading, form and result components and all the states and handleSubmit function into the `App` React component and its rendering and save it as `app.js`. If you are lazy, you can find the code from [here](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/react/app.js).
 
 Like before, we also need to host the files in a web server with
 
