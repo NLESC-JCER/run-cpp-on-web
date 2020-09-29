@@ -12,7 +12,7 @@ run.
 
 _How to prevent blocking when running long running tasks in C++?_
 
-In this blogpost, we will use web workers to solve this problem by offloading tasks to another thread.
+In this blog post, we will use web workers to solve this problem by offloading tasks to another thread.
 
 ## Long-running tasks with web worker
 
@@ -121,7 +121,7 @@ _Responsive UI thanks to the web worker._
 ## Recap and what next?
 
 In this blog post we have learned how to keep a web app from freezing while executing computationally intensive C++
-code. We learned how to create a web worker and how to use the web worker in a simple web app. 
+code. We learned how to create a web worker and how to use the web worker in a simple web app.
 
 Now take your web app a step further by continue reading our blog series. Other blog posts in this series, about C++ in
 web apps, will show you [how to interact with your app using forms](../react/README.md) and [how to spice up your app up with
