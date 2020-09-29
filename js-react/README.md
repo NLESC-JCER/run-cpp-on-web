@@ -1,3 +1,7 @@
+_By [Stefan Verhoeven](https://orcid.org/0000-0002-5821-2060), [Faruk Diblen](https://orcid.org/0000-0002-0989-929X),
+[Jurriaan H. Spaaks](https://orcid.org/0000-0002-7064-4069), [Adam Belloum](https://orcid.org/0000-0001-6306-6937), and
+[Christiaan Meijer](https://orcid.org/0000-0002-5529-5761)._
+
 # C++ on the web: Interactive form with React
 
 In the [previous blog post](TODO add link) we compiled the C++ algorithm into a webassembly code. In this blog post we will create a web application using [React](https://reactjs.org/). The web application will have a web-form which allows us to change the parameters of the algorithm.
@@ -245,3 +249,12 @@ In other blogs of the series that might be of interest we cover
 - plot with Vega, [displaying results from the algorithm in a more complex web app](show-me-the-visualization)
 
 We'll wrap up the series in a [final blog](js-kitchen-sink) that combines the topics of the whole series in a full-featured web application.
+
+## Get in touch with us
+
+This blog was written by NLeSC's Generalization Team. The team consists of Stefan Verhoeven, Faruk Diblen, Jurriaan H. Spaaks, Adam Belloum and Christiaan Meijer. Feel free to get in touch with the generalization team at generalization@esciencecenter.nl.
+
+If you enjoyed this article, leave a comment and give us a clap!
+
+_These blogs were written as part of the "Passing XSAMS" project. To learn more about the project, check out its
+[project page](https://www.esciencecenter.nl/projects/passing-xsams/)._
