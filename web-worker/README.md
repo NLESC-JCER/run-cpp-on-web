@@ -1,6 +1,6 @@
-# Responsive C++ in the browser using web workers
+# Help! My C++ web app is not responding
 
-In an [earlier blogpost](../js-webapp/README.md) we discussed how to run C++ code on the web using JavaScript. We
+In an [earlier blogpost](../webassembly/README.md) we discussed how to run C++ code on the web using JavaScript. We
 created a web app that executed some C++ code and then showed the result in the browser. While the page was running the
 C++ code, the page was blocked and unresponsive. This was not noticeable, because the computation done in the code
 
@@ -18,7 +18,7 @@ executed, after which the page can finish rendering. Because the WebAssembly cod
 this blog, we assume we have a longer running task. We create such a task artificially, by adding a few seconds of
 `sleep` in the [C++ code](newtonraphson.cpp). Like in the previous post, we compile the C++ code to create
 WebAssembly code. The example page with our slow task can be found
-[here](https://nlesc-jcer.github.io/run-cpp-on-web/js-webapp-async/example-blocking.html).
+[here](https://nlesc-jcer.github.io/run-cpp-on-web/web-worker/example-blocking.html).
 
 Notice that we also added a slider to the page. This slider simply serves to illustrate UI unresponsiveness--it has no attached
 function. Notice that while the WebAssembly code is still running, the slider is completely blocked. If this was an
@@ -108,7 +108,7 @@ The figure below illustrates what is happening in parallel in the two threads.
 ![threads](threads.png)
 
 We can see the code in action
-[here](https://nlesc-jcer.github.io/run-cpp-on-web/js-webapp-async/example-web-worker.html). The calculation still takes
+[here](https://nlesc-jcer.github.io/run-cpp-on-web/web-worker/example-web-worker.html). The calculation still takes
 the same time to perform, but as you will notice, the slider will be responsive all the time.
 
 ![responsive ui](web-worker.gif)
@@ -119,4 +119,4 @@ _Responsive UI thanks to the web worker._
 
 In this blog post we have learned how to run long running C++ code on the web using web workers.
 
-In the [next blogpost](../js-react/README.md) we will show how to expand the code to an interactive React webapp.
+In the [next blogpost](../react/README.md) we will show how to expand the code to an interactive React webapp.
