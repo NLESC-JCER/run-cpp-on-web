@@ -1,6 +1,6 @@
 # Responsive C++ in the browser using web workers
 
-In an [earlier blogpost](../js-webapp/README.md) we discussed how to run C++ code on the web using JavaScript. We
+In an [earlier blogpost](../webassembly) we discussed how to run C++ code on the web using JavaScript. We
 created a web app that executed some C++ code and then showed the result in the browser. While the page was running the
 C++ code, the page was blocked and unresponsive. This was not noticeable, because the computation done in the code
 
@@ -115,8 +115,12 @@ the same time to perform, but as you will notice, the slider will be responsive 
 
 _Responsive UI thanks to the web worker._
 
-## Outro
+## Recap and what next?
 
-In this blog post we have learned how to run long running C++ code on the web using web workers.
+In this blog post we have learned how to keep a web app from freezing while executing computationally intensive C++ code. We learned how to create a web worker and how to use the web worker in a simple web app. 
 
-In the [next blogpost](../js-react/README.md) we will show how to expand the code to an interactive React webapp.
+Now take your web app a step further by continue reading our blog series. Other blog posts in this series, about C++ in web apps, will show you [how to interact with your app using forms](../react) and [how to spice up your app up with visualizations](../vega). A final blog shows you [how to combine all of the above in a single web app](../kitchen-sink). Looking for the first blog and introduction to this series? This blog post will show you [how to get started running your C++ on the web using webassembly](../webassembly).
+
+## Get in touch with us
+
+This blog was written by NLeSC's Generalization Team. The team consists of Stefan Verhoeven, Faruk Diblen, Jurriaan H. Spaaks, Adam Belloum and Christiaan Meijer. Feel free to get in touch with the generalization team at generalization@esciencecenter.nl.
