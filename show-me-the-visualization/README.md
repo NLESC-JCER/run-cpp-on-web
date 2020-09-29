@@ -467,6 +467,7 @@ const spec = {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
   "width": 800,
   "height": 600,
+  "title": {"text": "Iterative rootfinding", "fontSize": 20, "fontWeight": "normal"},
   "layer": [
     equation_line,
     root_rule,
