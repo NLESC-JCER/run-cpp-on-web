@@ -28,12 +28,35 @@
           "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
           "width": 800,
           "height": 600,
+          "title": {
+            "text": "Iterations",
+            "fontSize": 20,
+            "fontWeight": "normal"
+          },
           "data": {
             "values": iterations
           },
           "encoding": {
-            "x": {"field": "index", "type": "ordinal", "title": "Iteration index"},
-            "y": {"field": "y", "type": "quantitative"}
+            "x": {
+              "field": "index",
+              "type": "quantitative",
+              "title": "Iteration index",
+              "axis": {
+                "labelFontSize": 20,
+                "titleFontSize": 20,
+                "labelFontWeight": "lighter",
+                "tickMinStep": 1.0
+              }
+            },
+            "y": {
+              "field": "y",
+              "type": "quantitative",
+              "axis": {
+                "labelFontSize": 20,
+                "titleFontSize": 20,
+                "labelFontWeight": "lighter"
+              }
+            }
           },
           "mark": {
             "type": "line",
