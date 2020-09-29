@@ -1,11 +1,11 @@
 _By [Stefan Verhoeven](https://orcid.org/0000-0002-5821-2060), [Faruk Diblen](https://orcid.org/0000-0002-0989-929X),
 [Jurriaan H. Spaaks](https://orcid.org/0000-0002-7064-4069), [Christiaan Meijer](https://orcid.org/0000-0002-5529-5761), and [Adam Belloum](https://orcid.org/0000-0001-6306-6937)._
 
-# Show me the visualization
+# Spice up your C++ web app with visualizations
 
-In a [previous blog](../run-your-c%2B%2B-code-on-the-web) we found the root of an equation using the Newton-Raphson
+In a [previous blog](../webassembly/README.md) we found the root of an equation using the Newton-Raphson
 algorithm implemented in C++ and compiled to a WebAsssembly module. In this blog, we're going to expand on that by
-visualizing the iterations that Newton-Raphson used to get from the initial guess to the estimate of the root. 
+visualizing the iterations that Newton-Raphson used to get from the initial guess to the estimate of the root.
 
 ![Under the hood](peugeot.jpg)
 _Visualization allows us to track what's going on under the hood of our program. Image courtesy of [Nenad Stojkovic](https://www.flickr.com/photos/nenadstojkovic/) via [flickr](https://www.flickr.com/photos/nenadstojkovic/49044775348)._
@@ -74,7 +74,7 @@ float NewtonRaphson::solve(float initial_guess) {
 ```
 File: _newtonraphson.cpp_.
 
-Before we go into the Emscripten world, let's first test our C++ code. We can check if the iteration property is populated correctly, by extending the command line interface we made in the [previous blog](../run-your-c%2B%2B-code-on-the-web) as follows:
+Before we go into the Emscripten world, let's first test our C++ code. We can check if the iteration property is populated correctly, by extending the command line interface we made in the [previous blog](../webassembly/README.md) as follows:
 
 ```cpp
 #include <iostream>
@@ -156,7 +156,7 @@ EMSCRIPTEN_BINDINGS(newtonraphson) {
 ```
 File: _bindings.cpp_.
 
-We can now compile our C++ code to a WebAssembly module with Emscripten using `emcc` command, exactly [like we did before](../run-your-c%2B%2B-code-on-the-web):
+We can now compile our C++ code to a WebAssembly module with Emscripten using `emcc` command, exactly [like we did before](../webassembly/README.md):
 
 ```shell
 emcc -I. -o newtonraphson.js -Oz -s MODULARIZE=1 \
@@ -375,7 +375,7 @@ python3 -m http.server 8000
 
 When we visit the web page at [http://localhost:8000/scatter.html](http://localhost:8000/scatter.html), we will be greeted by the following plot. We can zoom with the mouse wheel and pan by dragging. Hovering over a point shows a tooltip with relevant data at that point.
 
-[![scatter](scatter.png)](https://nlesc-jcer.github.io/run-cpp-on-web/show-me-the-visualization/scatter.html)
+[![scatter](scatter.png)](https://nlesc-jcer.github.io/run-cpp-on-web/vega/scatter.html)
 
 (Click on image to get interactive version)
 
@@ -383,7 +383,7 @@ When we visit the web page at [http://localhost:8000/scatter.html](http://localh
 
 In the first blog of this series we plotted the equation and root as
 
-![equation.png](https://nlesc-jcer.github.io/run-cpp-on-web/run-your-c%2B%2B-code-on-the-web/equation.png)
+![equation.png](https://nlesc-jcer.github.io/run-cpp-on-web/webassembly/equation.png)
 
 It would be nice to write a specification of this plot together with the iterations that the rootfinding algorithm went through.
 Vega-Lite can superimpose one chart on top of another with the [`layers`](https://vega.github.io/vega-lite/docs/layer.html) keyword.
@@ -478,11 +478,11 @@ const spec = {
 };
 ```
 
-The HTML page with all JavaScript put together to make a composite plot is available [here](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/show-me-the-visualization/app.html).
+The HTML page with all JavaScript put together to make a composite plot is available [here](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/vega/app.html).
 
 Visiting the page should give us a plot like
 
-[![Image](app.png)](https://nlesc-jcer.github.io/run-cpp-on-web/show-me-the-visualization/app.html)
+[![Image](app.png)](https://nlesc-jcer.github.io/run-cpp-on-web/vega/app.html)
 
 (Click on image to get interactive version)
 
@@ -490,12 +490,12 @@ Visiting the page should give us a plot like
 
 In this blog we have learned how to get complex data types from a WebAssembly module using Emscripten bindings and how to write a Vega-Lite specifications to get interactive visualizations.
 
-In other blogs of the series that might be of interest we cover
+Other blogs of the series that might be of interest
 
-* [use of a web-worker: how to perform computations without blocking the user interface](TODO)
-* [a react application: how to make a nice interactive form](TODO)
+* [Help! My C++ web app is not responding](../web-worker/README.md)
+* [Interact with your C++ web app using React forms](../react/README.md)
 
-We'll wrap up the series in a [final blog](TODO) that combines the topics of the whole series in a full-featured web application.
+We'll wrap up the series in a [final blog](../kitchen-sink/README.md) that combines the topics of the whole series in a full-featured web application.
 
 This blog was written by NLeSC's Generalization Team. The team consists of Stefan Verhoeven, Faruk Diblen, Jurriaan H. Spaaks, Adam Belloum and Christiaan Meijer. Feel free to get in touch with the generalization team at generalization@esciencecenter.nl.
 
