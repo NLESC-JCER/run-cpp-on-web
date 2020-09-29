@@ -4,24 +4,24 @@ _By [Stefan Verhoeven](https://orcid.org/0000-0002-5821-2060), [Faruk Diblen](ht
 
 # Interact with your C++ web app using React forms
 
-In a [previous blog post](../webassembly/README.md), we compiled the C++ algorithm into a WebAssembly code. In this blog post, we will create a web application using [React](https://reactjs.org/). The web application will have a web form that allows us to change the parameters of the algorithm.
+In a [previous blog post](../webassembly/README.md), we compiled the C++ algorithm into WebAssembly. In the current blog post, we will create a web application using [React](https://reactjs.org/). The web application will have a web form that allows us to change the parameters of the algorithm.
 
-I can feel your pain: there are too many things to learn, too many skills to get but too little time available which reminds me of our extra-ordinary friend [Napoleon Dynamite](https://www.imdb.com/title/tt0374900/). This blog post will guide you through the process of making a React web application without getting lost.
+We feel your pain: there are too many things to learn, too many skills to get, but too little time available--which reminds me of our extraordinary friend [Napoleon Dynamite](https://www.imdb.com/title/tt0374900/). This blog post will guide you through the process of making a React web application without getting lost.
 
 ![dynamite_gosh.png](dynamite_gosh.png)
 _If you haven't met Napoleon yet, [click here](https://www.youtube.com/watch?v=XsiiIa6bs9I) to see how he was struggling with his skills. Screenshot from [Napoleon Dynamite](https://www.imdb.com/title/tt0374900/) movie._
 
 ## React web application
 
-The web application we developed so far needs to update the entire page to display the results. Even for small changes in the web page this has to happen. Thanks to modern web browsers and JavaScript, Single Page Applications (SPA) can update only required elements in the web page. We will use one of the most popular web-frameworks, React, to develop the SPA. We preferred React over vanilla JavaScript because it is faster and easier to build a web application. Just let React deal with all the magic behind the scenes. [This blog post](https://www.freecodecamp.org/news/do-we-still-need-javascript-frameworks-42576735949b/) may help you to understand why we made this choice.
+The web application we developed so far needs to update the entire page to display the results. Even for small changes in the web page, this has to happen. Thanks to modern web browsers and JavaScript, Single Page Applications (SPAs) can update only required elements in the web page. We will use one of the most popular web frameworks, React, to develop the SPA. We chose React over vanilla JavaScript because building a web application is made easier by letting React deal with all the magic behind the scenes. [This blog post](https://www.freecodecamp.org/news/do-we-still-need-javascript-frameworks-42576735949b/) may help you to understand why we made this choice.
 
-The form in the web application will collect the user inputs and use them to initialize the algorithm. When the form is submitted, a WebAssembly code starts the calculation and the result is rendered. With this architecture, the application only needs cheap static file hosting to host the HTML, JavaScript, and WebAssembly files. The algorithm will be running in the web browser on the end-users machine instead of a server.
+The form in the web application will collect the user inputs and uses them to initialize the algorithm. When the form is submitted, a WebAssembly code starts the calculation and the result is rendered. With this architecture, the application only needs cheap static file hosting to host the HTML, JavaScript, and WebAssembly files. The algorithm will be running in the web browser on the end-user's machine instead of a server.
 
 ### The HTML code
 
 To render the React application we need an HTML element as a container. We will give it the identifier **container** which will use later when we implement the **React** application.
 
-We will keep the html code very minimal. The code will contain three essential elements:
+We will keep the HTML code very minimal. The code will contain three essential elements:
 
 - **\<head\>** element to set the title and to load the required external dependencies (javascript libraries).
 
@@ -88,13 +88,7 @@ function Heading() {
 }
 ```
 
-I now can hear what you are saying: but wait... How do I use Babel? We haven't included it anywhere. Yes, we did. Babel was already added to the HTML code.
-
-```html
-<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-```
-
-In order for the header element to be rendered we need to tell **ReactDOM** which element it should render and where it should be displayed. Do you still remember the **container** div we defined in the HTML part?
+In order for the header element to be rendered we need to tell **ReactDOM** which element it should render and where it should be displayed. Do you still remember the **container** `div` we defined in the HTML part?
 
 ```js
 ReactDOM.render(
@@ -103,7 +97,7 @@ ReactDOM.render(
 );
 ```
 
-The complete code should like this.
+The complete code should like this:
 
 ```js
 function Heading() {
@@ -123,9 +117,9 @@ When the page is rendered, the generated HTML code will be like:
 <h1>Root finding web application</h1>
 ```
 
-## Adding the  web form
+## Adding the web form
 
-The web application in our example should have a form with ``tolerance`` and ``initial_guess`` input fields, as well as, a submit button. The form in JSX can be written in the following way:
+The web application in our example should have a form with ``tolerance`` and ``initial_guess`` input fields, as well as a submit button. The form in JSX can be written in the following way:
 
 ```js
 <form onSubmit={handleSubmit}>
@@ -141,8 +135,8 @@ The web application in our example should have a form with ``tolerance`` and ``i
 </form>
 ```
 
-The form tag has a `onSubmit` property, which is set to a function (`handleSubmit`) that will handle the form
-submission. The input tag has a `value` property to set the variable (`tolerance` and `initial_guess`) and it also has `onChange`
+The form tag has an `onSubmit` property, which is set to a function (`handleSubmit`) that will handle the form
+submission. The input tag has a `value` property to set the variable (`tolerance` and `initial_guess`) and it also has an `onChange`
 property to set the function (`onToleranceChange` and `onGuessChange`) which will be triggered when the user changes the
 value.
 
@@ -156,7 +150,7 @@ const [initial_guess, setGuess] = React.useState(-4);
 
 The argument of the `useState` function is the initial value. The `tolerance` variable contains the current value for tolerance and `setTolerance` is a function to set the `tolerance` to a new value. The same logic is also used for the `initial_guess` variable.
 
-The input tag in the form will call the `onChange` function with a event object. We need to extract the user input from the event and pass it to `setTolerance` or `setGuess`. The value should be a number, so we use `Number()` to cast the string from the
+The input tag in the form will call the `onChange` function with an event object. We need to extract the user input from the event and pass it to `setTolerance` or `setGuess`. The value should be a number, so we use `Number()` to cast the string from the
 event to a number.
 
 ```js
@@ -169,7 +163,7 @@ function onGuessChange(event) {
 }
 ```
 
-We are now ready to implement the `handleSubmit` function which will process the submitted form data. The function will get, similar to the `onChange` of the input tag, an event object. Normally when you submit a form the form fields will be sent to the server, but we want to perform the calculation in the browser so we have to disable the default action with `preventDefault()` function. We will then construct a module as we did in the previous post.
+We are now ready to implement the `handleSubmit` function which will process the submitted form data. The function will get an event object, similar to the `onChange` of the input tag. Normally when you submit a form, the form fields will be sent to the server, but we want to perform the calculation in the browser, so we have to disable the default action with `preventDefault()`. We will then construct a WebAssembly module as we did in [a previous post](../webassembly/README.md).
 
 ```jsx
 function handleSubmit(event) {
@@ -195,7 +189,7 @@ When the calculation is done it will store the result value (`root`) using `setR
 
 
 To render the result we can use a React Component which has `root` as a property. When the calculation has not been done
-yet, it will render `Not submitted`. When the `root` property value is set then we will show it.
+yet, it will render `Not submitted`. We will show the `root` property value once it is set.
 
 ```jsx
 function Result(props) {
@@ -208,7 +202,7 @@ function Result(props) {
 }
 ```
 
-Finally we can render the `App` component to the HTML container with `container` as identifier.
+Finally we can render the `App` component to the HTML container with `id` equal to `container`.
 
 ```js
 ReactDOM.render(
@@ -217,7 +211,7 @@ ReactDOM.render(
 );
 ```
 
-We can combine the heading, form and result components and all the states and `handleSubmit` function into the `App` React component and its rendering and save it as `app.js`. If you are lazy, you can find the code from [here](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/react/app.js).
+We can combine the heading, form and result components and all the states and `handleSubmit` function into the `App` React component and its rendering and save it as `app.js`. You can find the resulting code [here](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/react/app.js).
 
 Like before, we also need to host the files in a web server with
 
@@ -229,17 +223,17 @@ python3 -m http.server 8000
 
 _The final page if everything works._
 
-Visit [http://localhost:8000/app.html](http://localhost:8000/app.html) to see the root answer or see the example app hosted on [GitHub pages](https://nlesc-jcer.github.io/run-cpp-on-web/react/app.html).
+Visit [http://localhost:8000/app.html](http://localhost:8000/app.html) to see the root answer, or go to [GitHub pages](https://nlesc-jcer.github.io/run-cpp-on-web/react/app.html) to see a hosted version of the example app.
 
 ## Extra notes
 
-The code supplied here should not be used in production as converting JSX in the web browser is slow. It's better to use [Create React App](http://create-react-app.dev/) which gives you an infrastructure to perform the transformation offline.
+The code supplied here should not be used in production as converting JSX in the web browser is slow. It's better to use [Create React App](http://create-react-app.dev/), which gives you an infrastructure to perform the transformation offline.
 
 ## Conclusion
 
 By writing React components we were able to create an interactive page with a form that executes the WebAssembly module compiled from the C++ code we introduced in the [first blog](../webassembly/README.md) of the series.
 
-We went through the components, JSX, props, and state which are the core building blocks of React web application.
+We went over JSX, props, state, and components, which together constitute the core building blocks of a React web application.
 
 In other blogs of the series that might be of interest we cover
 
@@ -251,7 +245,7 @@ We'll wrap up the series in a [final blog](../kitchen-sink/README.md) that combi
 
 ## Get in touch with us
 
-This blog was written by Generalization Team of Netherlands eScience Center. The team consists of Stefan Verhoeven, Faruk Diblen, Jurriaan H. Spaaks, Adam Belloum and Christiaan Meijer. Feel free to get in touch with the generalization team at generalization@esciencecenter.nl.
+This blog was written by the Generalization Team of the Netherlands eScience Center. The team consists of Stefan Verhoeven, Faruk Diblen, Jurriaan H. Spaaks, Adam Belloum and Christiaan Meijer. Feel free to get in touch with the generalization team at generalization@esciencecenter.nl.
 
 If you enjoyed this article, leave a comment and give us a clap!
 
