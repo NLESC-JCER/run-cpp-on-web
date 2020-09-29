@@ -5,7 +5,7 @@ algorithm implemented in C++ and compiled to a WebAsssembly module. In this blog
 visualizing the iterations that Newton-Raphson used to get from the initial guess to the estimate of the root. 
 
 ![Under the hood](peugeot.jpg)
-_Visualization allows us to track what's going on under the hood of our program. Image courtesy of [Nenad Stojkovic](https://www.flickr.com/photos/nenadstojkovic/49044775348)._
+_Visualization allows us to track what's going on under the hood of our program. Image courtesy of [Nenad Stojkovic](https://www.flickr.com/photos/nenadstojkovic/) via [flickr](https://www.flickr.com/photos/nenadstojkovic/49044775348)._
 
 ## Iterations
 
