@@ -53,10 +53,7 @@ research software, too.
 
 ![hold-your-horses.jpeg](hold-your-horses.jpeg)
 
-[Image source](https://pixabay.com/photos/horse-field-girl-horse-girl-field-2536537)
- by [Photographer](https://pixabay.com/users/lucianomarelli-5987093/)
-
-_Hold your horses._
+_Hold your horses. Image courtesy of [Luciano Marelli](https://pixabay.com/users/lucianomarelli-5987093/) via [pixabay](https://pixabay.com/photos/horse-field-girl-horse-girl-field-2536537)._
 
 ## What we'll need
 
