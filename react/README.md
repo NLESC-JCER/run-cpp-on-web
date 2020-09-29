@@ -4,24 +4,24 @@ _By [Stefan Verhoeven](https://orcid.org/0000-0002-5821-2060), [Faruk Diblen](ht
 
 # Interact with your C++ web app using React forms
 
-In a [previous blog post](../webassembly/README.md), we compiled the C++ algorithm into a WebAssembly code. In this blog post, we will create a web application using [React](https://reactjs.org/). The web application will have a web form that allows us to change the parameters of the algorithm.
+In a [previous blog post](../webassembly/README.md), we compiled the C++ algorithm into WebAssembly. In the current blog post, we will create a web application using [React](https://reactjs.org/). The web application will have a web form that allows us to change the parameters of the algorithm.
 
-I can feel your pain: there are too many things to learn, too many skills to get but too little time available which reminds me of our extra-ordinary friend [Napoleon Dynamite](https://www.imdb.com/title/tt0374900/). This blog post will guide you through the process of making a React web application without getting lost.
+We feel your pain: there are too many things to learn, too many skills to get, but too little time available--which reminds me of our extraordinary friend [Napoleon Dynamite](https://www.imdb.com/title/tt0374900/). This blog post will guide you through the process of making a React web application without getting lost.
 
 ![dynamite_gosh.png](dynamite_gosh.png)
 _If you haven't met Napoleon yet, [click here](https://www.youtube.com/watch?v=XsiiIa6bs9I) to see how he was struggling with his skills. Screenshot from [Napoleon Dynamite](https://www.imdb.com/title/tt0374900/) movie._
 
 ## React web application
 
-The web application we developed so far needs to update the entire page to display the results. Even for small changes in the web page this has to happen. Thanks to modern web browsers and JavaScript, Single Page Applications (SPA) can update only required elements in the web page. We will use one of the most popular web-frameworks, React, to develop the SPA. We preferred React over vanilla JavaScript because it is faster and easier to build a web application. Just let React deal with all the magic behind the scenes. [This blog post](https://www.freecodecamp.org/news/do-we-still-need-javascript-frameworks-42576735949b/) may help you to understand why we made this choice.
+The web application we developed so far needs to update the entire page to display the results. Even for small changes in the web page, this has to happen. Thanks to modern web browsers and JavaScript, Single Page Applications (SPAs) can update only required elements in the web page. We will use one of the most popular web frameworks, React, to develop the SPA. We chose React over vanilla JavaScript because building a web application is made easier by letting React deal with all the magic behind the scenes. [This blog post](https://www.freecodecamp.org/news/do-we-still-need-javascript-frameworks-42576735949b/) may help you to understand why we made this choice.
 
-The form in the web application will collect the user inputs and use them to initialize the algorithm. When the form is submitted, a WebAssembly code starts the calculation and the result is rendered. With this architecture, the application only needs cheap static file hosting to host the HTML, JavaScript, and WebAssembly files. The algorithm will be running in the web browser on the end-users machine instead of a server.
+The form in the web application will collect the user inputs and uses them to initialize the algorithm. When the form is submitted, a WebAssembly code starts the calculation and the result is rendered. With this architecture, the application only needs cheap static file hosting to host the HTML, JavaScript, and WebAssembly files. The algorithm will be running in the web browser on the end-user's machine instead of a server.
 
 ### The HTML code
 
 To render the React application we need an HTML element as a container. We will give it the identifier **container** which will use later when we implement the **React** application.
 
-We will keep the html code very minimal. The code will contain three essential elements:
+We will keep the HTML code very minimal. The code will contain three essential elements:
 
 - **\<head\>** element to set the title and to load the required external dependencies (javascript libraries).
 
