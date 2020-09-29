@@ -19,7 +19,7 @@ In this blogpost, we will use web workers to solve this problem by offloading ta
 Let's have a look at the code we ended up with in the last blog. When loading the page, the WebAssembly code is
 executed, after which the page can finish rendering. Because the WebAssembly code was very quick, this was fine. For
 this blog, we assume we have a longer running task. We create such a task artificially, by adding a few seconds of
-`sleep` in the [C++ code](newtonraphson.cpp). Like in the previous post, we compile the C++ code to create
+`sleep` in the [C++ code](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/web-worker/newtonraphson.cpp). Like in the previous post, we compile the C++ code to create
 WebAssembly code. The example page with our slow task can be found
 [here](https://nlesc-jcer.github.io/run-cpp-on-web/web-worker/example-blocking.html).
 
