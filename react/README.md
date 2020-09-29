@@ -163,7 +163,7 @@ function onGuessChange(event) {
 }
 ```
 
-We are now ready to implement the `handleSubmit` function which will process the submitted form data. The function will get an event object, similar to the `onChange` of the input tag. Normally when you submit a form, the form fields will be sent to the server, but we want to perform the calculation in the browser, so we have to disable the default action with `preventDefault()`. We will then construct a module as we did in the previous post.
+We are now ready to implement the `handleSubmit` function which will process the submitted form data. The function will get an event object, similar to the `onChange` of the input tag. Normally when you submit a form, the form fields will be sent to the server, but we want to perform the calculation in the browser, so we have to disable the default action with `preventDefault()`. We will then construct a WebAssembly module as we did in [a previous post](../webassembly/README.md).
 
 ```jsx
 function handleSubmit(event) {
