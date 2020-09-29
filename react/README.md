@@ -88,12 +88,6 @@ function Heading() {
 }
 ```
 
-I now can hear what you are saying: but wait... How do I use Babel? We haven't included it anywhere. Yes, we did. Babel was already added to the HTML code.
-
-```html
-<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-```
-
 In order for the header element to be rendered we need to tell **ReactDOM** which element it should render and where it should be displayed. Do you still remember the **container** `div` we defined in the HTML part?
 
 ```js
