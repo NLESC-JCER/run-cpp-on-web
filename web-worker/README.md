@@ -115,7 +115,7 @@ _Responsive UI thanks to offloading the root finding procedure to the web worker
 ## Recap and what next?
 
 In this blog post, we learned how to keep a web app from freezing while executing computationally intensive C++
-code. We learned how to create a web worker and how to use the web worker in a simple web app. 
+code. We learned how to create a web worker and how to use the web worker in a simple web app.
 
 Now you can take this web app a step further by reading some of the other blogs in this series, for example [how to interact with your app using forms](../react/README.md) and [how to spice up your app up with
 visualizations](../vega/README.md). A final blog shows you [how to combine all of the above in a single web app](../kitchen-sink/README.md).
@@ -126,7 +126,7 @@ to get started running your C++ on the web using webassembly.
 ## Get in touch with us
 
 
-This blog was written by Generalization Team of Netherlands eScience Center.  The team consists of Stefan Verhoeven,
+This blog was written by the Generalization Team of the Netherlands eScience Center.  The team consists of Stefan Verhoeven,
 Faruk Diblen, Jurriaan H. Spaaks, Adam Belloum and Christiaan Meijer. Feel free to get in touch with the generalization
 team at generalization@esciencecenter.nl.
 
