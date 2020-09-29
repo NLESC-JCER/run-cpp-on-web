@@ -231,8 +231,6 @@ _The final page if everything works._
 
 Visit [http://localhost:8000/app.html](http://localhost:8000/app.html) to see the root answer. Embedded below is the example app hosted on [GitHub pages](https://nlesc-jcer.github.io/cpp2wasm/react/example-app.html)
 
-<iframe width="100%" height="160" src="https://nlesc-jcer.github.io/cpp2wasm/react/example-app.html" /></iframe>
-
 ## Extra notes
 
 The code supplied here should not be used in production as converting JSX in the web browser is slow. It's better to use [Create React App](http://create-react-app.dev/) which gives you an infrastructure to perform the transformation offline.
