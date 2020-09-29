@@ -114,7 +114,7 @@ _Responsive UI thanks to offloading the rootfinding procedure to the web worker.
 
 ## Recap and what next?
 
-In this blog post we learned how to keep a web app from freezing while executing computationally intensive C++
+In this blog post, we learned how to keep a web app from freezing while executing computationally intensive C++
 code. We learned how to create a web worker and how to use the web worker in a simple web app. 
 
 Now take your web app a step further by reading some of the other blogs in this series, for example [how to interact with your app using forms](../react/README.md) and [how to spice up your app up with
