@@ -37,12 +37,9 @@ need to port it first**!
 
 ![newton.jpg](newton.jpg)
 
-[Image source](
-https://commons.wikimedia.org/wiki/File:Sir_Isaac_Newton._Wellcome_V0006785EL.jpg)
 
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.en)
 
-_Newton (and his hair)._
+_Newton (and his hair). Image courtesy of [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Sir_Isaac_Newton._Wellcome_V0006785EL.jpg)._
 
 Now before you say _"That'll be so much slower than running it native!"_ or _"C++ from the browser? Impossible!"_, just
 hold your horses for a sec. With the right tools, it is possible to run C++ code in the browser, with an acceptable
