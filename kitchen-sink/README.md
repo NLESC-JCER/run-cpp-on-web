@@ -251,7 +251,7 @@ Visiting the page at [http://localhost:8000/app.html](http://localhost:8000/app.
 (Click on image to get interactive version)
 
 You can try out different initial guesses to get different amount of iterations.
-For example having initial guess located in a local minium like `2` will make the algorithm use many iterations to jump over the minimum.
+For example having initial guess located in a local minimum like `2` will make the algorithm use many iterations to jump over the minimum.
 
 ## Recap
 
