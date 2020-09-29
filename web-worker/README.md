@@ -75,7 +75,7 @@ message, as well as the instructions for handling of any returned messages conta
 ```
 
 The web worker code only contains handling of the incoming message. The web worker unpacks the
-message, does the rootfinding calculation, and packs the results in a new message that it will send back.
+message, does the root finding calculation, and packs the results in a new message that it will send back.
 
 The code for the worker in `worker.js` is:
 
