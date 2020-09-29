@@ -229,7 +229,7 @@ python3 -m http.server 8000
 
 _The final page if everything works._
 
-Visit [http://localhost:8000/app.html](http://localhost:8000/app.html) to see the root answer, or got to [GitHub pages](https://nlesc-jcer.github.io/run-cpp-on-web/react/app.html) to see a hosted version of the example app.
+Visit [http://localhost:8000/app.html](http://localhost:8000/app.html) to see the root answer, or go to [GitHub pages](https://nlesc-jcer.github.io/run-cpp-on-web/react/app.html) to see a hosted version of the example app.
 
 ## Extra notes
 
