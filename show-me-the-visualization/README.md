@@ -406,8 +406,7 @@ const equation_line = {
 };
 ```
 
-To show where the root is, we draw a dotted vertical line at `x = -1` and label it `root`. For the ruler and title we
-reuse the data via `layers` and use a [rule marker](https://vega.github.io/vega-lite/docs/rule.html) and [text marker](https://vega.github.io/vega-lite/docs/text.html) respectively.
+To show where the root is, we draw a dotted vertical line using a [rule marker](https://vega.github.io/vega-lite/docs/rule.html) at `x = -1` and label it `root` with a [text marker](https://vega.github.io/vega-lite/docs/text.html).
 
 ```js
 const root_rule = {
