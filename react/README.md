@@ -38,7 +38,7 @@ We will keep the html code very minimal. The code will contain three essential e
     <script type="text/babel" src="app.js"></script>
   ```
 
-**Note:** We use the same `newtonraphson.js` and `newtonraphson.wasm` files as in the [first post](../webassembly/README.md) of this series. Make sure you download these files from [here](../webassembly).
+**Note:** We use the same `newtonraphson.js` and `newtonraphson.wasm` files as in the [first post](../webassembly/README.md) of this series. Make sure you download [newtonraphson.js](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/react/newtonraphson.js) and [newtonraphson.wasm](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/react/newtonraphson.wasm) files from GitHub.
 
 The complete html code will look like this:
 
