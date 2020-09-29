@@ -251,7 +251,7 @@ Visiting the page at [http://localhost:8000/app.html](http://localhost:8000/app.
 (Click on image to get interactive version)
 
 You can try out different initial guesses to get different amount of iterations.
-For example having initial guess located in a local minium like `2` will make the algorithm use many iterations to jump over the minimum.
+For example having initial guess located in a local minimum like `2` will make the algorithm use many iterations to jump over the minimum.
 
 ## Recap
 
@@ -259,7 +259,7 @@ In this series of blog posts we introduced a lot of different technologies to ab
 
 All the source code shown is available at [https://github.com/NLESC-JCER/run-cpp-on-web](https://github.com/NLESC-JCER/run-cpp-on-web).
 
-This blog was written by NLeSC's Generalization Team. The team consists of Stefan Verhoeven, Faruk Diblen, Jurriaan H. Spaaks, Adam Belloum and Christiaan Meijer. Feel free to get in touch with the generalization team at generalization@esciencecenter.nl.
+This blog was written by Generalization Team of Netherlands eScience Center. The team consists of Stefan Verhoeven, Faruk Diblen, Jurriaan H. Spaaks, Adam Belloum and Christiaan Meijer. Feel free to get in touch with the generalization team at generalization@esciencecenter.nl.
 
 Hope you enjoyed this series of blogs and if you have suggestions or questions please post a comment below.
 

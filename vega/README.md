@@ -385,7 +385,7 @@ In the first blog of this series we plotted the equation and root as
 
 ![equation.png](https://nlesc-jcer.github.io/run-cpp-on-web/webassembly/equation.png)
 
-It would be nice to write a specification of this plot together with the iterations that the rootfinding algorithm went through.
+It would be nice to write a specification of this plot together with the iterations that the root finding algorithm went through.
 Vega-Lite can superimpose one chart on top of another with the [`layers`](https://vega.github.io/vega-lite/docs/layer.html) keyword.
 Let's construct each layer separately and then superimpose them at the end.
 
@@ -497,7 +497,7 @@ Other blogs of the series that might be of interest
 
 We'll wrap up the series in a [final blog](../kitchen-sink/README.md) that combines the topics of the whole series in a full-featured web application.
 
-This blog was written by NLeSC's Generalization Team. The team consists of Stefan Verhoeven, Faruk Diblen, Jurriaan H. Spaaks, Adam Belloum and Christiaan Meijer. Feel free to get in touch with the generalization team at generalization@esciencecenter.nl.
+This blog was written by Generalization Team of Netherlands eScience Center. The team consists of Stefan Verhoeven, Faruk Diblen, Jurriaan H. Spaaks, Adam Belloum and Christiaan Meijer. Feel free to get in touch with the generalization team at generalization@esciencecenter.nl.
 
 If you enjoyed this article, leave a comment and give us a clap!
 

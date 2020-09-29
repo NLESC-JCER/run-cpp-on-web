@@ -11,7 +11,7 @@ run.
 
 _How to prevent blocking when running long running tasks in C++?_
 
-In this blogpost, we will use web workers to solve this problem by offloading tasks to another thread.
+In this blog post, we will use web workers to solve this problem by offloading tasks to another thread.
 
 ## Long-running tasks with web worker
 
@@ -124,6 +124,7 @@ Looking for the first blog and introduction to this series? [This blog post](../
 to get started running your C++ on the web using webassembly.
 
 ## Get in touch with us
+
 
 This blog was written by the Netherlands eScience Center's Generalization Team. The team consists of Stefan Verhoeven,
 Faruk Diblen, Jurriaan H. Spaaks, Adam Belloum and Christiaan Meijer. Feel free to get in touch with the generalization
