@@ -247,6 +247,7 @@ python3 -m http.server 8000
 Visiting the page at [http://localhost:8000/app.html](http://localhost:8000/app.html) should give us a plot like
 
 [![Image](app.gif)](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/kitchen-sink/app.html)
+
 (Click on image to get interactive version)
 
 You can try out different initial guesses to get different amount of iterations.
