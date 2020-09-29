@@ -110,7 +110,7 @@ the same time to perform, but as you will notice, the slider remains responsive.
 
 ![responsive ui](web-worker.gif)
 
-_Responsive UI thanks to offloading the rootfinding procedure to the web worker._
+_Responsive UI thanks to offloading the root finding procedure to the web worker._
 
 ## Recap and what next?
 
