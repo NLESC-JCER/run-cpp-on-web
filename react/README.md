@@ -1,12 +1,21 @@
+_By [Stefan Verhoeven](https://orcid.org/0000-0002-5821-2060), [Faruk Diblen](https://orcid.org/0000-0002-0989-929X),
+[Jurriaan H. Spaaks](https://orcid.org/0000-0002-7064-4069), [Adam Belloum](https://orcid.org/0000-0001-6306-6937), and
+[Christiaan Meijer](https://orcid.org/0000-0002-5529-5761)._
+
 # Interact with your C++ web app using React forms
 
 In a [previous blog post](../webassembly/README.md) we compiled the C++ algorithm into a webassembly code. In this blog post we will create a web application using [React](https://reactjs.org/). The web application will have a web-form which allows us to change the parameters of the algorithm.
 
+I can feel your pain: there are too many things to learn, too many skills to get but too little time available which reminds me our extra-ordinary friend [Napoleon Dynamite](https://www.imdb.com/title/tt0374900/). This blog post will guide you through the process of making a React web application whithout getting lost.
+
+![dynamite_gosh.png](dynamite_gosh.png)
+_If you haven't met Napoleon yet, [click here](https://www.youtube.com/watch?v=XsiiIa6bs9I) to see how he was struggling with his skills. Screenshot from [Napoleon Dynamite](https://www.imdb.com/title/tt0374900/) movie._
+
 ## React web application
 
-The web application we developed so far in needs to update the entire page to display the results. Even for small changes in the webpage this has to happen. Thanks to the web-browsers and JavaScript, Single Page Applications (SPA) can update only required elements in the webpage. We will use one of the most popular web-frameworks, React, to develop the SPA.
+The web application we developed so far in needs to update the entire page to display the results. Even for small changes in the webpage this has to happen. Thanks to modern web-browsers and JavaScript, Single Page Applications (SPA) can update only required elements in the webpage. We will use one of the most popular web-frameworks, React, to develop the SPA. We preferred React over vanilla JavaScript because it is faster and easier to build a web application. Just let React deal with all the magic behind the scenes. [This blog post](https://www.freecodecamp.org/news/do-we-still-need-javascript-frameworks-42576735949b/) may help you to understand why we made this choice.
 
-The form in the web application will collect the user inputs and use them to initialize the algorithm(**add link?**). When the form is submitted, a WebAssembly code starts the calculation and the result is rendered. With this architecture the application only needs cheap static file hosting to host the HTML, JavaScript and WebAssembly files. The algorithm will be running in the web browser on the end users machine instead of a server.
+The form in the web application will collect the user inputs and use them to initialize the algorithm. When the form is submitted, a WebAssembly code starts the calculation and the result is rendered. With this architecture the application only needs cheap static file hosting to host the HTML, JavaScript and WebAssembly files. The algorithm will be running in the web browser on the end users machine instead of a server.
 
 ### The HTML code
 
@@ -208,70 +217,7 @@ ReactDOM.render(
 );
 ```
 
-We can combine the heading, form and result components and all the states and handleSubmit function into the `App` React component and its rendering and save it as `app.js`.
-
-```js
-function Heading() {
-  const title = 'Root finding web application';
-  return <h1>{title}</h1>
-}
-
-function Result(props) {
-  const root = props.root;
-  let message = 'Not submitted';
-  if (root !== undefined) {
-    message = 'Function root is approximately at x = ' + root.toFixed(2);
-  }
-  return <div id="answer">{message}</div>;
-}
-
-function App() {
-  const [tolerance, setTolerance] = React.useState(0.001);
-  const [initial_guess, setGuess] = React.useState(-4);
-
-  function onToleranceChange(event) {
-    setTolerance(Number(event.target.value));
-  }
-
-  function onGuessChange(event) {
-    setGuess(Number(event.target.value));
-  }
-  const [root, setRoot] = React.useState(undefined);
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    // Wait for module to initialize,
-    createModule().then(({NewtonRaphson}) => {
-      // Perform computation
-      const newtonraphson = new NewtonRaphson(tolerance);
-      const root = newtonraphson.solve(initial_guess);
-      setRoot(root);
-    });
-  }
-
-  return (
-    <div>
-      <Heading/>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Tolerance:
-          <input name="tolerance" type="number" value={tolerance} onChange={onToleranceChange}/>
-        </label>
-        <label>
-          Initial guess:
-          <input name="initial_guess" type="number" value={initial_guess} onChange={onGuessChange}/>
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
-      <Result root={root}/>
-    </div>
-  );
-}
-ReactDOM.render(
-  <App/>,
-  document.getElementById('answer')
-);
-```
+We can combine the heading, form and result components and all the states and handleSubmit function into the `App` React component and its rendering and save it as `app.js`. If you are lazy, you can find the code from [here](https://github.com/NLESC-JCER/run-cpp-on-web/blob/master/js-react/app.js).
 
 Like before, we also need to host the files in a web server with
 
@@ -283,9 +229,7 @@ python3 -m http.server 8000
 
 _The final page if everything works._
 
-Visit [http://localhost:8000/app.html](http://localhost:8000/app.html) to see the root answer. Embedded below is the example app hosted on [GitHub pages](https://nlesc-jcer.github.io/cpp2wasm/react/example-app.html)
-
-<iframe width="100%" height="160" src="https://nlesc-jcer.github.io/cpp2wasm/react/example-app.html" /></iframe>
+Visit [http://localhost:8000/app.html](http://localhost:8000/app.html) to see the root answer or see the example app hosted on [GitHub pages](https://nlesc-jcer.github.io/run-cpp-on-web/react/app.html).
 
 ## Extra notes
 
@@ -293,12 +237,23 @@ The code supplied here should not be used in production as converting JSX in the
 
 ## Conclusion
 
-By writing React components we where able to create an interactive page with a form which executes the WebAssembly module compiled from the C++ code we introduced in the [first blog](../webassembly/README.md) of the series.
+By writing React components we were able to create an interactive page with a form which executes the WebAssembly module compiled from the C++ code we introduced in the [first blog](../webassembly/README.md) of the series.
+
 We went though the components, JSX, props and state which are the core building blocks of React web application.
 
 In other blogs of the series that might be of interest we cover
 
-- [use of a web-worker: how to perform computations without blocking the user interface](../web-worker/README.md)
-- [use of vega-lite: how to make visualization](../vega/README.md)
+- [Using C++ in a web app with WebAssembly](../webassembly/README.md): How to turn C++ code into a web app.
+- [Help! My C++ web app is not responding](../web-worker/README.md): How to use web workers to perform computations without blocking the user interface.
+- [Spice up your C++ web app with visualizations](../vega/README.md): Plotting data from the C++ web app using web visualization.
 
 We'll wrap up the series in a [final blog](../kitchen-sink/README.md) that combines the topics of the whole series in a full-featured web application.
+
+## Get in touch with us
+
+This blog was written by NLeSC's Generalization Team. The team consists of Stefan Verhoeven, Faruk Diblen, Jurriaan H. Spaaks, Adam Belloum and Christiaan Meijer. Feel free to get in touch with the generalization team at generalization@esciencecenter.nl.
+
+If you enjoyed this article, leave a comment and give us a clap!
+
+_These blogs were written as part of the "Passing XSAMS" project. To learn more about the project, check out its
+[project page](https://www.esciencecenter.nl/projects/passing-xsams/)._

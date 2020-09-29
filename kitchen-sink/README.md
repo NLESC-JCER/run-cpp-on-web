@@ -1,3 +1,7 @@
+_By [Stefan Verhoeven](https://orcid.org/0000-0002-5821-2060), [Faruk Diblen](https://orcid.org/0000-0002-0989-929X),
+[Jurriaan H. Spaaks](https://orcid.org/0000-0002-7064-4069), [Adam Belloum](https://orcid.org/0000-0001-6306-6937), and
+[Christiaan Meijer](https://orcid.org/0000-0002-5529-5761)._
+
 # Run C++ on the web with web assembly, web workers, React and Vega
 
 In previous blogs in the series we learned
@@ -11,6 +15,8 @@ Those topics by them selves are useful, but how can all those topics be put toge
 
 ![Pack everything but the kitchen sink](1024px-Pack_Gong_(3144438149).jpg)
 
+_Pack everything but the kitchen sink. Image courtesy of [WikiMedia Commons](https://commons.wikimedia.org/wiki/File:Pack_Gong_(3144438149).jpg)._
+
 We want to make an React application which will find the root of an equation using Newton-Raphson algorithm and plot each iteration of the algorithm. Let us go over the pieces for this application next.
 
 ## WebAssembly module
@@ -22,7 +28,7 @@ The WebAssembly module contains the equation and Newton-Raphson algorithm. We wi
 In the [web worker blog](TODO) we used a Web Worker thread to not block the user interface while busy with a computation. A Web Worker is not needed for the quick computation we are using, but let's be a good citizen and not claim the main thread when we don't need to.
 
 ![High five](high-five.jpg)
-_UI and worker thread working together from [pxhere](https://pxhere.com/en/photo/1451159)_
+_UI and worker thread working together. Image from [pxhere](https://pxhere.com/en/photo/1451159)._
 
 The work code of the Web Worker blog needs to be enhanced with returning the iterations like
 
@@ -252,4 +258,9 @@ In this series of blog posts we introduced a lot of different technologies to ab
 
 All the source code shown is available at [https://github.com/NLESC-JCER/run-cpp-on-web](https://github.com/NLESC-JCER/run-cpp-on-web).
 
+This blog was written by NLeSC's Generalization Team. The team consists of Stefan Verhoeven, Faruk Diblen, Jurriaan H. Spaaks, Adam Belloum and Christiaan Meijer. Feel free to get in touch with the generalization team at generalization@esciencecenter.nl.
+
 Hope you enjoyed this series of blogs and if you have suggestions or questions please post a comment below.
+
+_These blogs were written as part of the "Passing XSAMS" project. To learn more about the project, check out its
+[project page](https://www.esciencecenter.nl/projects/passing-xsams/)._

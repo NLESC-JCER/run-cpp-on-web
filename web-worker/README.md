@@ -1,3 +1,6 @@
+_By [Stefan Verhoeven](https://orcid.org/0000-0002-5821-2060), [Christiaan Meijer](https://orcid.org/0000-0002-5529-5761), [Faruk Diblen](https://orcid.org/0000-0002-0989-929X),
+[Jurriaan H. Spaaks](https://orcid.org/0000-0002-7064-4069), and [Adam Belloum](https://orcid.org/0000-0001-6306-6937)._
+
 # Help! My C++ web app is not responding
 
 In an [earlier blogpost](../webassembly/README.md) we discussed how to run C++ code on the web using JavaScript. We
@@ -115,8 +118,22 @@ the same time to perform, but as you will notice, the slider will be responsive 
 
 _Responsive UI thanks to the web worker._
 
-## Outro
+## Recap and what next?
 
-In this blog post we have learned how to run long running C++ code on the web using web workers.
+In this blog post we have learned how to keep a web app from freezing while executing computationally intensive C++
+code. We learned how to create a web worker and how to use the web worker in a simple web app. 
 
-In the [next blogpost](../react/README.md) we will show how to expand the code to an interactive React webapp.
+Now take your web app a step further by continue reading our blog series. Other blog posts in this series, about C++ in
+web apps, will show you [how to interact with your app using forms](../react) and [how to spice up your app up with
+visualizations](../vega). A final blog shows you [how to combine all of the above in a single web app](../kitchen-sink).
+Looking for the first blog and introduction to this series? This blog post will show you [how to get started running
+your C++ on the web using webassembly](../webassembly).
+
+## Get in touch with us
+
+This blog was written by NLeSC's Generalization Team. The team consists of Stefan Verhoeven, Faruk Diblen, Jurriaan H.
+Spaaks, Adam Belloum and Christiaan Meijer. Feel free to get in touch with the generalization team at
+generalization@esciencecenter.nl.
+
+_These blogs were written as part of the "Passing XSAMS" project. To learn more about the project, check out its
+[project page](https://www.esciencecenter.nl/projects/passing-xsams/)._
