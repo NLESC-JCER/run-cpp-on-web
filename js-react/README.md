@@ -2,7 +2,7 @@ _By [Stefan Verhoeven](https://orcid.org/0000-0002-5821-2060), [Faruk Diblen](ht
 [Jurriaan H. Spaaks](https://orcid.org/0000-0002-7064-4069), [Adam Belloum](https://orcid.org/0000-0001-6306-6937), and
 [Christiaan Meijer](https://orcid.org/0000-0002-5529-5761)._
 
-# C++ on the web: Interactive form with React
+# Interact with your C++ web app using React forms
 
 In the [previous blog post](TODO add link) we compiled the C++ algorithm into a webassembly code. In this blog post we will create a web application using [React](https://reactjs.org/). The web application will have a web-form which allows us to change the parameters of the algorithm.
 
