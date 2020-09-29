@@ -276,7 +276,7 @@ In upcoming blogs we will cover:
 - [Interact with your C++ web app using React forms](../react/README.md): how to let the user supply their own input values for `tolerance` and `initial_guess`.
 - [Spice up your C++ web app with visualizations](../vega/README.md): how to visualize data from the algorithm.
 
-We'll wrap up the series in [a final blog]() that combines the topics of the whole series in a full-featured web
+We'll wrap up the series in [a final blog](../kitchen-sink/README.md) that combines the topics of the whole series in a full-featured web
 application. If you're curious what that's going to look like, make sure to check out the [live demo](https://nlesc-jcer.github.io/run-cpp-on-web/kitchen-sink/app.html) on GitHub
 Pages.
 
