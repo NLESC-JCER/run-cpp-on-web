@@ -47,13 +47,37 @@ function iterations2spec(iterations) {
     ]
   };
   const iterations_scatter = {
-    "title": "2x^3 - 4x^2 + 6 with root",
+    "title": {
+      "text": "2x^3 - 4x^2 + 6 with root",
+      "fontSize": 20,
+      "fontWeight": "normal"
+    },
     "data": {
       "values": iterations
     },
     "encoding": {
-      "x": { "field": "x", "type": "quantitative" },
-      "y": { "field": "y", "type": "quantitative" },
+      "x": {
+        "field": "x",
+        "type": "quantitative",
+        "title": "x",
+        "axis": {
+          "labelFontSize": 20,
+          "titleFontSize": 20,
+          "labelFontWeight": "lighter",
+          "tickMinStep": 1.0
+        }
+      },
+      "y": {
+        "field": "y",
+        "type": "quantitative",
+        "title": "y",
+        "axis": {
+          "labelFontSize": 20,
+          "titleFontSize": 20,
+          "labelFontWeight": "lighter",
+          "titleX": -65
+        }
+      },
       "text": { "field": "index", "type": "nominal" }
     },
     "layer": [
@@ -65,15 +89,38 @@ function iterations2spec(iterations) {
     ]
   };
   const iteration_vs_y = {
-    "title": "Iterations",
+    "title": {
+      "text": "Iterations",
+      "fontSize": 20,
+      "fontWeight": "normal"
+    },
     "width": 400,
     "height": 600,
     "data": {
       "values": iterations
     },
     "encoding": {
-      "x": { "field": "index", "type": "ordinal", "title": "Iteration index" },
-      "y": { "field": "y", "type": "quantitative" }
+      "x": {
+        "field": "index",
+        "type": "quantitative",
+        "title": "Iteration index",
+        "axis": {
+          "labelFontSize": 20,
+          "titleFontSize": 20,
+          "labelFontWeight": "lighter",
+          "tickMinStep": 1.0
+        }
+      },
+      "y": {
+        "field": "y",
+        "type": "quantitative",
+        "axis": {
+          "labelFontSize": 20,
+          "titleFontSize": 20,
+          "labelFontWeight": "lighter",
+          "titleX": -65
+        }
+      }
     },
     "mark": {
       "type": "line",
