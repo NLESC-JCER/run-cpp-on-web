@@ -480,7 +480,7 @@ const spec = {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
   "width": 800,
   "height": 600,
-  "title": {"text": "Iterative rootfinding", "fontSize": 20, "fontWeight": "normal"},
+  "title": {"text": "Iterative root finding", "fontSize": 20, "fontWeight": "normal"},
   "layer": [
     equation_line,
     root_rule,
@@ -508,7 +508,7 @@ Other blogs of the series that might be of interest
 
 We'll wrap up the series in a [final blog](../kitchen-sink/README.md) that combines the topics of the whole series in a full-featured web application.
 
-This blog was written by Generalization Team of Netherlands eScience Center. The team consists of Stefan Verhoeven, Faruk Diblen, Jurriaan H. Spaaks, Adam Belloum and Christiaan Meijer. Feel free to get in touch with the generalization team at generalization@esciencecenter.nl.
+This blog was written by the Generalization Team of the Netherlands eScience Center. The team consists of Stefan Verhoeven, Faruk Diblen, Jurriaan H. Spaaks, Adam Belloum and Christiaan Meijer. Feel free to get in touch with the generalization team at generalization@esciencecenter.nl.
 
 If you enjoyed this article, leave a comment and give us a clap!
 
