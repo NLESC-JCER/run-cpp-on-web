@@ -1,6 +1,6 @@
 #include "newtonraphson.hpp"
 #include "algebra.cpp"
-#include <math.h>
+#include <cmath>
 #include <unistd.h> // for sleep
 
 // Define the constructor method of NewtonRaphson instances
@@ -13,7 +13,7 @@ float NewtonRaphson::solve(float initial_guess) {
   do {
     delta_x = equation(x) / derivative(x);
     x = x - delta_x;
-  } while (fabs(delta_x) >= tolerance);
+  } while (std::abs(delta_x) >= tolerance);
 
   // Artificially make this code slow
   sleep(5);

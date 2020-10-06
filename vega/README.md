@@ -54,7 +54,7 @@ record the value of relevant variables in each cycle, as follows:
 ```cpp
 #include "newtonraphson.hpp"
 #include "algebra.cpp"
-#include <math.h>
+#include <cmath>
 
 // Define the constructor method of NewtonRaphson instances
 NewtonRaphson::NewtonRaphson(float tolerance_in) : tolerance(tolerance_in) {}
@@ -68,7 +68,7 @@ float NewtonRaphson::solve(float initial_guess) {
     delta_x = equation(x) / derivative(x);
     iterations.push_back({i++, x, equation(x), derivative(x), delta_x});
     x = x - delta_x;
-  } while (fabs(delta_x) >= tolerance);
+  } while (std::abs(delta_x) >= tolerance);
   return x;
 };
 ```
