@@ -53,7 +53,7 @@ record the value of relevant variables in each cycle, as follows:
 
 ```cpp
 #include "newtonraphson.hpp"
-#include "algebra.cpp"
+#include "problem.hpp"
 #include <cmath>
 
 // Define the constructor method of NewtonRaphson instances
@@ -106,7 +106,7 @@ File: _cli.cpp_.
 Compile it with:
 
 ```shell
-g++ -o cli.exe newtonraphson.cpp cli.cpp
+g++ -o cli.exe problem.cpp newtonraphson.cpp cli.cpp
 ```
 
 Run with:
@@ -160,7 +160,7 @@ We can now compile our C++ code to a WebAssembly module with Emscripten using `e
 
 ```shell
 emcc -I. -o newtonraphson.js -Oz -s MODULARIZE=1 \
-  -s EXPORT_NAME=createModule --bind newtonraphson.cpp bindings.cpp
+  -s EXPORT_NAME=createModule --bind problem.cpp newtonraphson.cpp bindings.cpp
 ```
 
 To get the iteration data in JavaScript we use the following code

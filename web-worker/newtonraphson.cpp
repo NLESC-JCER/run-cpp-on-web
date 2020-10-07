@@ -1,5 +1,5 @@
 #include "newtonraphson.hpp"
-#include "algebra.cpp"
+#include "problem.hpp"
 #include <cmath>
 #include <unistd.h> // for sleep
 

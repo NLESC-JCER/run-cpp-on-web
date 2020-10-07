@@ -72,6 +72,17 @@ their JavaScript equivalent and back. For this, we'll use
 Here is the equation whose root we want to find, along with its derivative, since that's what Newton-Raphson requires:
 
 ```cpp
+#ifndef H_PROBLEM_HPP
+#define H_PROBLEM_HPP
+
+float equation(float x);
+float derivative(float x);
+
+#endif
+```
+File: _problem.hpp_
+
+```cpp
 // An example equation
 float equation(float x) {
   return 2 * x * x * x - 4 * x * x + 6;
@@ -82,7 +93,7 @@ float derivative(float x) {
   return 6 * x * x - 8 * x;
 }
 ```
-File: _algebra.cpp_
+File: _problem.cpp_
 
 The snippet below shows the contents of the file ``newtonraphson.hpp``. It is the header file for the Newton-Raphson
 iterative root finding algorithm. It defines a class named ``NewtonRaphson``. Besides the
@@ -109,7 +120,7 @@ File ``newtonraphson.cpp`` contains the corresponding implementation:
 
 ```cpp
 #include "newtonraphson.hpp"
-#include "algebra.cpp"
+#include "problem.hpp"
 #include <cmath>
 
 // Define the constructor method of NewtonRaphson instances
@@ -130,7 +141,7 @@ File: _newtonraphson.cpp_.
 
 From this definition, ``NewtonRaphson`` instances need to be initialized with a value for ``tolerance_in``, which is then
 stored as the private member ``tolerance``. Once the object instance has been constructed, users can call its ``solve`` method to iteratively find ``equation``'s root, with ``equation`` and its ``derivative`` being imported from
-``algebra.cpp`` via the ``include`` line near the top.
+``problem.hpp`` via the ``include`` line near the top.
 
 ### Check on command line
 
@@ -159,7 +170,7 @@ File: _cli.cpp_.
 Our command line program can be compiled with:
 
 ```shell
-g++ -o cli.exe cli.cpp newtonraphson.cpp
+g++ -o cli.exe problem.cpp newtonraphson.cpp cli.cpp
 ```
 
 Subsequently running it should give the following output:
@@ -202,7 +213,7 @@ The Newton-Raphson source and its binding can be compiled into a WebAssembly mod
 
 ```shell
 emcc -I. -o newtonraphson.js -Oz -s MODULARIZE=1 \
-  -s EXPORT_NAME=createModule --bind newtonraphson.cpp bindings.cpp
+  -s EXPORT_NAME=createModule --bind problem.cpp newtonraphson.cpp bindings.cpp
 ```
 
 This will generate a WebAssembly module ``newtonraphson.wasm``, along with a JavaScript file ``newtonraphson.js``. We also export the `createModule` function in the compile command so `createModule` function can be used in JavaScript later to load and initialize the WebAssembly module.
