@@ -252,4 +252,4 @@ If you enjoyed this article, leave a comment and give us a clap!
 _These blogs were written as part of the "Passing XSAMS" project. To learn more about the project, check out its
 [project page](https://www.esciencecenter.nl/projects/passing-xsams/)._
 
-_Thank you to our proof readers [Daan Boer](https://github.com/DAANBOER)._
+_Thank you to our proof reader [Daan Boer](https://github.com/DAANBOER)._
