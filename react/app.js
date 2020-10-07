@@ -9,7 +9,7 @@ function Heading() {
     if (root !== undefined) {
       message = 'Function root is approximately at x = ' + root.toFixed(2);
     }
-    return <div id="answer">{message}</div>;
+    return <div>{message}</div>;
   }
 
   function App() {
@@ -56,5 +56,5 @@ function Heading() {
   }
   ReactDOM.render(
     <App/>,
-    document.getElementById('answer')
+    document.getElementById('container')
   );

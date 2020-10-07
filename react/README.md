@@ -62,7 +62,7 @@ The complete HTML code will look like this:
   </head>
   <script type="text/javascript" src="newtonraphson.js"></script>
   <script type="text/babel" src="app.js"></script>
-  <div id="answer"></div>
+  <div id="container"></div>
 </html>
 ```
 
@@ -93,11 +93,11 @@ In order for the header element to be rendered we need to tell **ReactDOM** whic
 ```js
 ReactDOM.render(
   <Heading/>,
-  document.getElementById('answer')
+  document.getElementById('container')
 );
 ```
 
-The complete code should like this:
+The complete code should look like this:
 
 ```js
 function Heading() {
@@ -198,7 +198,7 @@ function Result(props) {
   if (root !== undefined) {
     message = 'Function root is approximately at x = ' + root.toFixed(2);
   }
-  return <div id="answer">{message}</div>;
+  return <div>{message}</div>;
 }
 ```
 
