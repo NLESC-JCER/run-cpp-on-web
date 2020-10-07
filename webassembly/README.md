@@ -241,9 +241,10 @@ File: _index.html_.
 ### Hosting the app with a web server
 
 We'll need a web server to display the HTML page in a web browser. For this, we'll use the
-[http.server](https://docs.python.org/3/library/http.server.html) module from Python 3 to host all files on port 8000, like so:
+[http.server](https://docs.python.org/3/library/http.server.html) module from Python 3 to host all files in the current directory on port 8000, like so:
 
 ```shell
+# change to directory with index.html, newtonraphson.wasm and newtonraphson.js
 python3 -m http.server 8000
 ```
 
