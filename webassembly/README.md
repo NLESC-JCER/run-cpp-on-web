@@ -205,8 +205,8 @@ emcc -I. -o newtonraphson.js -Oz -s MODULARIZE=1 \
   -s EXPORT_NAME=createModule --bind newtonraphson.cpp bindings.cpp
 ```
 
-This will generate a WebAssembly module ``newtonraphson.wasm``, along with a JavaScript file ``newtonraphson.js``. Using
-this JavaScript library, we can find the root of the mathematical function, and subsequently display its value with the
+This will generate a WebAssembly module ``newtonraphson.wasm``, along with a JavaScript file ``newtonraphson.js``. We also export the `createModule` function in the compile command so `createModule` function can be used in JavaScript later to load and initialize the WebAssembly module.
+Using this JavaScript library, we can find the root of the mathematical function, and subsequently display its value with the
 following HTML:
 
 ```html
