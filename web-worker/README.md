@@ -132,3 +132,5 @@ team at generalization@esciencecenter.nl.
 
 _These blogs were written as part of the "Passing XSAMS" project. To learn more about the project, check out its
 [project page](https://www.esciencecenter.nl/projects/passing-xsams/)._
+
+_Thank you to our proof readers [Carlos Martinez-Ortiz](https://orcid.org/0000-0001-5565-7577)._
