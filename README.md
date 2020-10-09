@@ -1,5 +1,6 @@
+The blog posts have been published at [https://medium.com/@eScienceCenter/using-c-in-a-web-app-with-webassembly-efd78c08469](https://medium.com/@eScienceCenter/using-c-in-a-web-app-with-webassembly-efd78c08469)
+
 Repository for draft blog post based on [cpp2wasm guide](https://github.com/NLESC-JCER/cpp2wasm).
-Blogs will be published at [https://medium.com/@eScienceCenter](https://medium.com/@eScienceCenter)
 
 - audience: RSEs
 - approach: text before code, include code if it supports the story
@@ -14,7 +15,7 @@ The blog topics are
 1. [Spice up your C++ web app with visualizations](vega/README.md)
 1. [C++ web app with WebAssembly, Vega, Web Worker and React](kitchen-sink/README.md)
 
-THe blog posts have been published at [https://medium.com/@eScienceCenter/using-c-in-a-web-app-with-webassembly-efd78c08469](https://medium.com/@eScienceCenter/using-c-in-a-web-app-with-webassembly-efd78c08469)
+
 
 Blog ideas:
 
