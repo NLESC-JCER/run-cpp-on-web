@@ -1,6 +1,6 @@
 #include "newtonraphson.hpp"
-#include "algebra.cpp"
-#include <math.h>
+#include "problem.hpp"
+#include <cmath>
 
 // Define the constructor method of NewtonRaphson instances
 NewtonRaphson::NewtonRaphson(float tolerance_in) : tolerance(tolerance_in) {}
@@ -12,6 +12,6 @@ float NewtonRaphson::solve(float initial_guess) {
   do {
     delta_x = equation(x) / derivative(x);
     x = x - delta_x;
-  } while (fabs(delta_x) >= tolerance);
+  } while (std::abs(delta_x) >= tolerance);
   return x;
 };

@@ -53,8 +53,8 @@ record the value of relevant variables in each cycle, as follows:
 
 ```cpp
 #include "newtonraphson.hpp"
-#include "algebra.cpp"
-#include <math.h>
+#include "problem.hpp"
+#include <cmath>
 
 // Define the constructor method of NewtonRaphson instances
 NewtonRaphson::NewtonRaphson(float tolerance_in) : tolerance(tolerance_in) {}
@@ -68,7 +68,7 @@ float NewtonRaphson::solve(float initial_guess) {
     delta_x = equation(x) / derivative(x);
     iterations.push_back({i++, x, equation(x), derivative(x), delta_x});
     x = x - delta_x;
-  } while (fabs(delta_x) >= tolerance);
+  } while (std::abs(delta_x) >= tolerance);
   return x;
 };
 ```
@@ -106,7 +106,7 @@ File: _cli.cpp_.
 Compile it with:
 
 ```shell
-g++ -o cli.exe newtonraphson.cpp cli.cpp
+g++ -o cli.exe problem.cpp newtonraphson.cpp cli.cpp
 ```
 
 Run with:
@@ -160,7 +160,7 @@ We can now compile our C++ code to a WebAssembly module with Emscripten using `e
 
 ```shell
 emcc -I. -o newtonraphson.js -Oz -s MODULARIZE=1 \
-  -s EXPORT_NAME=createModule --bind newtonraphson.cpp bindings.cpp
+  -s EXPORT_NAME=createModule --bind problem.cpp newtonraphson.cpp bindings.cpp
 ```
 
 To get the iteration data in JavaScript we use the following code

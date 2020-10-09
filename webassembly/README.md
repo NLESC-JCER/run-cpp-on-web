@@ -72,6 +72,17 @@ their JavaScript equivalent and back. For this, we'll use
 Here is the equation whose root we want to find, along with its derivative, since that's what Newton-Raphson requires:
 
 ```cpp
+#ifndef H_PROBLEM_HPP
+#define H_PROBLEM_HPP
+
+float equation(float x);
+float derivative(float x);
+
+#endif
+```
+File: _problem.hpp_
+
+```cpp
 // An example equation
 float equation(float x) {
   return 2 * x * x * x - 4 * x * x + 6;
@@ -82,7 +93,7 @@ float derivative(float x) {
   return 6 * x * x - 8 * x;
 }
 ```
-File: _algebra.cpp_
+File: _problem.cpp_
 
 The snippet below shows the contents of the file ``newtonraphson.hpp``. It is the header file for the Newton-Raphson
 iterative root finding algorithm. It defines a class named ``NewtonRaphson``. Besides the
@@ -109,8 +120,8 @@ File ``newtonraphson.cpp`` contains the corresponding implementation:
 
 ```cpp
 #include "newtonraphson.hpp"
-#include "algebra.cpp"
-#include <math.h>
+#include "problem.hpp"
+#include <cmath>
 
 // Define the constructor method of NewtonRaphson instances
 NewtonRaphson::NewtonRaphson(float tolerance_in) : tolerance(tolerance_in) {}
@@ -122,7 +133,7 @@ float NewtonRaphson::solve(float initial_guess) {
   do {
     delta_x = equation(x) / derivative(x);
     x = x - delta_x;
-  } while (fabs(delta_x) >= tolerance);
+  } while (std::abs(delta_x) >= tolerance);
   return x;
 };
 ```
@@ -130,7 +141,7 @@ File: _newtonraphson.cpp_.
 
 From this definition, ``NewtonRaphson`` instances need to be initialized with a value for ``tolerance_in``, which is then
 stored as the private member ``tolerance``. Once the object instance has been constructed, users can call its ``solve`` method to iteratively find ``equation``'s root, with ``equation`` and its ``derivative`` being imported from
-``algebra.cpp`` via the ``include`` line near the top.
+``problem.hpp`` via the ``include`` line near the top.
 
 ### Check on command line
 
@@ -159,7 +170,7 @@ File: _cli.cpp_.
 Our command line program can be compiled with:
 
 ```shell
-g++ -o cli.exe cli.cpp newtonraphson.cpp
+g++ -o cli.exe problem.cpp newtonraphson.cpp cli.cpp
 ```
 
 Subsequently running it should give the following output:
@@ -202,11 +213,11 @@ The Newton-Raphson source and its binding can be compiled into a WebAssembly mod
 
 ```shell
 emcc -I. -o newtonraphson.js -Oz -s MODULARIZE=1 \
-  -s EXPORT_NAME=createModule --bind newtonraphson.cpp bindings.cpp
+  -s EXPORT_NAME=createModule --bind problem.cpp newtonraphson.cpp bindings.cpp
 ```
 
-This will generate a WebAssembly module ``newtonraphson.wasm``, along with a JavaScript file ``newtonraphson.js``. Using
-this JavaScript library, we can find the root of the mathematical function, and subsequently display its value with the
+This will generate a WebAssembly module ``newtonraphson.wasm``, along with a JavaScript file ``newtonraphson.js``. We also export the `createModule` JavaScript function in the compile command so it can be used to load and initialize the WebAssembly module.
+Using this JavaScript library, we can find the root of the mathematical function, and subsequently display its value with the
 following HTML:
 
 ```html
@@ -241,9 +252,10 @@ File: _index.html_.
 ### Hosting the app with a web server
 
 We'll need a web server to display the HTML page in a web browser. For this, we'll use the
-[http.server](https://docs.python.org/3/library/http.server.html) module from Python 3 to host all files on port 8000, like so:
+[http.server](https://docs.python.org/3/library/http.server.html) module from Python 3 to host all files in the current directory on port 8000, like so:
 
 ```shell
+# change to directory with index.html, newtonraphson.* files
 python3 -m http.server 8000
 ```
 
@@ -285,4 +297,4 @@ If you enjoyed this article, leave a comment and give us a clap!
 _These blogs were written as part of the "Passing XSAMS" project. To learn more about the project, check out its
 [project page](https://www.esciencecenter.nl/projects/passing-xsams/)._
 
-_Thank you to our proof readers [Lourens Veen](https://orcid.org/0000-0002-6311-1168) and [Patrick Bos](https://orcid.org/0000-0002-6033-960X)._
+_Thank you to our proof readers [Jan van Dijk](https://orcid.org/0000-0001-8002-5459), [Daan Boer](https://github.com/DAANBOER), [Lourens Veen](https://orcid.org/0000-0002-6311-1168) and [Patrick Bos](https://orcid.org/0000-0002-6033-960X)._
