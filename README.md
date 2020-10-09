@@ -14,6 +14,8 @@ The blog topics are
 1. [Spice up your C++ web app with visualizations](vega/README.md)
 1. [C++ web app with WebAssembly, Vega, Web Worker and React](kitchen-sink/README.md)
 
+THe blog posts have been published at [https://medium.com/@eScienceCenter/using-c-in-a-web-app-with-webassembly-efd78c08469](https://medium.com/@eScienceCenter/using-c-in-a-web-app-with-webassembly-efd78c08469)
+
 Blog ideas:
 
 1. when stuff goes wrong, handling exceptions from C++
